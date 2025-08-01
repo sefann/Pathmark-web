@@ -7,9 +7,7 @@ import {
   Eye, 
   Heart, 
   Users, 
-  Award, 
   Globe,
-  Calendar,
   CheckCircle
 } from 'lucide-react';
 
