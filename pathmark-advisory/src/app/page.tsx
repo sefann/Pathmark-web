@@ -9,9 +9,7 @@ import {
   Cpu, 
   DollarSign, 
   Users, 
-  CheckCircle,
   ArrowRight,
-  Play,
   Target,
   Award,
   Globe
@@ -275,8 +273,8 @@ export default function HomePage() {
               Ready to Bring Your Vision to Life?
             </h2>
             <p className="text-xl mb-8 max-w-2xl mx-auto">
-              Let's discuss how we can help you achieve your business goals 
-              with our comprehensive consulting and project execution services.
+                             Let&apos;s discuss how we can help you achieve your business goals 
+               with our comprehensive consulting and project execution services.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact" className="btn-secondary text-lg px-8 py-4">

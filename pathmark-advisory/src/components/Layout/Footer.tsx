@@ -62,7 +62,7 @@ const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 <MapPin size={18} className="text-accent" />
-                <span className="text-sm">D'Mayors Estate, Games Village, Abuja</span>
+                <span className="text-sm">D&apos;Mayors Estate, Games Village, Abuja</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone size={18} className="text-accent" />
