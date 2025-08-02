@@ -20,41 +20,42 @@ export default function HomePage() {
   const [servicesRef, servicesInView] = useInView({ threshold: 0.1 });
   const [whyRef, whyInView] = useInView({ threshold: 0.1 });
   const [statsRef, statsInView] = useInView({ threshold: 0.1 });
+  const [partnersRef, partnersInView] = useInView({ threshold: 0.1 });
 
   const services = [
     {
       icon: Zap,
       title: 'Energy',
       description: 'Comprehensive energy solutions and renewable energy consulting',
-      href: '/services#energy',
+      href: '/services/energy',
       color: 'from-yellow-400 to-orange-500'
     },
     {
       icon: Building,
       title: 'Construction',
       description: 'Infrastructure development and construction project management',
-      href: '/services#construction',
+      href: '/services/construction',
       color: 'from-gray-400 to-gray-600'
     },
     {
       icon: Cpu,
       title: 'Technology',
       description: 'Digital transformation and technology implementation services',
-      href: '/services#technology',
+      href: '/services/technology',
       color: 'from-blue-400 to-purple-500'
     },
     {
       icon: DollarSign,
       title: 'Finance',
       description: 'Financial consulting and investment advisory services',
-      href: '/services#finance',
+      href: '/services/finance',
       color: 'from-green-400 to-emerald-500'
     },
     {
       icon: Users,
       title: 'Consulting',
       description: 'Strategic business consulting and organizational development',
-      href: '/services#consulting',
+      href: '/services/consulting',
       color: 'from-indigo-400 to-blue-500'
     }
   ];
@@ -89,6 +90,17 @@ export default function HomePage() {
     { number: '5', label: 'Industries Served' }
   ];
 
+  const trustedPartners = [
+    { name: 'Partner 1', logo: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80' },
+    { name: 'Partner 2', logo: 'https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80' },
+    { name: 'Partner 3', logo: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80' },
+    { name: 'Partner 4', logo: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80' },
+    { name: 'Partner 5', logo: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80' },
+    { name: 'Partner 6', logo: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80' },
+    { name: 'Partner 7', logo: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80' },
+    { name: 'Partner 8', logo: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80' }
+  ];
+
   return (
     <div className="pt-16">
       {/* Hero Section */}
@@ -96,9 +108,14 @@ export default function HomePage() {
         ref={heroRef}
         className="relative min-h-screen flex items-center justify-center overflow-hidden"
       >
-        {/* Background Video/Image Placeholder */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary-600 to-accent opacity-90"></div>
-        <div className="absolute inset-0 bg-black/20"></div>
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url('https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')`
+          }}
+        ></div>
+        <div className="absolute inset-0 bg-black/50"></div>
         
         {/* Hero Content */}
         <div className="relative z-10 container-custom text-center text-white">
@@ -256,6 +273,62 @@ export default function HomePage() {
                 </motion.div>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* Trusted Partners Section */}
+      <section ref={partnersRef} className="section-padding bg-gray-50">
+        <div className="container-custom">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={partnersInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl lg:text-5xl font-bold text-primary mb-6">
+              Trusted by Industry Leaders
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              We work with leading companies across various sectors, building lasting partnerships 
+              that drive mutual success and growth.
+            </p>
+          </motion.div>
+
+          <div className="relative overflow-hidden">
+            <motion.div
+              animate={{
+                x: [0, -1000],
+              }}
+              transition={{
+                x: {
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  duration: 30,
+                  ease: "linear",
+                },
+              }}
+              className="flex gap-12 items-center"
+            >
+              {/* Duplicate logos for seamless loop */}
+              {[...trustedPartners, ...trustedPartners].map((partner, index) => (
+                <motion.div
+                  key={`${partner.name}-${index}`}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={partnersInView ? { opacity: 1, scale: 1 } : {}}
+                  transition={{ duration: 0.8, delay: index * 0.1 }}
+                  className="flex-shrink-0"
+                >
+                  <div className="w-32 h-20 bg-white rounded-lg shadow-md flex items-center justify-center p-4 hover:shadow-lg transition-shadow duration-300">
+                    <img
+                      src={partner.logo}
+                      alt={partner.name}
+                      className="w-full h-full object-contain grayscale hover:grayscale-0 transition-all duration-300"
+                    />
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
           </div>
         </div>
       </section>

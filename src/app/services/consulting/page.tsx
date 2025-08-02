@@ -163,10 +163,42 @@ export default function ConsultingPage() {
         ref={heroRef}
         className="relative min-h-screen flex items-center justify-center overflow-hidden"
       >
-        {/* Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-400 via-blue-500 to-indigo-600 opacity-90"></div>
-        <div className="absolute inset-0 bg-black/30"></div>
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center opacity-20"></div>
+        {/* Background Grid Images */}
+        <div className="absolute inset-0 bg-black/50"></div>
+        <div className="absolute inset-0 grid grid-cols-3 gap-0">
+          {/* Business Transformation Image */}
+          <div className="relative overflow-hidden">
+            <div 
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+              style={{
+                backgroundImage: `url('https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')`
+              }}
+            ></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-600/60 to-blue-800/60"></div>
+          </div>
+          
+          {/* Procurement Solutions Image */}
+          <div className="relative overflow-hidden">
+            <div 
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+              style={{
+                backgroundImage: `url('https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')`
+              }}
+            ></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-green-600/60 to-green-800/60"></div>
+          </div>
+          
+          {/* Market Research Image */}
+          <div className="relative overflow-hidden">
+            <div 
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+              style={{
+                backgroundImage: `url('https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')`
+              }}
+            ></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-orange-600/60 to-orange-800/60"></div>
+          </div>
+        </div>
         
         {/* Hero Content */}
         <div className="relative z-10 container-custom text-center text-white">

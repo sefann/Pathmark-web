@@ -27,10 +27,12 @@ const Footer = () => {
   ];
 
   const services = [
-    { name: 'Energy Solutions', href: '/services#energy' },
-    { name: 'Construction', href: '/services#construction' },
-    { name: 'Technology', href: '/services#technology' },
-    { name: 'Financial Services', href: '/services#finance' },
+    { name: 'Energy Solutions', href: '/services/energy' },
+    { name: 'Construction', href: '/services/construction' },
+    { name: 'Technology', href: '/services/technology' },
+    { name: 'Financial Services', href: '/services/finance' },
+    { name: 'General Consulting', href: '/services/consulting' },
+    { name: 'Government Relations', href: '/services/government' },
   ];
 
   const socialLinks = [

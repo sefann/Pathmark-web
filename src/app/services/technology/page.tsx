@@ -195,10 +195,42 @@ export default function TechnologyPage() {
          ref={heroRef}
          className="relative min-h-screen flex items-center justify-center overflow-hidden"
        >
-         {/* Background */}
-         <div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-purple-500 to-indigo-600 opacity-90"></div>
-         <div className="absolute inset-0 bg-black/30"></div>
-         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center opacity-20"></div>
+         {/* Background Grid Images */}
+         <div className="absolute inset-0 bg-black/50"></div>
+         <div className="absolute inset-0 grid grid-cols-3 gap-0">
+           {/* Cybersecurity Image */}
+           <div className="relative overflow-hidden">
+             <div 
+               className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+               style={{
+                 backgroundImage: `url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')`
+               }}
+             ></div>
+             <div className="absolute inset-0 bg-gradient-to-br from-red-600/60 to-red-800/60"></div>
+           </div>
+           
+           {/* Cloud Solutions Image */}
+           <div className="relative overflow-hidden">
+             <div 
+               className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+               style={{
+                 backgroundImage: `url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')`
+               }}
+             ></div>
+             <div className="absolute inset-0 bg-gradient-to-br from-blue-600/60 to-blue-800/60"></div>
+           </div>
+           
+           {/* Smart Home Image */}
+           <div className="relative overflow-hidden">
+             <div 
+               className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+               style={{
+                 backgroundImage: `url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')`
+               }}
+             ></div>
+             <div className="absolute inset-0 bg-gradient-to-br from-purple-600/60 to-purple-800/60"></div>
+           </div>
+         </div>
         
         {/* Hero Content */}
         <div className="relative z-10 container-custom text-center text-white">

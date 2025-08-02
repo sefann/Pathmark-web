@@ -20,12 +20,13 @@ import {
   Shield,
   Clock,
   Drill,
-  Pipeline,
+  PenLine,
   Factory,
   MapPin,
   FileText,
   Users2,
-  Settings
+  Settings,
+  Fuel
 } from 'lucide-react';
 
 export default function EnergyPage() {
@@ -51,7 +52,7 @@ export default function EnergyPage() {
       color: 'from-amber-400 to-orange-500'
     },
     {
-      icon: Pipeline,
+      icon: Fuel,
       title: 'Oil & Gas Services',
       description: 'Support for upstream, midstream, and downstream oil and gas companies across the entire value chain.',
       overview: 'We help clients navigate complex regulatory environments, manage operational challenges, and execute strategic project plans to maximize efficiency and ensure compliance.',
@@ -98,7 +99,7 @@ export default function EnergyPage() {
       color: 'from-blue-500 to-blue-700'
     },
     {
-      icon: Pipeline,
+      icon: Fuel,
       title: 'Midstream Services',
       description: 'Solutions that facilitate the safe and efficient movement of crude oil and natural gas',
       services: [
@@ -187,9 +188,42 @@ export default function EnergyPage() {
         ref={heroRef}
         className="relative min-h-screen flex items-center justify-center overflow-hidden"
       >
-        {/* Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-yellow-400 via-orange-500 to-red-600 opacity-90"></div>
-        <div className="absolute inset-0 bg-black/30"></div>
+        {/* Background Grid Images */}
+        <div className="absolute inset-0 bg-black/50"></div>
+        <div className="absolute inset-0 grid grid-cols-3 gap-0">
+          {/* Mining Image */}
+          <div className="relative overflow-hidden">
+            <div 
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+              style={{
+                backgroundImage: `url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')`
+              }}
+            ></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-amber-600/60 to-orange-800/60"></div>
+          </div>
+          
+          {/* Oil & Gas Image */}
+          <div className="relative overflow-hidden">
+            <div 
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+              style={{
+                backgroundImage: `url('https://images.unsplash.com/photo-1544644181-1484b3fdfc62?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')`
+              }}
+            ></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-600/60 to-cyan-800/60"></div>
+          </div>
+          
+          {/* Renewable Energy Image */}
+          <div className="relative overflow-hidden">
+            <div 
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+              style={{
+                backgroundImage: `url('https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')`
+              }}
+            ></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/60 to-orange-600/60"></div>
+          </div>
+        </div>
         
         {/* Hero Content */}
         <div className="relative z-10 container-custom text-center text-white">
@@ -267,7 +301,7 @@ export default function EnergyPage() {
                     <div className="font-semibold text-gray-800">Mining</div>
                   </div>
                   <div className="bg-white rounded-lg p-4 text-center">
-                    <Pipeline size={32} className="text-blue-500 mx-auto mb-2" />
+                    <Fuel size={32} className="text-blue-500 mx-auto mb-2" />
                     <div className="font-semibold text-gray-800">Oil & Gas</div>
                   </div>
                   <div className="bg-white rounded-lg p-4 text-center">
@@ -497,7 +531,7 @@ export default function EnergyPage() {
                     'bg-gradient-to-br from-yellow-100 to-orange-100'
                   }`}>
                     {study.category === 'Mining' && <Drill size={64} className="text-amber-500" />}
-                    {study.category === 'Oil & Gas' && <Pipeline size={64} className="text-blue-500" />}
+                    {study.category === 'Oil & Gas' && <Fuel size={64} className="text-blue-500" />}
                     {study.category === 'Renewable Energy' && <Sun size={64} className="text-yellow-500" />}
                   </div>
                   <div className="p-6">
