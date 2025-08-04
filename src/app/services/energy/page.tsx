@@ -232,9 +232,7 @@ export default function EnergyPage() {
             animate={heroInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
           >
-            <div className="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Zap size={48} className="text-white" />
-            </div>
+
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
               Energy Services
             </h1>
@@ -359,7 +357,7 @@ export default function EnergyPage() {
                     <p className="text-gray-700 mb-6 leading-relaxed">
                       {service.overview}
                     </p>
-                    <ul className="space-y-2">
+                    <ul className="space-y-2 mb-6">
                       {service.features.map((feature, idx) => (
                         <li key={idx} className="flex items-center space-x-2">
                           <CheckCircle size={16} className="text-green-500 flex-shrink-0" />
@@ -367,6 +365,18 @@ export default function EnergyPage() {
                         </li>
                       ))}
                     </ul>
+                    {service.title === 'Mining Services' && (
+                      <Link href="/services/energy/mining" className="inline-flex items-center text-primary hover:text-accent transition-colors font-semibold">
+                        Explore Mining Services
+                        <ArrowRight size={16} className="ml-2" />
+                      </Link>
+                    )}
+                    {service.title === 'Renewable Energy Solutions' && (
+                      <Link href="/services/energy/renewable-energy" className="inline-flex items-center text-primary hover:text-accent transition-colors font-semibold">
+                        Explore Renewable Energy
+                        <ArrowRight size={16} className="ml-2" />
+                      </Link>
+                    )}
                   </div>
                 </motion.div>
               );

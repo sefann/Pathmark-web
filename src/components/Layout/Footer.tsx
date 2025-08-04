@@ -24,6 +24,7 @@ const Footer = () => {
     { name: 'Industries', href: '/industries' },
     { name: 'Portfolio', href: '/portfolio' },
     { name: 'Insights', href: '/insights' },
+    { name: 'Mining', href: '/services/energy/mining' },
   ];
 
   const services = [

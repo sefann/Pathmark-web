@@ -3,12 +3,6 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { 
-  Zap, 
-  Building, 
-  Cpu, 
-  DollarSign, 
-  Users, 
-  Scale,
   ArrowRight,
   Target,
   Award,
@@ -25,48 +19,36 @@ export default function ServicesPage() {
     {
       id: 'energy',
       title: 'Energy Solutions',
-      icon: Zap,
-      color: 'from-yellow-400 to-orange-500',
-      description: 'Comprehensive energy consulting and renewable energy solutions for sustainable development.',
+      description: 'Comprehensive energy consulting including mining, oil & gas, and renewable energy solutions.',
       href: '/services/energy'
     },
     {
       id: 'construction',
       title: 'Construction & Infrastructure',
-      icon: Building,
-      color: 'from-gray-400 to-gray-600',
       description: 'Infrastructure development and construction project management services.',
       href: '/services/construction'
     },
     {
       id: 'technology',
       title: 'Technology Solutions',
-      icon: Cpu,
-      color: 'from-blue-400 to-purple-500',
       description: 'Digital transformation and technology implementation services.',
       href: '/services/technology'
     },
     {
       id: 'finance',
       title: 'Financial Services',
-      icon: DollarSign,
-      color: 'from-green-400 to-emerald-500',
       description: 'Financial consulting and investment advisory services.',
       href: '/services/finance'
     },
     {
       id: 'consulting',
       title: 'General Consulting',
-      icon: Users,
-      color: 'from-indigo-400 to-blue-500',
       description: 'Strategic business consulting and organizational development.',
       href: '/services/consulting'
     },
     {
       id: 'government',
       title: 'Lobbying & Government Relations',
-      icon: Scale,
-      color: 'from-purple-400 to-pink-500',
       description: 'Government relations and regulatory advocacy services.',
       href: '/services/government'
     }
@@ -120,35 +102,29 @@ export default function ServicesPage() {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => {
-              const Icon = service.icon;
-              return (
-                <motion.div
-                  key={service.id}
-                  initial={{ opacity: 0, y: 50 }}
-                  animate={servicesInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.8, delay: index * 0.1 }}
-                >
-                  <Link href={service.href}>
-                    <div className="bg-white rounded-xl shadow-lg p-8 card-hover group cursor-pointer h-full">
-                      <div className={`w-16 h-16 bg-gradient-to-r ${service.color} rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                        <Icon size={32} className="text-white" />
-                      </div>
-                      <h3 className="text-2xl font-bold text-primary mb-4 group-hover:text-accent transition-colors">
-                        {service.title}
-                      </h3>
-                      <p className="text-gray-600 leading-relaxed">
-                        {service.description}
-                      </p>
-                      <div className="mt-6 flex items-center text-primary group-hover:text-accent transition-colors">
-                        <span className="font-semibold">Learn More</span>
-                        <ArrowRight size={20} className="ml-2 group-hover:translate-x-2 transition-transform" />
-                      </div>
+            {services.map((service, index) => (
+              <motion.div
+                key={service.id}
+                initial={{ opacity: 0, y: 50 }}
+                animate={servicesInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: index * 0.1 }}
+              >
+                <Link href={service.href}>
+                  <div className="bg-white rounded-xl shadow-lg p-8 card-hover group cursor-pointer h-full">
+                    <h3 className="text-2xl font-bold text-primary mb-4 group-hover:text-accent transition-colors">
+                      {service.title}
+                    </h3>
+                    <p className="text-gray-600 leading-relaxed">
+                      {service.description}
+                    </p>
+                    <div className="mt-6 flex items-center text-primary group-hover:text-accent transition-colors">
+                      <span className="font-semibold">Learn More</span>
+                      <ArrowRight size={20} className="ml-2 group-hover:translate-x-2 transition-transform" />
                     </div>
-                  </Link>
-                </motion.div>
-              );
-            })}
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>

@@ -185,40 +185,40 @@ export default function ConstructionPage() {
         ref={heroRef}
         className="relative min-h-screen flex items-center justify-center overflow-hidden"
       >
-        {/* Background Grid Images */}
+        {/* Background Image with Animation */}
         <div className="absolute inset-0 bg-black/50"></div>
-        <div className="absolute inset-0 grid grid-cols-3 gap-0">
-          {/* Residential Construction Image */}
-          <div className="relative overflow-hidden">
-            <div 
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-              style={{
-                backgroundImage: `url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')`
-              }}
-            ></div>
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-600/60 to-blue-800/60"></div>
-          </div>
+        <div className="absolute inset-0">
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat animate-pulse"
+            style={{
+              backgroundImage: `url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')`
+            }}
+          ></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-600/60 to-blue-800/60"></div>
           
-          {/* Commercial Construction Image */}
-          <div className="relative overflow-hidden">
-            <div 
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-              style={{
-                backgroundImage: `url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')`
-              }}
-            ></div>
-            <div className="absolute inset-0 bg-gradient-to-br from-green-600/60 to-green-800/60"></div>
-          </div>
-          
-          {/* Infrastructure Development Image */}
-          <div className="relative overflow-hidden">
-            <div 
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-              style={{
-                backgroundImage: `url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')`
-              }}
-            ></div>
-            <div className="absolute inset-0 bg-gradient-to-br from-orange-600/60 to-orange-800/60"></div>
+          {/* Animated Construction Elements */}
+          <div className="absolute inset-0 overflow-hidden">
+            {[...Array(8)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute w-2 h-2 bg-yellow-400 rounded-full opacity-60"
+                animate={{
+                  x: [0, Math.random() * 200 - 100],
+                  y: [0, Math.random() * 200 - 100],
+                  opacity: [0.6, 0, 0.6],
+                }}
+                transition={{
+                  duration: Math.random() * 8 + 6,
+                  repeat: Infinity,
+                  ease: "linear",
+                  delay: Math.random() * 3,
+                }}
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                }}
+              />
+            ))}
           </div>
         </div>
         
@@ -229,9 +229,7 @@ export default function ConstructionPage() {
             animate={heroInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
           >
-            <div className="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Building size={48} className="text-white" />
-            </div>
+
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
               Construction & Infrastructure
             </h1>

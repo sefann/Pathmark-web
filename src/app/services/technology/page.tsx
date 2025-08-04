@@ -195,40 +195,40 @@ export default function TechnologyPage() {
          ref={heroRef}
          className="relative min-h-screen flex items-center justify-center overflow-hidden"
        >
-         {/* Background Grid Images */}
+         {/* Background Image with Animation */}
          <div className="absolute inset-0 bg-black/50"></div>
-         <div className="absolute inset-0 grid grid-cols-3 gap-0">
-           {/* Cybersecurity Image */}
-           <div className="relative overflow-hidden">
-             <div 
-               className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-               style={{
-                 backgroundImage: `url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')`
-               }}
-             ></div>
-             <div className="absolute inset-0 bg-gradient-to-br from-red-600/60 to-red-800/60"></div>
-           </div>
+         <div className="absolute inset-0">
+           <div 
+             className="absolute inset-0 bg-cover bg-center bg-no-repeat animate-pulse"
+             style={{
+               backgroundImage: `url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')`
+             }}
+           ></div>
+           <div className="absolute inset-0 bg-gradient-to-br from-blue-600/60 to-blue-800/60"></div>
            
-           {/* Cloud Solutions Image */}
-           <div className="relative overflow-hidden">
-             <div 
-               className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-               style={{
-                 backgroundImage: `url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')`
-               }}
-             ></div>
-             <div className="absolute inset-0 bg-gradient-to-br from-blue-600/60 to-blue-800/60"></div>
-           </div>
-           
-           {/* Smart Home Image */}
-           <div className="relative overflow-hidden">
-             <div 
-               className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-               style={{
-                 backgroundImage: `url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')`
-               }}
-             ></div>
-             <div className="absolute inset-0 bg-gradient-to-br from-purple-600/60 to-purple-800/60"></div>
+           {/* Animated Technology Elements */}
+           <div className="absolute inset-0 overflow-hidden">
+             {[...Array(12)].map((_, i) => (
+               <motion.div
+                 key={i}
+                 className="absolute w-1 h-1 bg-cyan-400 rounded-full opacity-70"
+                 animate={{
+                   x: [0, Math.random() * 300 - 150],
+                   y: [0, Math.random() * 300 - 150],
+                   opacity: [0.7, 0, 0.7],
+                 }}
+                 transition={{
+                   duration: Math.random() * 10 + 8,
+                   repeat: Infinity,
+                   ease: "linear",
+                   delay: Math.random() * 4,
+                 }}
+                 style={{
+                   left: `${Math.random() * 100}%`,
+                   top: `${Math.random() * 100}%`,
+                 }}
+               />
+             ))}
            </div>
          </div>
         
@@ -239,9 +239,7 @@ export default function TechnologyPage() {
             animate={heroInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
           >
-            <div className="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Cpu size={48} className="text-white" />
-            </div>
+
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
               Technology Solutions
             </h1>

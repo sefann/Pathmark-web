@@ -1,8 +1,9 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import Link from 'next/link';
+import { useState, useEffect } from 'react';
 import { 
   Zap, 
   Building, 
@@ -21,12 +22,23 @@ export default function HomePage() {
   const [whyRef, whyInView] = useInView({ threshold: 0.1 });
   const [statsRef, statsInView] = useInView({ threshold: 0.1 });
   const [partnersRef, partnersInView] = useInView({ threshold: 0.1 });
+  
+  const [currentServiceIndex, setCurrentServiceIndex] = useState(0);
+  const servicesList = ['Energy', 'Construction', 'Technology', 'Finance', 'Government Relations'];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentServiceIndex((prev) => (prev + 1) % servicesList.length);
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, [servicesList.length]);
 
   const services = [
     {
       icon: Zap,
       title: 'Energy',
-      description: 'Comprehensive energy solutions and renewable energy consulting',
+      description: 'Comprehensive energy solutions including mining, oil & gas, and renewable energy',
       href: '/services/energy',
       color: 'from-yellow-400 to-orange-500'
     },
@@ -128,9 +140,35 @@ export default function HomePage() {
               The Path to Bringing Your{' '}
               <span className="text-accent">Vision</span> to Life
             </h1>
-            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed">
-              Professional consulting and project execution services across Energy, 
-              Construction, Technology, Finance, and Government Relations.
+            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed text-center">
+              Professional consulting and project execution services across{' '}
+              <span className="inline-block min-w-[400px] text-center">
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={currentServiceIndex}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="text-white font-extrabold text-3xl md:text-4xl lg:text-5xl"
+                  >
+                    {servicesList[currentServiceIndex].split('').map((char, index) => (
+                      <motion.span
+                        key={index}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ 
+                          duration: 0.1, 
+                          delay: index * 0.1,
+                          ease: "easeIn"
+                        }}
+                      >
+                        {char}
+                      </motion.span>
+                    ))}
+                  </motion.span>
+                </AnimatePresence>
+              </span>
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link href="/contact" className="btn-secondary text-lg px-8 py-4">

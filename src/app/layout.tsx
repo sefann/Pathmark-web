@@ -8,6 +8,11 @@ export const metadata: Metadata = {
   description: "Professional consulting and project execution services across Energy, Construction, Technology, Finance, and Government Relations. Based in Abuja, Nigeria.",
   keywords: "consulting, project execution, energy, construction, technology, finance, Nigeria, Abuja",
   authors: [{ name: "Pathmark Advisory Co. Ltd" }],
+  icons: {
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+    apple: '/favicon.svg',
+  },
   openGraph: {
     title: "Pathmark Advisory Co. Ltd",
     description: "The Path to Bringing Your Vision to Life",
