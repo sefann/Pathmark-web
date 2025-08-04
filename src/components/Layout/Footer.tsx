@@ -47,35 +47,21 @@ const Footer = () => {
     <footer className="bg-gray-900 text-white">
       <div className="container-custom">
         {/* Main Footer Content */}
-        <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="pt-2 pb-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="lg:col-span-1">
-            <div className="flex items-center space-x-2 mb-6">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">P</span>
+            <div className="flex flex-col items-center mb-2">
+              <div className="w-56 h-56 lg:w-64 lg:h-64 flex items-center justify-center mb-1">
+                <img 
+                  src="/logo.svg" 
+                  alt="Pathmark Advisory Logo" 
+                  className="w-full h-full object-contain"
+                />
               </div>
-              <div>
-                <h3 className="text-xl font-bold">Pathmark Advisory</h3>
-                <p className="text-sm text-gray-400">Co. Ltd</p>
-              </div>
-            </div>
-            <p className="text-gray-300 mb-6 leading-relaxed">
-              The Path to Bringing Your Vision to Life. We provide comprehensive consulting 
-              and project execution services across multiple industries.
-            </p>
-            <div className="space-y-3">
-              <div className="flex items-center space-x-3">
-                <MapPin size={18} className="text-accent" />
-                <span className="text-sm">D&apos;Mayors Estate, Games Village, Abuja</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <Phone size={18} className="text-accent" />
-                <span className="text-sm">+234000000000</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <Mail size={18} className="text-accent" />
-                <span className="text-sm">contact@pathmarkadvisory.com</span>
-              </div>
+              <p className="text-gray-300 leading-relaxed text-center max-w-md">
+                The Path to Bringing Your Vision to Life. We provide comprehensive consulting 
+                and project execution services across multiple industries.
+              </p>
             </div>
           </div>
 
@@ -167,9 +153,23 @@ const Footer = () => {
                 );
               })}
             </div>
-            <Link href="/contact" className="btn-secondary">
+            <Link href="/contact" className="btn-secondary mb-6 block">
               Get In Touch
             </Link>
+            <div className="space-y-4">
+              <div className="flex items-start space-x-3">
+                <MapPin size={18} className="text-accent mt-0.5 flex-shrink-0" />
+                <span className="text-sm text-gray-300 leading-relaxed">D&apos;Mayors Estate, Games Village, Abuja</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Phone size={18} className="text-accent flex-shrink-0" />
+                <span className="text-sm text-gray-300">+234000000000</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Mail size={18} className="text-accent flex-shrink-0" />
+                <span className="text-sm text-gray-300">contact@pathmarkadvisory.com</span>
+              </div>
+            </div>
           </div>
         </div>
 

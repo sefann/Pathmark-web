@@ -85,7 +85,7 @@ const Header = () => {
                                            <Link href="/" className="flex items-center">
               <div className="w-32 h-32 lg:w-36 lg:h-36 flex items-center justify-center">
                                <img 
-                  src="/logo.svg.svg" 
+                  src="/logo.svg" 
                   alt="Pathmark Advisory Logo" 
                   className="w-full h-full object-contain"
                 />
