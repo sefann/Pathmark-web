@@ -127,7 +127,7 @@ export default function HomePage() {
             backgroundImage: `url('https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')`
           }}
         ></div>
-        <div className="absolute inset-0 bg-black/50"></div>
+        <div className="absolute inset-0 bg-black/70"></div>
         
         {/* Hero Content */}
         <div className="relative z-10 container-custom text-center text-white">
@@ -140,7 +140,7 @@ export default function HomePage() {
               The Path to Bringing Your{' '}
               <span className="text-accent">Vision</span> to Life
             </h1>
-            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed text-center">
+            <p className="text-xl md:text-2xl mb-4 max-w-3xl mx-auto leading-relaxed text-center">
               Professional consulting and project execution services across{' '}
               <span className="inline-block min-w-[400px] text-center">
                 <AnimatePresence mode="wait">
@@ -170,13 +170,16 @@ export default function HomePage() {
                 </AnimatePresence>
               </span>
             </p>
+            <p className="text-lg md:text-xl mb-8 max-w-4xl mx-auto leading-relaxed text-center text-accent font-semibold">
+              💼 Investment Opportunities Available for Local & International Clients
+            </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link href="/contact" className="btn-secondary text-lg px-8 py-4">
-                Request Consultation
+                Explore Investment Opportunities
                 <ArrowRight className="ml-2" size={20} />
               </Link>
-              <Link href="/portfolio" className="btn-outline text-lg px-8 py-4 border-white text-white hover:bg-white hover:text-primary">
-                View Our Portfolio
+              <Link href="/contact" className="btn-outline text-lg px-8 py-4 border-white text-white hover:bg-white hover:text-primary">
+                Partner With Us
               </Link>
             </div>
           </motion.div>
@@ -243,6 +246,124 @@ export default function HomePage() {
               );
             })}
           </div>
+        </div>
+      </section>
+
+      {/* Investment Opportunities Section */}
+      <section className="section-padding bg-gradient-to-r from-primary to-accent text-white">
+        <div className="container-custom">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+              💼 Investment Opportunities
+            </h2>
+            <p className="text-xl max-w-4xl mx-auto leading-relaxed">
+              We offer exclusive investment opportunities across all our service areas for both local and international clients. 
+              Partner with us to access high-growth sectors and strategic projects.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 text-center"
+            >
+              <div className="text-2xl mb-2">🏭</div>
+              <h3 className="text-sm font-bold mb-2">Energy & Mining</h3>
+              <p className="text-primary-100 text-xs leading-relaxed">
+                Mining operations, renewable energy, and infrastructure development.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 text-center"
+            >
+              <div className="text-2xl mb-2">🏗️</div>
+              <h3 className="text-sm font-bold mb-2">Construction</h3>
+              <p className="text-primary-100 text-xs leading-relaxed">
+                Infrastructure projects, real estate, and construction ventures.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 text-center"
+            >
+              <div className="text-2xl mb-2">💻</div>
+              <h3 className="text-sm font-bold mb-2">Technology</h3>
+              <p className="text-primary-100 text-xs leading-relaxed">
+                Digital transformation, fintech, and technology startups.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 text-center"
+            >
+              <div className="text-2xl mb-2">💰</div>
+              <h3 className="text-sm font-bold mb-2">Finance</h3>
+              <p className="text-primary-100 text-xs leading-relaxed">
+                Banking, insurance, and financial technology sectors.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 text-center"
+            >
+              <div className="text-2xl mb-2">🤝</div>
+              <h3 className="text-sm font-bold mb-2">Government</h3>
+              <p className="text-primary-100 text-xs leading-relaxed">
+                Public-private partnerships and government projects.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 text-center"
+            >
+              <div className="text-2xl mb-2">🌍</div>
+              <h3 className="text-2xl font-bold mb-2">Global</h3>
+              <p className="text-primary-100 text-xs leading-relaxed">
+                International partnerships and cross-border opportunities.
+              </p>
+            </motion.div>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+            className="text-center mt-12"
+          >
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-block"
+            >
+              <Link href="/contact" className="bg-white text-primary hover:bg-primary-100 transition-all duration-300 text-xl font-bold px-12 py-6 rounded-full shadow-2xl hover:shadow-3xl border-2 border-white/20 backdrop-blur-sm">
+                Start Your Investment Journey
+                <ArrowRight className="ml-3 inline" size={24} />
+              </Link>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
