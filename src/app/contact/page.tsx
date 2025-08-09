@@ -58,7 +58,7 @@ export default function ContactPage() {
     {
       icon: MapPin,
       title: 'Our Location',
-      details: ['D&apos;Mayors Estate', 'Games Village, Abuja', 'Nigeria'],
+      details: ['T007, PLOT 1248 ORJI UZOR KALU CLOSE', 'MABUSHI, ABUJA FCT', 'Nigeria'],
       link: 'https://maps.google.com'
     },
     {
@@ -313,7 +313,7 @@ export default function ContactPage() {
                     <div className="text-center">
                       <MapPin size={48} className="text-primary mx-auto mb-4" />
                       <h3 className="text-xl font-bold text-primary mb-2">Our Location</h3>
-                      <p className="text-gray-600">D&apos;Mayors Estate, Games Village</p>
+                      <p className="text-gray-600">T007, PLOT 1248 ORJI UZOR KALU CLOSE, MABUSHI</p>
                       <p className="text-gray-600">Abuja, Nigeria</p>
                       <a 
                         href="https://maps.google.com" 

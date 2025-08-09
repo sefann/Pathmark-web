@@ -159,7 +159,7 @@ const Footer = () => {
             <div className="space-y-4">
               <div className="flex items-start space-x-3">
                 <MapPin size={18} className="text-accent mt-0.5 flex-shrink-0" />
-                <span className="text-sm text-gray-300 leading-relaxed">D&apos;Mayors Estate, Games Village, Abuja</span>
+                <span className="text-sm text-gray-300 leading-relaxed">T007, PLOT 1248 ORJI UZOR KALU CLOSE, MABUSHI, ABUJA FCT</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone size={18} className="text-accent flex-shrink-0" />
