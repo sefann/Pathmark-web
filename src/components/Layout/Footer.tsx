@@ -185,6 +185,9 @@ const Footer = () => {
             <Link href="/terms" className="text-gray-400 hover:text-white text-sm transition-colors">
               Terms of Service
             </Link>
+            <Link href="/admin/manual-articles" className="text-gray-400 hover:text-white text-sm transition-colors">
+              Admin
+            </Link>
             <motion.button
               onClick={scrollToTop}
               whileHover={{ scale: 1.1 }}
