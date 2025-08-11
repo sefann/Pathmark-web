@@ -1,0 +1,204 @@
+import { NextRequest, NextResponse } from 'next/server';
+import Parser from 'rss-parser';
+import axios from 'axios';
+import { fallbackArticles } from '@/data/fallback-articles';
+import { manualArticles } from '@/data/manual-articles';
+import { Article, InsightsResponse } from '@/types/insights';
+import { getAllRSSSources } from '@/config/rss-sources';
+import { rssCache, generateCacheKey, getCacheHeaders, generateETag } from '@/lib/cache';
+import { performanceMonitor, withTiming } from '@/lib/performance';
+
+const parser = new Parser({
+  customFields: {
+    item: [
+      ['media:content', 'media'],
+      ['media:thumbnail', 'thumbnail'],
+      ['media:group', 'mediaGroup'],
+      ['enclosure', 'enclosure'],
+      ['dc:creator', 'author'],
+      ['category', 'category'],
+      ['image', 'image'],
+    ],
+  },
+});
+
+
+
+
+
+async function fetchRSSFeed(url: string, category: string, sourceName: string): Promise<Article[]> {
+  try {
+    // Check cache first
+    const cacheKey = generateCacheKey(url, category);
+    const cachedData = rssCache.get(cacheKey);
+    const cachedEtag = rssCache.getEtag(cacheKey);
+    const cachedLastModified = rssCache.getLastModified(cacheKey);
+
+    // Prepare headers for conditional requests
+    const headers: Record<string, string> = {
+      'User-Agent': 'Mozilla/5.0 (compatible; PathmarkInsights/1.0)',
+    };
+
+    if (cachedEtag) {
+      headers['If-None-Match'] = cachedEtag;
+    }
+
+    if (cachedLastModified) {
+      headers['If-Modified-Since'] = cachedLastModified;
+    }
+
+    const response = await axios.get(url, {
+      timeout: 10000,
+      headers,
+      validateStatus: (status) => status < 400, // Accept 304 Not Modified
+    });
+
+    // If 304 Not Modified, return cached data
+    if (response.status === 304 && cachedData) {
+      return cachedData;
+    }
+
+    const feed = await parser.parseString(response.data);
+    
+    const articles = feed.items.slice(0, 10).map((item, index) => {
+      // Extract image from various RSS feed formats
+      let imageUrl = undefined;
+      
+      // Only use images that are likely to be relevant (not generic logos or ads)
+      if (item.media?.$?.url && !item.media.$.url.includes('logo') && !item.media.$.url.includes('ad')) {
+        imageUrl = item.media.$.url;
+      } else if (item.thumbnail?.$?.url && !item.thumbnail.$.url.includes('logo') && !item.thumbnail.$.url.includes('ad')) {
+        imageUrl = item.thumbnail.$.url;
+      } else if (item.enclosure?.$?.url && item.enclosure.$.type?.startsWith('image/') && 
+                 !item.enclosure.$.url.includes('logo') && !item.enclosure.$.url.includes('ad')) {
+        imageUrl = item.enclosure.$.url;
+      } else if (item.mediaGroup?.media?.[0]?.$?.url && 
+                 !item.mediaGroup.media[0].$.url.includes('logo') && !item.mediaGroup.media[0].$.url.includes('ad')) {
+        imageUrl = item.mediaGroup.media[0].$.url;
+      } else if (item.image && !item.image.includes('logo') && !item.image.includes('ad')) {
+        imageUrl = item.image;
+      }
+      
+      // If no relevant image found, don't set imageUrl (will use category placeholder)
+      
+      return {
+        id: `${category}-${sourceName}-${index}`,
+        title: item.title || 'Untitled',
+        link: item.link || '#',
+        description: item.contentSnippet || item.content || item.summary || 'No description available',
+        category,
+        source: sourceName,
+        pubDate: item.pubDate || item.isoDate || new Date().toISOString(),
+        image: imageUrl,
+        author: item.creator || item.author || undefined,
+      };
+    });
+
+    // Cache the results with ETag and Last-Modified
+    const etag = response.headers.etag;
+    const lastModified = response.headers['last-modified'];
+    rssCache.set(cacheKey, articles, etag, lastModified);
+
+    return articles;
+  } catch (error) {
+    console.error(`Error fetching RSS feed from ${url}:`, error);
+    return [];
+  }
+}
+
+async function fetchAllFeeds(): Promise<Article[]> {
+  const allArticles: Article[] = [];
+  const sources = getAllRSSSources();
+  
+  for (const source of sources) {
+    const articles = await fetchRSSFeed(source.url, source.category, source.name);
+    allArticles.push(...articles);
+  }
+  
+  // Sort by publication date (newest first)
+  return allArticles.sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
+}
+
+export async function GET(request: NextRequest) {
+  const startTime = Date.now();
+  
+  try {
+    const { searchParams } = new URL(request.url);
+    const category = searchParams.get('category');
+    const limit = parseInt(searchParams.get('limit') || '50');
+    
+    let allArticles: Article[] = [];
+    let cacheHit = false;
+    
+    try {
+      // Try to fetch from RSS feeds first with performance monitoring
+      allArticles = await withTiming('fetchAllFeeds', async () => {
+        const result = await fetchAllFeeds();
+        return result;
+      });
+    } catch (rssError) {
+      console.error('RSS feeds failed, using fallback data:', rssError);
+      // If RSS feeds fail, use fallback data
+      allArticles = fallbackArticles;
+      cacheHit = true; // Fallback data is considered a cache hit
+    }
+    
+    // Combine manual articles with RSS articles
+    const allArticlesWithManual = [...manualArticles, ...allArticles];
+    
+    // Filter by category if specified
+    const filteredArticles = category && category !== 'All' 
+      ? allArticlesWithManual.filter(article => article.category === category)
+      : allArticlesWithManual;
+    
+    // Apply limit
+    const limitedArticles = filteredArticles.slice(0, limit);
+    
+    const response: InsightsResponse = {
+      success: true,
+      articles: limitedArticles,
+      total: filteredArticles.length,
+      category: category || 'All',
+    };
+    
+    // Generate ETag for response
+    const etag = generateETag(response);
+    
+    // Check if client has the same version
+    const ifNoneMatch = request.headers.get('if-none-match');
+    if (ifNoneMatch === etag) {
+      return new NextResponse(null, { status: 304 });
+    }
+    
+    // Record performance metrics
+    const fetchTime = Date.now() - startTime;
+    performanceMonitor.recordFetch(fetchTime, cacheHit, response.articles.length);
+    
+    // Return response with caching headers
+    const nextResponse = NextResponse.json(response);
+    Object.entries(getCacheHeaders(3600)).forEach(([key, value]) => {
+      nextResponse.headers.set(key, value);
+    });
+    nextResponse.headers.set('ETag', etag);
+    
+    return nextResponse;
+  } catch (error) {
+    console.error('Error fetching insights:', error);
+    
+    // Return fallback data even if everything else fails
+    const fallbackResponse: InsightsResponse = {
+      success: false,
+      articles: fallbackArticles.slice(0, 12),
+      total: fallbackArticles.length,
+      category: 'All',
+      error: 'Using fallback data due to service issues',
+    };
+    
+    const nextResponse = NextResponse.json(fallbackResponse, { status: 200 });
+    Object.entries(getCacheHeaders(300)).forEach(([key, value]) => {
+      nextResponse.headers.set(key, value);
+    });
+    
+    return nextResponse;
+  }
+}

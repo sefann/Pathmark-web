@@ -1,175 +1,163 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import Link from 'next/link';
 import { 
   Calendar, 
   Clock, 
   User, 
   ArrowRight,
   Search,
-  BookOpen
+  BookOpen,
+  ExternalLink,
+  RefreshCw,
+  Filter,
+  Globe
 } from 'lucide-react';
+import { Article, InsightsResponse } from '@/types/insights';
+import ArticleImage from '@/components/ArticleImage';
+import ManualArticlesSection from '@/components/ManualArticlesSection';
+import Banner from '@/components/Banner';
 
 export default function InsightsPage() {
-  const [heroRef, heroInView] = useInView({ threshold: 0.1 });
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchTerm, setSearchTerm] = useState('');
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
+  const [displayedCount, setDisplayedCount] = useState(6);
+  const [loadingMore, setLoadingMore] = useState(false);
 
   const categories = [
     'All',
     'Energy',
-    'Construction',
     'Technology',
+    'Construction',
     'Finance',
-    'Government Relations',
-    'Industry Trends',
-    'Company News'
+    'Public Sector',
+    'Mining',
+    'Investment Africa',
+    'Nigerian News'
   ];
 
-  const insights = [
-    {
-      id: 1,
-      title: 'The Future of Renewable Energy in Nigeria: Opportunities and Challenges',
-      excerpt: 'Nigeria is positioned to become a leader in renewable energy across West Africa. We explore the key opportunities and challenges facing the sector.',
-      category: 'Energy',
-      author: 'Aisha A. Adamu',
-      date: '2024-01-15',
-      readTime: '8 min read',
-      image: '/api/placeholder/600/400',
-      featured: true,
-      tags: ['Renewable Energy', 'Nigeria', 'Solar Power', 'Policy']
-    },
-    {
-      id: 2,
-      title: 'Digital Transformation in African Financial Services',
-      excerpt: 'How fintech innovations are reshaping the financial landscape across Africa and what it means for traditional banking.',
-      category: 'Finance',
-      author: 'Sulaimon A. Ajishafe',
-      date: '2024-01-10',
-      readTime: '6 min read',
-      image: '/api/placeholder/600/400',
-      featured: true,
-      tags: ['Fintech', 'Digital Banking', 'Africa', 'Innovation']
-    },
-    {
-      id: 3,
-      title: 'Infrastructure Development: Key to Nigeria\'s Economic Growth',
-      excerpt: 'Analyzing the critical role of infrastructure investment in driving sustainable economic development across Nigeria.',
-      category: 'Construction',
-      author: 'Pathmark Team',
-      date: '2024-01-05',
-      readTime: '10 min read',
-      image: '/api/placeholder/600/400',
-      featured: false,
-      tags: ['Infrastructure', 'Economic Growth', 'Construction', 'Development']
-    },
-    {
-      id: 4,
-      title: 'Navigating Government Relations in West Africa',
-      excerpt: 'Best practices for building effective relationships with government stakeholders in the West African business environment.',
-      category: 'Government Relations',
-      author: 'Aisha A. Adamu',
-      date: '2023-12-28',
-      readTime: '7 min read',
-      image: '/api/placeholder/600/400',
-      featured: false,
-      tags: ['Government Relations', 'West Africa', 'Policy', 'Stakeholder Management']
-    },
-    {
-      id: 5,
-      title: 'Technology Adoption in Traditional Industries',
-      excerpt: 'How traditional sectors in Nigeria are leveraging technology to improve efficiency and competitiveness.',
-      category: 'Technology',
-      author: 'Sulaimon A. Ajishafe',
-      date: '2023-12-20',
-      readTime: '5 min read',
-      image: '/api/placeholder/600/400',
-      featured: false,
-      tags: ['Digital Transformation', 'Traditional Industries', 'Efficiency', 'Innovation']
-    },
-    {
-      id: 6,
-      title: 'Pathmark Advisory Expands Operations to Ghana',
-      excerpt: 'We are excited to announce our expansion into the Ghanaian market, bringing our expertise to more clients across West Africa.',
-      category: 'Company News',
-      author: 'Pathmark Team',
-      date: '2023-12-15',
-      readTime: '3 min read',
-      image: '/api/placeholder/600/400',
-      featured: false,
-      tags: ['Company News', 'Expansion', 'Ghana', 'West Africa']
-    },
-    {
-      id: 7,
-      title: '2024 Industry Outlook: Trends Shaping Business in Africa',
-      excerpt: 'Our comprehensive analysis of the key trends and opportunities that will define the African business landscape in 2024.',
-      category: 'Industry Trends',
-      author: 'Pathmark Team',
-      date: '2023-12-10',
-      readTime: '12 min read',
-      image: '/api/placeholder/600/400',
-      featured: false,
-      tags: ['Industry Trends', '2024 Outlook', 'Africa', 'Business Strategy']
-    },
-    {
-      id: 8,
-      title: 'Sustainable Construction Practices in Nigeria',
-      excerpt: 'Exploring eco-friendly construction methods and materials that are gaining traction in the Nigerian construction industry.',
-      category: 'Construction',
-      author: 'Pathmark Team',
-      date: '2023-12-05',
-      readTime: '9 min read',
-      image: '/api/placeholder/600/400',
-      featured: false,
-      tags: ['Sustainable Construction', 'Green Building', 'Nigeria', 'Environment']
+  const fetchInsights = async (category: string = 'All') => {
+    setLoading(true);
+    setError(null);
+    
+    try {
+      const params = new URLSearchParams({
+        category,
+        limit: '50'
+      });
+      
+      const response = await fetch(`/api/insights?${params}`);
+      const data: InsightsResponse = await response.json();
+      
+      if (data.success) {
+        setArticles(data.articles);
+        setLastUpdated(new Date());
+      } else {
+        setError('Failed to fetch insights');
+      }
+    } catch (err) {
+      setError('Network error occurred');
+      console.error('Error fetching insights:', err);
+    } finally {
+      setLoading(false);
     }
-  ];
+  };
 
-  const filteredInsights = insights.filter(insight => {
-    const matchesCategory = selectedCategory === 'All' || insight.category === selectedCategory;
-    const matchesSearch = insight.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         insight.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         insight.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
-    return matchesCategory && matchesSearch;
+  useEffect(() => {
+    fetchInsights(selectedCategory);
+  }, [selectedCategory]);
+
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory(category);
+    setSearchTerm('');
+    setDisplayedCount(6);
+  };
+
+  const handleRefresh = () => {
+    setLoading(true);
+    setError(null);
+    setDisplayedCount(6);
+    fetchInsights(selectedCategory);
+  };
+
+  const handleLoadMore = () => {
+    setLoadingMore(true);
+    setTimeout(() => {
+      setDisplayedCount(prev => prev + 6);
+      setLoadingMore(false);
+    }, 500);
+  };
+
+  const filteredArticles = articles.filter(article => {
+    if (!searchTerm) return true;
+    
+    const searchLower = searchTerm.toLowerCase();
+    return (
+      article.title.toLowerCase().includes(searchLower) ||
+      article.description.toLowerCase().includes(searchLower) ||
+      article.source.toLowerCase().includes(searchLower) ||
+      article.category.toLowerCase().includes(searchLower)
+    );
   });
 
-  const featuredInsights = insights.filter(insight => insight.featured);
-  const regularInsights = filteredInsights.filter(insight => !insight.featured);
+  const displayedArticles = filteredArticles.filter(article => !article.isManual).slice(0, displayedCount);
+  const hasMoreArticles = filteredArticles.filter(article => !article.isManual).length > displayedCount;
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffInHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60));
+    
+    if (diffInHours < 1) return 'Just now';
+    if (diffInHours < 24) return `${diffInHours}h ago`;
+    if (diffInHours < 48) return 'Yesterday';
+    
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    });
+  };
+
+  const getCategoryColor = (category: string) => {
+    const colors = {
+      'Energy': 'bg-yellow-100 text-yellow-800',
+      'Technology': 'bg-blue-100 text-blue-800',
+      'Construction': 'bg-orange-100 text-orange-800',
+      'Finance': 'bg-green-100 text-green-800',
+      'Public Sector': 'bg-purple-100 text-purple-800',
+      'Mining': 'bg-gray-100 text-gray-800',
+      'Investment Africa': 'bg-red-100 text-red-800',
+      'Nigerian News': 'bg-primary-100 text-primary-800'
+    };
+    return colors[category as keyof typeof colors] || 'bg-gray-100 text-gray-800';
+  };
 
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <section ref={heroRef} className="relative section-padding text-white overflow-hidden">
-        {/* Background Image */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')`
-          }}
-        ></div>
-        <div className="absolute inset-0 bg-gradient-to-br from-primary to-primary-800 opacity-90"></div>
-        <div className="relative z-10">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={heroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="text-center"
-          >
-            <h1 className="text-4xl lg:text-6xl font-bold mb-6">
-              Insights & Thought Leadership
-            </h1>
-            <p className="text-xl lg:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed">
-              Stay informed with our latest insights on industry trends, best practices, 
-              and strategic perspectives from across Africa&apos;s business landscape.
-            </p>
-          </motion.div>
+      <Banner
+        title="Latest Insights Across Industries"
+        subtitle="Stay informed with real-time industry news and insights from trusted sources across Energy, Technology, Construction, Finance, and more."
+        imagePath="/images/insights-banner.jpg"
+      >
+        <div className="flex items-center justify-center space-x-4 text-sm">
+          <Globe size={16} />
+          <span>Automatically updated from multiple sources</span>
+          {lastUpdated && (
+            <>
+              <span>•</span>
+              <span>Last updated: {formatDate(lastUpdated.toISOString())}</span>
+            </>
+          )}
         </div>
-        </div>
-      </section>
+      </Banner>
 
       {/* Search and Filter Section */}
       <section className="py-12 bg-gray-50">
@@ -180,19 +168,29 @@ export default function InsightsPage() {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
               <input
                 type="text"
-                placeholder="Search insights..."
+                placeholder="Search articles..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
               />
             </div>
 
+            {/* Refresh Button */}
+            <button
+              onClick={handleRefresh}
+              disabled={loading}
+              className="flex items-center space-x-2 px-4 py-3 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50"
+            >
+              <RefreshCw size={16} className={loading ? 'animate-spin' : ''} />
+              <span>Refresh</span>
+            </button>
+
             {/* Category Filter */}
             <div className="flex flex-wrap gap-2">
               {categories.map((category) => (
                 <button
                   key={category}
-                  onClick={() => setSelectedCategory(category)}
+                  onClick={() => handleCategoryChange(category)}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                     selectedCategory === category
                       ? 'bg-primary text-white'
@@ -207,82 +205,15 @@ export default function InsightsPage() {
         </div>
       </section>
 
-      {/* Featured Insights */}
-      {featuredInsights.length > 0 && selectedCategory === 'All' && !searchTerm && (
-        <section className="section-padding">
-          <div className="container-custom">
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="mb-12"
-            >
-              <h2 className="text-3xl lg:text-4xl font-bold text-primary mb-6">Featured Insights</h2>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                {featuredInsights.map((insight, index) => (
-                  <motion.article
-                    key={insight.id}
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                    className="bg-white rounded-xl shadow-lg overflow-hidden card-hover group"
-                  >
-                    <div className="aspect-video bg-gradient-to-br from-primary-100 to-accent-100 relative">
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <BookOpen size={48} className="text-primary opacity-50" />
-                      </div>
-                      <div className="absolute top-4 left-4">
-                        <span className="bg-accent text-white px-3 py-1 rounded-full text-sm font-medium">
-                          Featured
-                        </span>
-                      </div>
-                    </div>
-                    <div className="p-6">
-                      <div className="flex items-center space-x-4 text-sm text-gray-500 mb-3">
-                        <span className="bg-primary-100 text-primary px-2 py-1 rounded text-xs font-medium">
-                          {insight.category}
-                        </span>
-                        <div className="flex items-center space-x-1">
-                          <Calendar size={14} />
-                          <span>{new Date(insight.date).toLocaleDateString()}</span>
-                        </div>
-                        <div className="flex items-center space-x-1">
-                          <Clock size={14} />
-                          <span>{insight.readTime}</span>
-                        </div>
-                      </div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors">
-                        {insight.title}
-                      </h3>
-                      <p className="text-gray-600 mb-4 leading-relaxed">
-                        {insight.excerpt}
-                      </p>
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2">
-                          <User size={16} className="text-gray-400" />
-                          <span className="text-sm text-gray-600">{insight.author}</span>
-                        </div>
-                        <Link 
-                          href={`/insights/${insight.id}`}
-                          className="text-primary hover:text-accent transition-colors flex items-center space-x-1"
-                        >
-                          <span>Read More</span>
-                          <ArrowRight size={16} />
-                        </Link>
-                      </div>
-                    </div>
-                  </motion.article>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-        </section>
+      {/* Manual Articles Section */}
+      {articles.some(article => article.isManual) && (
+        <ManualArticlesSection 
+          articles={articles.filter(article => article.isManual)} 
+        />
       )}
 
-      {/* All Insights */}
-      <section className="section-padding bg-gray-50">
+      {/* RSS Articles Grid */}
+      <section className="section-padding">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -293,82 +224,150 @@ export default function InsightsPage() {
           >
             <div className="flex items-center justify-between mb-8">
               <h2 className="text-3xl lg:text-4xl font-bold text-primary">
-                {selectedCategory === 'All' ? 'Latest Insights' : `${selectedCategory} Insights`}
+                {selectedCategory === 'All' ? 'Industry News & Updates' : `${selectedCategory} News`}
               </h2>
               <div className="text-sm text-gray-600">
-                {filteredInsights.length} article{filteredInsights.length !== 1 ? 's' : ''} found
+                {loading ? 'Loading...' : `Showing ${displayedArticles.length} of ${filteredArticles.filter(article => !article.isManual).length} articles`}
               </div>
             </div>
 
-            {filteredInsights.length === 0 ? (
+            {loading ? (
+              <div className="text-center py-16">
+                <RefreshCw size={64} className="text-gray-300 mx-auto mb-4 animate-spin" />
+                <h3 className="text-xl font-semibold text-gray-600 mb-2">Loading latest insights...</h3>
+                <p className="text-gray-500">Fetching news from trusted sources</p>
+              </div>
+            ) : error ? (
               <div className="text-center py-16">
                 <BookOpen size={64} className="text-gray-300 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold text-gray-600 mb-2">No insights found</h3>
+                <h3 className="text-xl font-semibold text-gray-600 mb-2">Unable to load insights</h3>
+                <p className="text-gray-500 mb-4">{error}</p>
+                <button
+                  onClick={handleRefresh}
+                  className="btn-primary"
+                >
+                  Try Again
+                </button>
+              </div>
+            ) : filteredArticles.length === 0 ? (
+              <div className="text-center py-16">
+                <BookOpen size={64} className="text-gray-300 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold text-gray-600 mb-2">No articles found</h3>
                 <p className="text-gray-500">Try adjusting your search or filter criteria.</p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {(selectedCategory === 'All' && !searchTerm ? regularInsights : filteredInsights).map((insight, index) => (
-                  <motion.article
-                    key={insight.id}
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                    className="bg-white rounded-xl shadow-lg overflow-hidden card-hover group"
-                  >
-                    <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 relative">
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <BookOpen size={32} className="text-gray-400" />
-                      </div>
-                    </div>
-                    <div className="p-6">
-                      <div className="flex items-center space-x-4 text-sm text-gray-500 mb-3">
-                        <span className="bg-primary-100 text-primary px-2 py-1 rounded text-xs font-medium">
-                          {insight.category}
-                        </span>
-                        <div className="flex items-center space-x-1">
-                          <Calendar size={14} />
-                          <span>{new Date(insight.date).toLocaleDateString()}</span>
+              <>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {displayedArticles.map((article, index) => (
+                    <motion.article
+                      key={article.id}
+                      initial={{ opacity: 0, y: 50 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.8, delay: index * 0.1 }}
+                      viewport={{ once: true }}
+                      className="bg-white rounded-xl shadow-lg overflow-hidden card-hover group"
+                    >
+                      {/* Article Image */}
+                      <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 relative overflow-hidden">
+                        <ArticleImage
+                          src={article.image}
+                          alt={article.title}
+                          category={article.category}
+                          source={article.source}
+                        />
+                        
+                        {/* Source badge */}
+                        <div className="absolute top-3 right-3">
+                          <div className="bg-black bg-opacity-50 text-white px-2 py-1 rounded text-xs font-medium">
+                            {article.source}
+                          </div>
                         </div>
                       </div>
-                      <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors line-clamp-2">
-                        {insight.title}
-                      </h3>
-                      <p className="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-3">
-                        {insight.excerpt}
-                      </p>
-                      <div className="flex flex-wrap gap-1 mb-4">
-                        {insight.tags.slice(0, 2).map((tag) => (
-                          <span key={tag} className="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs">
-                            {tag}
+
+                      {/* Article Content */}
+                      <div className="p-6">
+                        {/* Category and Date */}
+                        <div className="flex items-center justify-between mb-3">
+                          <span className={`px-2 py-1 rounded text-xs font-medium ${getCategoryColor(article.category)}`}>
+                            {article.category}
                           </span>
-                        ))}
-                        {insight.tags.length > 2 && (
-                          <span className="text-gray-400 text-xs">+{insight.tags.length - 2} more</span>
-                        )}
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2">
-                          <User size={14} className="text-gray-400" />
-                          <span className="text-xs text-gray-600">{insight.author}</span>
+                          <div className="flex items-center space-x-1 text-xs text-gray-500">
+                            <Calendar size={12} />
+                            <span>{formatDate(article.pubDate)}</span>
+                          </div>
                         </div>
-                        <div className="flex items-center space-x-2 text-xs text-gray-500">
-                          <Clock size={14} />
-                          <span>{insight.readTime}</span>
+
+                        {/* Title */}
+                        <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors line-clamp-2">
+                          {article.title}
+                        </h3>
+
+                        {/* Description */}
+                        <p className="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-3">
+                          {article.description}
+                        </p>
+
+                        {/* Source and Author */}
+                        <div className="flex items-center justify-between mb-4">
+                          <div className="flex items-center space-x-2">
+                            <Globe size={12} className="text-gray-400" />
+                            <span className="text-xs text-gray-600 font-medium">{article.source}</span>
+                          </div>
+                          {article.author && (
+                            <div className="flex items-center space-x-1">
+                              <User size={12} className="text-gray-400" />
+                              <span className="text-xs text-gray-600">{article.author}</span>
+                            </div>
+                          )}
                         </div>
+
+                        {/* Read More Link */}
+                        <a
+                          href={article.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center text-primary hover:text-accent transition-colors text-sm font-medium group/link"
+                        >
+                          <span>Read Article</span>
+                          <ExternalLink size={14} className="ml-1 group-hover/link:translate-x-0.5 transition-transform" />
+                        </a>
                       </div>
-                      <Link 
-                        href={`/insights/${insight.id}`}
-                        className="mt-4 inline-flex items-center text-primary hover:text-accent transition-colors text-sm font-medium"
-                      >
-                        <span>Read Article</span>
-                        <ArrowRight size={14} className="ml-1" />
-                      </Link>
-                    </div>
-                  </motion.article>
-                ))}
-              </div>
+                    </motion.article>
+                  ))}
+                </div>
+
+                {/* Load More Button */}
+                {hasMoreArticles && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                    viewport={{ once: true }}
+                    className="text-center mt-12"
+                  >
+                    <button
+                      onClick={handleLoadMore}
+                      disabled={loadingMore}
+                      className="btn-primary flex items-center space-x-2 mx-auto"
+                    >
+                      {loadingMore ? (
+                        <>
+                          <RefreshCw size={16} className="animate-spin" />
+                          <span>Loading...</span>
+                        </>
+                      ) : (
+                        <>
+                          <span>Load More Articles</span>
+                          <ArrowRight size={16} />
+                        </>
+                      )}
+                    </button>
+                    <p className="text-sm text-gray-500 mt-2">
+                      {filteredArticles.filter(article => !article.isManual).length - displayedArticles.length} more articles available
+                    </p>
+                  </motion.div>
+                )}
+              </>
             )}
           </motion.div>
         </div>
@@ -385,11 +384,11 @@ export default function InsightsPage() {
             className="text-center"
           >
             <h2 className="text-3xl lg:text-4xl font-bold mb-6">
-              Stay Updated with Our Insights
+              Stay Updated with Industry Insights
             </h2>
             <p className="text-xl mb-8 max-w-2xl mx-auto">
-              Subscribe to our newsletter and get the latest industry insights, 
-              trends, and thought leadership delivered to your inbox.
+              Subscribe to our newsletter and get curated industry insights, 
+              trends, and analysis delivered to your inbox.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
               <input
