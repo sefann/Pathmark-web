@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import Link from 'next/link';
+import Banner from '@/components/Banner';
 import { 
   Building2, 
   FileText, 
@@ -210,49 +211,21 @@ export default function GovernmentPage() {
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <section 
-        ref={heroRef}
-        className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      <Banner
+        title="Lobbying & Government Relations"
+        subtitle="Strategic engagement with public sector stakeholders to influence policy, navigate government systems, and secure access to public-sector opportunities with integrity, intelligence, and impact."
+        imagePath="/images/government-banner.png"
       >
-        {/* Background Image */}
-        <div className="absolute inset-0 bg-black/50"></div>
-        <div className="absolute inset-0">
-          <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{
-              backgroundImage: `url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')`
-            }}
-          ></div>
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-600/60 to-blue-800/60"></div>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <Link href="/contact" className="btn-secondary text-lg px-8 py-4">
+            Get Government Relations Consultation
+            <ArrowRight className="ml-2" size={20} />
+          </Link>
+          <Link href="#services" className="btn-outline text-lg px-8 py-4 border-white text-white hover:bg-white hover:text-primary">
+            Explore Services
+          </Link>
         </div>
-        
-        {/* Hero Content */}
-        <div className="relative z-10 container-custom text-center text-white">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={heroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-          >
-
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
-              Lobbying & Government Relations
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 max-w-4xl mx-auto leading-relaxed">
-              Strategic engagement with public sector stakeholders to influence policy, navigate government systems, 
-              and secure access to public-sector opportunities with integrity, intelligence, and impact.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Link href="/contact" className="btn-secondary text-lg px-8 py-4">
-                Get Government Relations Consultation
-                <ArrowRight className="ml-2" size={20} />
-              </Link>
-              <Link href="#services" className="btn-outline text-lg px-8 py-4 border-white text-white hover:bg-white hover:text-primary">
-                Explore Services
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      </Banner>
 
       {/* Overview Section */}
       <section className="section-padding bg-white">

@@ -86,3 +86,4 @@ export const getArticleImage = async (article: {
   // Finally, fall back to category image
   return getCategoryImage(article.category);
 };
+

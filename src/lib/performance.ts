@@ -102,3 +102,4 @@ export const getMemoryUsage = () => {
 export const checkPerformanceBudget = (fetchTime: number, budget: number = 5000): boolean => {
   return fetchTime <= budget;
 };
+

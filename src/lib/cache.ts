@@ -93,3 +93,4 @@ export const generateETag = (data: any): string => {
   }
   return `"${hash.toString(16)}"`;
 };
+

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import Banner from '@/components/Banner';
 import { 
   Filter,
   Calendar,
@@ -256,34 +257,11 @@ export default function PortfolioPage() {
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <section ref={heroRef} className="relative section-padding text-white overflow-hidden">
-        {/* Background Image */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')`
-          }}
-        ></div>
-        <div className="absolute inset-0 bg-gradient-to-br from-primary to-primary-800 opacity-90"></div>
-        <div className="relative z-10">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={heroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="text-center"
-          >
-            <h1 className="text-4xl lg:text-6xl font-bold mb-6">
-              Our Portfolio
-            </h1>
-            <p className="text-xl lg:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed">
-              Explore our successful projects and transformational initiatives across 
-              multiple industries and sectors throughout Africa.
-            </p>
-          </motion.div>
-        </div>
-        </div>
-      </section>
+      <Banner
+        title="Our Portfolio"
+        subtitle="Explore our successful projects and transformational initiatives across multiple industries and sectors throughout Africa."
+        imagePath="/images/portfolio-banner.png"
+      />
 
       {/* Portfolio Stats */}
       <section className="py-16 bg-gray-50">

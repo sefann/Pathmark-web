@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import Link from 'next/link';
+import Banner from '@/components/Banner';
 import { 
   DollarSign, 
   Calculator, 
@@ -181,74 +182,21 @@ export default function FinancePage() {
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <section 
-        ref={heroRef}
-        className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      <Banner
+        title="Financial Services"
+        subtitle="Comprehensive financial solutions spanning cost analysis, budget preparation, bank charge recovery, and business planning. Driving financial success across Nigeria."
+        imagePath="/images/finance-banner.png"
       >
-        {/* Background Image with Animation */}
-        <div className="absolute inset-0 bg-black/50"></div>
-        <div className="absolute inset-0">
-          <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat animate-pulse"
-            style={{
-              backgroundImage: `url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')`
-            }}
-          ></div>
-          <div className="absolute inset-0 bg-gradient-to-br from-green-600/60 to-green-800/60"></div>
-          
-          {/* Animated Finance Elements */}
-          <div className="absolute inset-0 overflow-hidden">
-            {[...Array(10)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-1 h-1 bg-green-400 rounded-full opacity-60"
-                animate={{
-                  x: [0, Math.random() * 250 - 125],
-                  y: [0, Math.random() * 250 - 125],
-                  opacity: [0.6, 0, 0.6],
-                }}
-                transition={{
-                  duration: Math.random() * 9 + 7,
-                  repeat: Infinity,
-                  ease: "linear",
-                  delay: Math.random() * 3,
-                }}
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                }}
-              />
-            ))}
-          </div>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <Link href="/contact" className="btn-secondary text-lg px-8 py-4">
+            Get Financial Consultation
+            <ArrowRight className="ml-2" size={20} />
+          </Link>
+          <Link href="#services" className="btn-outline text-lg px-8 py-4 border-white text-white hover:bg-white hover:text-primary">
+            Explore Services
+          </Link>
         </div>
-        
-        {/* Hero Content */}
-        <div className="relative z-10 container-custom text-center text-white">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={heroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-          >
-
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
-              Financial Services
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed">
-              Comprehensive financial solutions spanning cost analysis, budget preparation, bank charge recovery, 
-              and business planning. Driving financial success across Nigeria.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Link href="/contact" className="btn-secondary text-lg px-8 py-4">
-                Get Financial Consultation
-                <ArrowRight className="ml-2" size={20} />
-              </Link>
-              <Link href="#services" className="btn-outline text-lg px-8 py-4 border-white text-white hover:bg-white hover:text-primary">
-                Explore Services
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      </Banner>
 
       {/* Overview Section */}
       <section className="section-padding bg-white">

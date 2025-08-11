@@ -20,6 +20,7 @@ import {
   GraduationCap,
   Briefcase
 } from 'lucide-react';
+import Banner from '@/components/Banner';
 
 export default function AboutPage() {
   const [heroRef, heroInView] = useInView({ threshold: 0.1 });
@@ -33,7 +34,7 @@ export default function AboutPage() {
       id: 'leadership-1',
       name: 'Aisha A. Adamu',
       title: 'Lead Managing Partner',
-      yearsExperience: '15+ years',
+      yearsExperience: '10+ years',
       bio: 'Strategic consulting and project management expert specializing in energy sector development and policy advisory across Africa.',
       detailedBio: 'Aisha is a visionary leader who has transformed the consulting landscape in West Africa. Her expertise spans across multiple sectors, with particular focus on energy policy development and implementation. She has successfully advised governments and private sector clients on major infrastructure projects, regulatory frameworks, and strategic partnerships. Her leadership has been instrumental in establishing Pathmark Advisory as a trusted partner for complex, high-impact projects.',
       briefExpertise: ['Energy Policy', 'Strategic Planning', 'Government Relations'],
@@ -138,34 +139,11 @@ export default function AboutPage() {
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <section ref={heroRef} className="relative section-padding text-white overflow-hidden">
-        {/* Background Image */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')`
-          }}
-        ></div>
-        <div className="absolute inset-0 bg-gradient-to-br from-primary to-primary-800 opacity-90"></div>
-        <div className="relative z-10">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={heroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="text-center"
-          >
-            <h1 className="text-4xl lg:text-6xl font-bold mb-6">
-              About Pathmark Advisory
-            </h1>
-            <p className="text-xl lg:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed">
-              Your trusted partner in bringing visions to life through strategic consulting 
-              and expert project execution across multiple industries.
-            </p>
-          </motion.div>
-        </div>
-        </div>
-      </section>
+      <Banner
+        title="About Pathmark Advisory"
+        subtitle="Your trusted partner in bringing visions to life through strategic consulting and expert project execution across multiple industries."
+        imagePath="/images/about-banner.png"
+      />
 
       {/* Company Overview */}
       <section className="section-padding">

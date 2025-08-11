@@ -80,3 +80,4 @@ export const manualArticles: Article[] = [
     featured: false
   }
 ];
+

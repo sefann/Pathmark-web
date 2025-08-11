@@ -22,6 +22,13 @@ export default function HomePage() {
   const [whyRef, whyInView] = useInView({ threshold: 0.1 });
   const [statsRef, statsInView] = useInView({ threshold: 0.1 });
   const [partnersRef, partnersInView] = useInView({ threshold: 0.1 });
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const [videoError, setVideoError] = useState(false);
+
+  // Debug video loading
+  useEffect(() => {
+    console.log('Video state:', { videoLoaded, videoError });
+  }, [videoLoaded, videoError]);
   
   const [currentServiceIndex, setCurrentServiceIndex] = useState(0);
   const servicesList = ['Energy', 'Construction', 'Technology', 'Finance', 'Government Relations'];
@@ -120,13 +127,34 @@ export default function HomePage() {
         ref={heroRef}
         className="relative min-h-screen flex items-center justify-center overflow-hidden"
       >
-        {/* Background Image */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')`
+        {/* Background Video */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ objectPosition: 'center' }}
+          onLoadedData={() => setVideoLoaded(true)}
+          onCanPlay={() => setVideoLoaded(true)}
+          onError={(e) => {
+            console.error('Video loading error:', e);
+            setVideoError(true);
           }}
-        ></div>
+        >
+          <source src="/videos/home-banner.mp4?v=1" type="video/mp4" />
+        </video>
+        
+        {/* Fallback background image only if video fails to load */}
+        {videoError && (
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: `url('https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')`
+            }}
+          ></div>
+        )}
         <div className="absolute inset-0 bg-black/70"></div>
         
         {/* Hero Content */}
@@ -170,7 +198,7 @@ export default function HomePage() {
                 </AnimatePresence>
               </span>
             </p>
-            <p className="text-lg md:text-xl mb-8 max-w-4xl mx-auto leading-relaxed text-center text-accent font-semibold">
+            <p className="text-lg md:text-xl mb-8 max-w-4xl mx-auto leading-relaxed text-center text-white font-semibold">
               💼 Investment Opportunities Available for Local & International Clients
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">

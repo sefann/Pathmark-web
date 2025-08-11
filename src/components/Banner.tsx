@@ -29,7 +29,7 @@ export default function Banner({
       ></div>
       
       {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary to-primary-800 opacity-90"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-900 to-blue-950 opacity-80"></div>
       
       {/* Content */}
       <div className="relative z-10">
@@ -55,3 +55,4 @@ export default function Banner({
     </section>
   );
 }
+

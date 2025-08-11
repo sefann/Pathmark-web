@@ -28,6 +28,7 @@ import {
   Settings,
   Fuel
 } from 'lucide-react';
+import Banner from '@/components/Banner';
 
 export default function EnergyPage() {
   const [heroRef, heroInView] = useInView({ threshold: 0.1 });
@@ -184,74 +185,11 @@ export default function EnergyPage() {
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <section 
-        ref={heroRef}
-        className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      >
-        {/* Background Grid Images */}
-        <div className="absolute inset-0 bg-black/50"></div>
-        <div className="absolute inset-0 grid grid-cols-3 gap-0">
-          {/* Mining Image */}
-          <div className="relative overflow-hidden">
-            <div 
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-              style={{
-                backgroundImage: `url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')`
-              }}
-            ></div>
-            <div className="absolute inset-0 bg-gradient-to-br from-amber-600/60 to-orange-800/60"></div>
-          </div>
-          
-          {/* Oil & Gas Image */}
-          <div className="relative overflow-hidden">
-            <div 
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-              style={{
-                backgroundImage: `url('https://images.unsplash.com/photo-1544644181-1484b3fdfc62?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')`
-              }}
-            ></div>
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-600/60 to-cyan-800/60"></div>
-          </div>
-          
-          {/* Renewable Energy Image */}
-          <div className="relative overflow-hidden">
-            <div 
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-              style={{
-                backgroundImage: `url('https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')`
-              }}
-            ></div>
-            <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/60 to-orange-600/60"></div>
-          </div>
-        </div>
-        
-        {/* Hero Content */}
-        <div className="relative z-10 container-custom text-center text-white">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={heroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-          >
-
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
-              Energy Services
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed">
-              Comprehensive energy solutions spanning mining, oil & gas, and renewable energy. 
-              From exploration to execution, we power Nigeria's energy future.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Link href="/contact" className="btn-secondary text-lg px-8 py-4">
-                Get Energy Consultation
-                <ArrowRight className="ml-2" size={20} />
-              </Link>
-              <Link href="#services" className="btn-outline text-lg px-8 py-4 border-white text-white hover:bg-white hover:text-primary">
-                Explore Services
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <Banner
+        title="Energy Solutions"
+        subtitle="Comprehensive energy consulting including mining, oil & gas, and renewable energy solutions across Nigeria and Africa."
+        imagePath="/images/Energy-banner.png"
+      />
 
       {/* Overview Section */}
       <section className="section-padding bg-white">

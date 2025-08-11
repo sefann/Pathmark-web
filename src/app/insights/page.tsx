@@ -145,7 +145,7 @@ export default function InsightsPage() {
       <Banner
         title="Latest Insights Across Industries"
         subtitle="Stay informed with real-time industry news and insights from trusted sources across Energy, Technology, Construction, Finance, and more."
-        imagePath="/images/insights-banner.jpg"
+        imagePath="/images/insights-banner.png"
       >
         <div className="flex items-center justify-center space-x-4 text-sm">
           <Globe size={16} />

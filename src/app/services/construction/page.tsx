@@ -5,9 +5,9 @@ import { useInView } from 'react-intersection-observer';
 import Link from 'next/link';
 import { 
   Building, 
-  Home, 
-  Settings, 
-  Palette, 
+  Wrench, 
+  HardHat, 
+  FileText, 
   CheckCircle, 
   ArrowRight,
   Lightbulb,
@@ -18,17 +18,30 @@ import {
   BarChart3,
   Shield,
   Clock,
-  Hammer,
+  PenLine,
+  Factory,
   MapPin,
-  FileText,
   Users2,
-  Monitor,
-  Speaker,
-  Camera,
-  Wrench,
+  Settings,
   Truck,
-  HardHat
+  Hammer,
+  Ruler,
+  Compass,
+  Layers,
+  GitBranch,
+  Zap,
+  Database,
+  Lock,
+  Eye,
+  AlertTriangle,
+  Search,
+  TrendingUp,
+  Gauge,
+  ClipboardList,
+  Home,
+  Palette
 } from 'lucide-react';
+import Banner from '@/components/Banner';
 
 export default function ConstructionPage() {
   const [heroRef, heroInView] = useInView({ threshold: 0.1 });
@@ -181,74 +194,11 @@ export default function ConstructionPage() {
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <section 
-        ref={heroRef}
-        className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      >
-        {/* Background Image with Animation */}
-        <div className="absolute inset-0 bg-black/50"></div>
-        <div className="absolute inset-0">
-          <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat animate-pulse"
-            style={{
-              backgroundImage: `url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')`
-            }}
-          ></div>
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-600/60 to-blue-800/60"></div>
-          
-          {/* Animated Construction Elements */}
-          <div className="absolute inset-0 overflow-hidden">
-            {[...Array(8)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-2 h-2 bg-yellow-400 rounded-full opacity-60"
-                animate={{
-                  x: [0, Math.random() * 200 - 100],
-                  y: [0, Math.random() * 200 - 100],
-                  opacity: [0.6, 0, 0.6],
-                }}
-                transition={{
-                  duration: Math.random() * 8 + 6,
-                  repeat: Infinity,
-                  ease: "linear",
-                  delay: Math.random() * 3,
-                }}
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                }}
-              />
-            ))}
-          </div>
-        </div>
-        
-        {/* Hero Content */}
-        <div className="relative z-10 container-custom text-center text-white">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={heroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-          >
-
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
-              Construction & Infrastructure
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed">
-              Comprehensive construction and real estate development services. 
-              From concept to completion, we build Nigeria's future.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Link href="/contact" className="btn-secondary text-lg px-8 py-4">
-                Start Your Project
-                <ArrowRight className="ml-2" size={20} />
-              </Link>
-              <Link href="#services" className="btn-outline text-lg px-8 py-4 border-white text-white hover:bg-white hover:text-primary">
-                Explore Services
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <Banner
+        title="Construction & Infrastructure"
+        subtitle="Infrastructure development and construction project management services across Nigeria and West Africa."
+        imagePath="/images/construction-banner.png"
+      />
 
       {/* Overview Section */}
       <section className="section-padding bg-white">
