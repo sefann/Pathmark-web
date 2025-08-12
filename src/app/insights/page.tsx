@@ -206,11 +206,9 @@ export default function InsightsPage() {
       </section>
 
       {/* Manual Articles Section */}
-      {articles.some(article => article.isManual) && (
-        <ManualArticlesSection 
-          articles={articles.filter(article => article.isManual)} 
-        />
-      )}
+      <ManualArticlesSection 
+        articles={articles.filter(article => article.isManual)} 
+      />
 
       {/* RSS Articles Grid */}
       <section className="section-padding">

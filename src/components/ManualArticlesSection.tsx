@@ -14,6 +14,11 @@ export default function ManualArticlesSection({ articles }: ManualArticlesSectio
   const featuredArticles = articles.filter(article => article.featured);
   const regularManualArticles = articles.filter(article => !article.featured);
 
+  // Don't render anything if there are no manual articles
+  if (articles.length === 0) {
+    return null;
+  }
+
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {

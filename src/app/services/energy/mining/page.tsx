@@ -121,7 +121,7 @@ export default function MiningPage() {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')`
+            backgroundImage: `url('/images/mining-banner.png')`
           }}
         ></div>
         <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/50 to-primary/80"></div>
@@ -359,9 +359,13 @@ export default function MiningPage() {
                 Start Your Mining Project
                 <ArrowRight className="ml-2 inline" size={20} />
               </button>
-              <button className="border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-gray-900 transition-all duration-300">
-                Download Mining Brochure
-              </button>
+                             <a 
+                 href="/brochures/mining-brochure.pdf" 
+                 download="Pathmark-Mining-Services-Brochure.pdf"
+                 className="border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-gray-900 transition-all duration-300 inline-block"
+               >
+                 Download Mining Brochure
+               </a>
             </div>
           </motion.div>
         </div>

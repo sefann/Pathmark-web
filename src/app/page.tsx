@@ -206,9 +206,13 @@ export default function HomePage() {
                 Explore Investment Opportunities
                 <ArrowRight className="ml-2" size={20} />
               </Link>
-              <Link href="/contact" className="btn-outline text-lg px-8 py-4 border-white text-white hover:bg-white hover:text-primary">
-                Partner With Us
-              </Link>
+              <a 
+                href="/brochures/pathmark-brochure.pdf" 
+                download="Pathmark-Company-Brochure.pdf"
+                className="btn-outline text-lg px-8 py-4 border-white text-white hover:bg-white hover:text-primary inline-block"
+              >
+                Download Company Brochure
+              </a>
             </div>
           </motion.div>
         </div>
@@ -536,13 +540,10 @@ export default function HomePage() {
                              Let&apos;s discuss how we can help you achieve your business goals 
                with our comprehensive consulting and project execution services.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex justify-center">
               <Link href="/contact" className="btn-secondary text-lg px-8 py-4">
                 Start Your Project
                 <ArrowRight className="ml-2" size={20} />
-              </Link>
-              <Link href="/about" className="btn-outline border-white text-white hover:bg-white hover:text-primary text-lg px-8 py-4">
-                Learn About Us
               </Link>
             </div>
           </motion.div>
