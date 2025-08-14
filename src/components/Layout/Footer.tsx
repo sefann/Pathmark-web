@@ -185,8 +185,8 @@ const Footer = () => {
             <Link href="/terms" className="text-gray-400 hover:text-white text-sm transition-colors">
               Terms of Service
             </Link>
-            <Link href="/admin/manual-articles" className="text-gray-400 hover:text-white text-sm transition-colors">
-              Admin
+            <Link href="/studio" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white text-sm transition-colors">
+              Studio
             </Link>
             <motion.button
               onClick={scrollToTop}

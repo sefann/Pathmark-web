@@ -143,13 +143,10 @@ export async function GET(request: NextRequest) {
       cacheHit = true; // Fallback data is considered a cache hit
     }
     
-    // Combine manual articles with RSS articles
-    const allArticlesWithManual = [...manualArticles, ...allArticles];
-    
-    // Filter by category if specified
+    // Filter RSS articles by category if specified (only RSS articles, not manual)
     const filteredArticles = category && category !== 'All' 
-      ? allArticlesWithManual.filter(article => article.category === category)
-      : allArticlesWithManual;
+      ? allArticles.filter(article => article.category === category && article.source !== 'Pathmark Advisory')
+      : allArticles.filter(article => article.source !== 'Pathmark Advisory');
     
     // Apply limit
     const limitedArticles = filteredArticles.slice(0, limit);
