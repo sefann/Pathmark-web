@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import Link from 'next/link';
 import Banner from '@/components/Banner';
+import StatisticsSection from '@/components/StatisticsSection';
 import { 
   Building2, 
   FileText, 
@@ -471,32 +472,9 @@ export default function GovernmentPage() {
       </section>
 
       {/* Stats Section */}
-      <section ref={statsRef} className="section-padding bg-primary text-white">
-        <div className="container-custom">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat, index) => {
-              const Icon = stat.icon;
-              return (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, scale: 0.5 }}
-                  animate={statsInView ? { opacity: 1, scale: 1 } : {}}
-                  transition={{ duration: 0.8, delay: index * 0.1 }}
-                  className="text-center"
-                >
-                  <Icon size={48} className="text-accent mx-auto mb-4" />
-                  <div className="text-4xl lg:text-5xl font-bold text-accent mb-2">
-                    {stat.number}
-                  </div>
-                  <div className="text-lg text-primary-100">
-                    {stat.label}
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      <StatisticsSection 
+        stats={stats}
+      />
 
       {/* Case Studies Section */}
       <section className="section-padding bg-white">

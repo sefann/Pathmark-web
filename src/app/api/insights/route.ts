@@ -22,10 +22,6 @@ const parser = new Parser({
   },
 });
 
-
-
-
-
 async function fetchRSSFeed(url: string, category: string, sourceName: string): Promise<Article[]> {
   try {
     // Check cache first
@@ -48,7 +44,7 @@ async function fetchRSSFeed(url: string, category: string, sourceName: string): 
     }
 
     const response = await axios.get(url, {
-      timeout: 10000,
+      timeout: 5000, // Reduced timeout for faster loading
       headers,
       validateStatus: (status) => status < 400, // Accept 304 Not Modified
     });
@@ -60,7 +56,7 @@ async function fetchRSSFeed(url: string, category: string, sourceName: string): 
 
     const feed = await parser.parseString(response.data);
     
-    const articles = feed.items.slice(0, 10).map((item, index) => {
+    const articles = feed.items.slice(0, 15).map((item, index) => { // Increased to 15 articles per feed
       // Extract image from various RSS feed formats
       let imageUrl = undefined;
       
@@ -78,8 +74,6 @@ async function fetchRSSFeed(url: string, category: string, sourceName: string): 
       } else if (item.image && !item.image.includes('logo') && !item.image.includes('ad')) {
         imageUrl = item.image;
       }
-      
-      // If no relevant image found, don't set imageUrl (will use category placeholder)
       
       return {
         id: `${category}-${sourceName}-${index}`,
@@ -110,10 +104,23 @@ async function fetchAllFeeds(): Promise<Article[]> {
   const allArticles: Article[] = [];
   const sources = getAllRSSSources();
   
-  for (const source of sources) {
-    const articles = await fetchRSSFeed(source.url, source.category, source.name);
-    allArticles.push(...articles);
-  }
+  // Limit to first 15 sources for more content
+  const limitedSources = sources.slice(0, 15);
+  
+  // Use Promise.allSettled for parallel fetching with better error handling
+  const promises = limitedSources.map(source => 
+    fetchRSSFeed(source.url, source.category, source.name)
+  );
+  
+  const results = await Promise.allSettled(promises);
+  
+  results.forEach((result, index) => {
+    if (result.status === 'fulfilled') {
+      allArticles.push(...result.value);
+    } else {
+      console.error(`Failed to fetch from ${limitedSources[index].name}:`, result.reason);
+    }
+  });
   
   // Sort by publication date (newest first)
   return allArticles.sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
@@ -125,7 +132,7 @@ export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const category = searchParams.get('category');
-    const limit = parseInt(searchParams.get('limit') || '50');
+    const limit = parseInt(searchParams.get('limit') || '100');
     
     let allArticles: Article[] = [];
     let cacheHit = false;
@@ -173,7 +180,7 @@ export async function GET(request: NextRequest) {
     
     // Return response with caching headers
     const nextResponse = NextResponse.json(response);
-    Object.entries(getCacheHeaders(3600)).forEach(([key, value]) => {
+    Object.entries(getCacheHeaders(1800)).forEach(([key, value]) => { // Reduced cache time to 30 minutes
       nextResponse.headers.set(key, value);
     });
     nextResponse.headers.set('ETag', etag);

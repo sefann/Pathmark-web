@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import Banner from '@/components/Banner';
+import StatisticsSection from '@/components/StatisticsSection';
 import { 
   Filter,
   Calendar,
@@ -264,52 +265,15 @@ export default function PortfolioPage() {
       />
 
       {/* Portfolio Stats */}
-      <section className="py-16 bg-gray-50">
-        <div className="container-custom">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="text-center"
-            >
-              <div className="text-4xl font-bold text-primary mb-2">100+</div>
-              <div className="text-gray-600">Projects Completed</div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.1 }}
-              viewport={{ once: true }}
-              className="text-center"
-            >
-              <div className="text-4xl font-bold text-primary mb-2">$2B+</div>
-              <div className="text-gray-600">Total Project Value</div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="text-center"
-            >
-              <div className="text-4xl font-bold text-primary mb-2">50+</div>
-              <div className="text-gray-600">Happy Clients</div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              viewport={{ once: true }}
-              className="text-center"
-            >
-              <div className="text-4xl font-bold text-primary mb-2">10,000+</div>
-              <div className="text-gray-600">Jobs Created</div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+      <StatisticsSection 
+        stats={[
+          { number: '50+', label: 'Projects Completed' },
+          { number: '₦2B+', label: 'Total Project Value' },
+          { number: '25+', label: 'Happy Clients' },
+          { number: '1,000+', label: 'Jobs Created' }
+        ]}
+        className="bg-gray-50"
+      />
 
       {/* Filter Section */}
       <section className="py-8 bg-white sticky top-16 z-40 border-b">

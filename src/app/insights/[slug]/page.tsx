@@ -119,8 +119,6 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                 <ShareButton title={post.title} />
               </div>
 
-
-
               {/* Article Body */}
               <div className="prose prose-lg max-w-none">
                 {post.body && post.body.length > 0 ? (

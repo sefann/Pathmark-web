@@ -21,6 +21,7 @@ import {
   Briefcase
 } from 'lucide-react';
 import Banner from '@/components/Banner';
+import StatisticsSection from '@/components/StatisticsSection';
 
 export default function AboutPage() {
   const [heroRef, heroInView] = useInView({ threshold: 0.1 });
@@ -182,26 +183,15 @@ export default function AboutPage() {
               viewport={{ once: true }}
               className="relative"
             >
-              <div className="bg-gradient-to-br from-primary-50 to-accent-50 rounded-2xl p-8">
-                <div className="grid grid-cols-2 gap-6">
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-primary mb-2">100+</div>
-                    <div className="text-gray-600">Projects Completed</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-primary mb-2">50+</div>
-                    <div className="text-gray-600">Happy Clients</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-primary mb-2">10+</div>
-                    <div className="text-gray-600">Years Experience</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-primary mb-2">5</div>
-                    <div className="text-gray-600">Industries Served</div>
-                  </div>
-                </div>
-              </div>
+              <StatisticsSection 
+                stats={[
+                  { number: '100+', label: 'Projects Completed' },
+                  { number: '50+', label: 'Happy Clients' },
+                  { number: '10+', label: 'Years Experience' },
+                  { number: '5', label: 'Industries Served' }
+                ]}
+                className="bg-gradient-to-br from-primary-50 to-accent-50 rounded-2xl"
+              />
             </motion.div>
           </div>
         </div>
