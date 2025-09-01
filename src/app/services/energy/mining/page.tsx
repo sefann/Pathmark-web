@@ -58,58 +58,48 @@ export default function MiningPage() {
   const minerals = [
     {
       name: 'Gold',
-      image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
+      image: '/images/gold.png',
       description: 'Precious metal mining and processing'
     },
     {
-      name: 'Iron Ore',
-      image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
-      description: 'Industrial iron ore extraction'
-    },
-    {
-      name: 'Lithium',
-      image: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
-      description: 'Battery-grade lithium mining'
-    },
-    {
-      name: 'Coal',
-      image: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
-      description: 'Thermal and metallurgical coal'
-    },
-    {
-      name: 'Limestone',
-      image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
-      description: 'Construction and industrial limestone'
-    },
-    {
-      name: 'Quartz',
-      image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
-      description: 'High-purity quartz extraction'
-    },
-    {
-      name: 'Gypsum',
-      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
-      description: 'Construction gypsum mining'
-    },
-    {
       name: 'Tin',
-      image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
+      image: '/images/Tin.png',
       description: 'Industrial tin mining'
     },
     {
+      name: 'Limestone',
+      image: '/images/Limestone.png',
+      description: 'Construction and industrial limestone'
+    },
+    {
+      name: 'Coal',
+      image: '/images/coal.png',
+      description: 'Thermal and metallurgical coal'
+    },
+    {
+      name: 'Gypsum',
+      image: '/images/Gypsum.png',
+      description: 'Construction gypsum mining'
+    },
+    {
       name: 'Feldspar',
-      image: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
+      image: '/images/Feldspar.png',
       description: 'Ceramic and glass feldspar'
     },
     {
       name: 'Quarrying',
-      image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
+      image: '/images/quarrying.png',
       description: 'Aggregate and construction materials'
     },
     {
-      name: 'Industrial Materials',
-      image: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
+      name: 'Industrial Minerals',
+      image: '/images/industrial minerals.png',
       description: 'Specialized industrial minerals'
+    },
+    {
+      name: 'Quartz',
+      image: '/images/Quartz.png',
+      description: 'High-purity quartz extraction'
     }
   ];
 

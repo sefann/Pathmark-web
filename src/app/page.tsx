@@ -111,14 +111,11 @@ export default function HomePage() {
   ];
 
   const trustedPartners = [
-    { name: 'Partner 1', logo: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80' },
-    { name: 'Partner 2', logo: 'https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80' },
-    { name: 'Partner 3', logo: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80' },
-    { name: 'Partner 4', logo: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80' },
-    { name: 'Partner 5', logo: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80' },
-    { name: 'Partner 6', logo: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80' },
-    { name: 'Partner 7', logo: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80' },
-    { name: 'Partner 8', logo: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80' }
+    { name: 'Dangote Group', logo: '/logos/dangote.svg' },
+    { name: 'First Bank', logo: '/logos/firstbank.svg' },
+    { name: 'Mama Mia', logo: '/logos/mamamia.svg' },
+    { name: 'New Age', logo: '/logos/newage.svg' },
+    { name: 'VG Energy', logo: '/logos/vgenergy.svg' }
   ];
 
   return (
@@ -202,18 +199,11 @@ export default function HomePage() {
             <p className="text-lg md:text-xl mb-8 max-w-4xl mx-auto leading-relaxed text-center text-white font-semibold">
               💼 Investment Opportunities Available for Local & International Clients
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <div className="flex justify-center items-center">
               <Link href="/contact" className="btn-secondary text-lg px-8 py-4">
                 Explore Investment Opportunities
                 <ArrowRight className="ml-2" size={20} />
               </Link>
-              <a 
-                href="/brochures/pathmark-brochure.pdf" 
-                download="Pathmark-Company-Brochure.pdf"
-                className="btn-outline text-lg px-8 py-4 border-white text-white hover:bg-white hover:text-primary inline-block"
-              >
-                Download Company Brochure
-              </a>
             </div>
           </motion.div>
         </div>
@@ -492,13 +482,13 @@ export default function HomePage() {
                   transition={{ duration: 0.8, delay: index * 0.1 }}
                   className="flex-shrink-0"
                 >
-                  <div className="w-32 h-20 bg-white rounded-lg shadow-md flex items-center justify-center p-4 hover:shadow-lg transition-shadow duration-300">
-                    <img
-                      src={partner.logo}
-                      alt={partner.name}
-                      className="w-full h-full object-contain grayscale hover:grayscale-0 transition-all duration-300"
-                    />
-                  </div>
+                                     <div className="w-56 h-40 bg-white rounded-lg shadow-md flex items-center justify-center p-5 hover:shadow-lg transition-all duration-300 hover:scale-105">
+                     <img
+                       src={partner.logo}
+                       alt={partner.name}
+                       className="w-48 h-32 object-contain grayscale hover:grayscale-0 transition-all duration-300"
+                     />
+                   </div>
                 </motion.div>
               ))}
             </motion.div>
