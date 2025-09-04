@@ -5,8 +5,8 @@ import { trackFormSubmission, trackFormInteraction } from './GoogleAnalytics';
 interface FormAnalyticsProps {
   formName: string;
   onFormStart?: () => void;
-  onFormSubmit?: (data: any) => void;
-  onFormError?: (error: any) => void;
+  onFormSubmit?: (data: Record<string, unknown>) => void;
+  onFormError?: (error: Error | string) => void;
 }
 
 export const useFormAnalytics = ({ formName, onFormStart, onFormSubmit, onFormError }: FormAnalyticsProps) => {
@@ -16,12 +16,12 @@ export const useFormAnalytics = ({ formName, onFormStart, onFormSubmit, onFormEr
     onFormStart?.();
   };
 
-  const trackFormSubmit = (formData: any) => {
+  const trackFormSubmit = (formData: Record<string, unknown>) => {
     trackFormSubmission(formName, formData);
     onFormSubmit?.(formData);
   };
 
-  const trackFormError = (error: any) => {
+  const trackFormError = (error: Error | string) => {
     trackFormInteraction('error', formName);
     onFormError?.(error);
   };
@@ -44,7 +44,7 @@ export const useFormAnalytics = ({ formName, onFormStart, onFormSubmit, onFormEr
 };
 
 // Simple form analytics without Google Analytics
-export const trackFormSubmissionSimple = (formData: any) => {
+export const trackFormSubmissionSimple = (formData: Record<string, unknown>) => {
   // Log to console for development
   console.log('Form Submission Analytics:', {
     timestamp: new Date().toISOString(),

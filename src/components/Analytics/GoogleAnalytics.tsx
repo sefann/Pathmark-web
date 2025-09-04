@@ -29,7 +29,7 @@ export default function GoogleAnalytics({ measurementId }: GoogleAnalyticsProps)
 }
 
 // Form submission tracking function
-export const trackFormSubmission = (formName: string, formData: any) => {
+export const trackFormSubmission = (formName: string, formData: Record<string, unknown>) => {
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', 'form_submit', {
       event_category: 'Contact Form',
@@ -57,6 +57,6 @@ export const trackFormInteraction = (action: string, formName: string) => {
 // Declare gtag function for TypeScript
 declare global {
   interface Window {
-    gtag: (...args: any[]) => void;
+    gtag: (...args: unknown[]) => void;
   }
 }
