@@ -15,7 +15,7 @@ import Banner from '@/components/Banner';
 import { useFormAnalytics, trackFormSubmissionSimple } from '@/components/Analytics/FormAnalytics';
 
 export default function ContactPage() {
-  const [heroRef, heroInView] = useInView({ threshold: 0.1 });
+  // const [heroRef, heroInView] = useInView({ threshold: 0.1 }); // Unused for now
   const [formData, setFormData] = useState({
     name: '',
     email: '',

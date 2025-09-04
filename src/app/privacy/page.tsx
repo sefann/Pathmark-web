@@ -157,7 +157,7 @@ export default function PrivacyPolicyPage() {
             <div className="bg-white rounded-xl shadow-lg p-8 mb-12">
               <h2 className="text-3xl font-bold text-primary mb-6">Introduction</h2>
               <p className="text-lg text-gray-600 leading-relaxed mb-6">
-                Pathmark Advisory Co. Ltd ("we," "our," or "us") is committed to protecting and respecting your privacy. 
+                Pathmark Advisory Co. Ltd (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;) is committed to protecting and respecting your privacy. 
                 This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit 
                 our website, engage our consulting services, or otherwise interact with us.
               </p>
@@ -225,7 +225,7 @@ export default function PrivacyPolicyPage() {
               <h2 className="text-3xl font-bold mb-6">Contact Us About Privacy</h2>
               <p className="text-xl mb-8 text-primary-100">
                 If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, 
-                please don't hesitate to contact us.
+                please don&apos;t hesitate to contact us.
               </p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

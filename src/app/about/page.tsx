@@ -12,19 +12,16 @@ import {
   CheckCircle,
   User,
   Quote,
-  Award,
   ChevronDown,
   ChevronUp,
   Mail,
-  Linkedin,
-  GraduationCap,
-  Briefcase
+  Linkedin
 } from 'lucide-react';
 import Banner from '@/components/Banner';
 import StatisticsSection from '@/components/StatisticsSection';
 
 export default function AboutPage() {
-  const [heroRef, heroInView] = useInView({ threshold: 0.1 });
+  // const [heroRef, heroInView] = useInView({ threshold: 0.1 }); // Unused for now
   const [timelineRef, timelineInView] = useInView({ threshold: 0.1 });
   const [valuesRef, valuesInView] = useInView({ threshold: 0.1 });
   const [expandedMember, setExpandedMember] = useState<number | null>(null);
@@ -379,7 +376,7 @@ export default function AboutPage() {
                          <Quote className="text-accent" size={20} />
                          <span className="font-semibold text-gray-900">Leadership Quote</span>
                        </div>
-                       <p className="text-gray-600 italic leading-relaxed">"{leader.quote}"</p>
+                       <p className="text-gray-600 italic leading-relaxed">&ldquo;{leader.quote}&rdquo;</p>
                      </div>
 
                      <div className="flex flex-wrap gap-2 mb-4">

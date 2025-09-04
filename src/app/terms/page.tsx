@@ -197,8 +197,8 @@ export default function TermsOfServicePage() {
             <div className="bg-white rounded-xl shadow-lg p-8 mb-12">
               <h2 className="text-3xl font-bold text-primary mb-6">Introduction</h2>
               <p className="text-lg text-gray-600 leading-relaxed mb-6">
-                Welcome to Pathmark Advisory Co. Ltd. These Terms of Service ("Terms") constitute a legally binding 
-                agreement between you and Pathmark Advisory Co. Ltd ("Company," "we," "our," or "us") regarding your 
+                Welcome to Pathmark Advisory Co. Ltd. These Terms of Service (&ldquo;Terms&rdquo;) constitute a legally binding 
+                agreement between you and Pathmark Advisory Co. Ltd (&ldquo;Company,&rdquo; &ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;) regarding your 
                 use of our website, services, and any related applications or platforms.
               </p>
               <p className="text-lg text-gray-600 leading-relaxed mb-6">

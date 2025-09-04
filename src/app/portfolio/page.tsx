@@ -22,7 +22,7 @@ import {
 } from 'lucide-react';
 
 export default function PortfolioPage() {
-  const [heroRef, heroInView] = useInView({ threshold: 0.1 });
+  // const [heroRef, heroInView] = useInView({ threshold: 0.1 }); // Unused for now
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedProject, setSelectedProject] = useState<any>(null);
 
@@ -496,7 +496,7 @@ export default function PortfolioPage() {
                 <div className="bg-gradient-to-r from-primary-50 to-accent-50 rounded-xl p-6">
                   <h4 className="text-xl font-bold text-primary mb-4">Client Testimonial</h4>
                   <blockquote className="text-gray-700 italic mb-4 text-lg leading-relaxed">
-                    "{selectedProject.testimonial.quote}"
+                    &ldquo;{selectedProject.testimonial.quote}&rdquo;
                   </blockquote>
                   <cite className="text-primary font-semibold">
                     — {selectedProject.testimonial.author}
