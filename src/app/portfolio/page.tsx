@@ -2,11 +2,11 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
+// import { useInView } from 'react-intersection-observer'; // Unused for now
 import Banner from '@/components/Banner';
 import StatisticsSection from '@/components/StatisticsSection';
 import { 
-  Filter,
+  // Filter, // Unused for now
   Calendar,
   MapPin,
   DollarSign,
@@ -24,7 +24,7 @@ import {
 export default function PortfolioPage() {
   // const [heroRef, heroInView] = useInView({ threshold: 0.1 }); // Unused for now
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [selectedProject, setSelectedProject] = useState<any>(null);
+  const [selectedProject, setSelectedProject] = useState<unknown>(null);
 
   const categories = [
     'All',
@@ -235,7 +235,7 @@ export default function PortfolioPage() {
     ? projects 
     : projects.filter(project => project.category === selectedCategory);
 
-  const openModal = (project: any) => {
+  const openModal = (project: unknown) => {
     setSelectedProject(project);
   };
 

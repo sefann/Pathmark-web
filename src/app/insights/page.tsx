@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, User, ArrowRight, Filter, Search, Globe, FileText, ChevronDown, Clock, Tag } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Calendar, User, ArrowRight, Filter, Search, Globe, FileText } from 'lucide-react';
 import Link from 'next/link';
 import { urlFor } from '../../sanity/lib/image';
 
@@ -534,8 +534,8 @@ export default function InsightsPage() {
   }, [filteredRssArticles]);
 
   // Get featured articles for hero and sidebar
-  const featuredSanityPost = filteredSanityPosts[0];
-  const featuredRssArticle = filteredRssArticles[0];
+  // const featuredSanityPost = filteredSanityPosts[0]; // Unused for now
+  // const featuredRssArticle = filteredRssArticles[0]; // Unused for now
   const sidebarSanityPosts = filteredSanityPosts.slice(1, 4);
   const sidebarRssArticles = filteredRssArticles.slice(1, 50); // Load more articles for scrolling
   const remainingSanityPosts = filteredSanityPosts.slice(4, 10);
@@ -634,7 +634,7 @@ export default function InsightsPage() {
                       ease: "easeInOut",
                     }}
                   >
-                    {filteredSanityPosts.slice(0, 5).map((post, index) => (
+                    {filteredSanityPosts.slice(0, 5).map((post) => (
                       <div
                         key={post._id}
                         className="w-full h-full flex-shrink-0"
@@ -729,7 +729,7 @@ export default function InsightsPage() {
                       ease: "easeInOut",
                     }}
                   >
-                    {filteredRssArticles.slice(0, 5).map((article, index) => (
+                    {filteredRssArticles.slice(0, 5).map((article) => (
                       <div
                         key={article.id}
                         className="w-full h-full flex-shrink-0"

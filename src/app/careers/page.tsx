@@ -15,12 +15,12 @@ import {
   Target,
   Heart,
   TrendingUp,
-  Globe
+  // Globe // Unused for now
 } from 'lucide-react';
 
 export default function CareersPage() {
   const [heroRef, heroInView] = useInView({ threshold: 0.1 });
-  const [selectedJob, setSelectedJob] = useState<any>(null);
+  const [selectedJob, setSelectedJob] = useState<unknown>(null);
   const [applicationData, setApplicationData] = useState({
     name: '',
     email: '',

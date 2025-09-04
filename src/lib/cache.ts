@@ -1,6 +1,6 @@
 // RSS Feed Caching System
 interface CacheEntry {
-  data: any;
+  data: unknown;
   timestamp: number;
   etag?: string;
   lastModified?: string;
@@ -11,7 +11,7 @@ class RSSCache {
   private readonly TTL = 3600000; // 1 hour in milliseconds
   private readonly MAX_CACHE_SIZE = 100; // Maximum number of cached entries
 
-  set(key: string, data: any, etag?: string, lastModified?: string): void {
+  set(key: string, data: unknown, etag?: string, lastModified?: string): void {
     // Remove oldest entries if cache is full
     if (this.cache.size >= this.MAX_CACHE_SIZE) {
       const oldestKey = this.cache.keys().next().value;
@@ -26,7 +26,7 @@ class RSSCache {
     });
   }
 
-  get(key: string): any | null {
+  get(key: string): unknown | null {
     const entry = this.cache.get(key);
     if (!entry) return null;
 
@@ -83,7 +83,7 @@ export const getCacheHeaders = (maxAge: number = 3600) => {
 };
 
 // ETag generator
-export const generateETag = (data: any): string => {
+export const generateETag = (data: unknown): string => {
   const str = JSON.stringify(data);
   let hash = 0;
   for (let i = 0; i < str.length; i++) {

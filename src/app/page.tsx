@@ -21,7 +21,7 @@ export default function HomePage() {
   const [heroRef, heroInView] = useInView({ threshold: 0.1 });
   const [servicesRef, servicesInView] = useInView({ threshold: 0.1 });
   const [whyRef, whyInView] = useInView({ threshold: 0.1 });
-  const [statsRef, statsInView] = useInView({ threshold: 0.1 });
+  // const [statsRef, statsInView] = useInView({ threshold: 0.1 }); // Unused for now
   const [partnersRef, partnersInView] = useInView({ threshold: 0.1 });
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [videoError, setVideoError] = useState(false);

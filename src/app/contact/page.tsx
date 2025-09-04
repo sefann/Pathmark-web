@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
+// import { useInView } from 'react-intersection-observer'; // Unused for now
 import { 
   MapPin, 
   Phone, 

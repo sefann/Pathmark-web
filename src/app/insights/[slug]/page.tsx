@@ -12,8 +12,8 @@ interface Post {
   title: string;
   slug: { current: string };
   publishedAt: string;
-  image: any;
-  body: any[];
+  image: unknown;
+  body: unknown[];
 }
 
 // Fetch data
