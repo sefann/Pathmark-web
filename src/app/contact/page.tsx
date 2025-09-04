@@ -12,6 +12,7 @@ import {
   MessageSquare
 } from 'lucide-react';
 import Banner from '@/components/Banner';
+import { useFormAnalytics, trackFormSubmissionSimple } from '@/components/Analytics/FormAnalytics';
 
 export default function ContactPage() {
   const [heroRef, heroInView] = useInView({ threshold: 0.1 });
@@ -24,6 +25,20 @@ export default function ContactPage() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  // Form analytics
+  const analytics = useFormAnalytics({
+    formName: 'contact-form',
+    onFormStart: () => {
+      console.log('Contact form started');
+    },
+    onFormSubmit: (data) => {
+      console.log('Contact form submitted successfully:', data);
+    },
+    onFormError: (error) => {
+      console.log('Contact form error:', error);
+    }
+  });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -48,6 +63,11 @@ export default function ContactPage() {
 
       if (response.ok) {
         setSubmitStatus('success');
+        
+        // Track successful form submission
+        analytics.trackFormSubmit(formData);
+        trackFormSubmissionSimple(formData);
+        
         setFormData({
           name: '',
           email: '',
@@ -59,10 +79,16 @@ export default function ContactPage() {
         const errorData = await response.json();
         console.error('Form submission error:', errorData);
         setSubmitStatus('error');
+        
+        // Track form error
+        analytics.trackFormError(errorData);
       }
     } catch (error) {
       console.error('Form submission error:', error);
       setSubmitStatus('error');
+      
+      // Track form error
+      analytics.trackFormError(error);
     } finally {
       setIsSubmitting(false);
     }
@@ -192,6 +218,8 @@ export default function ContactPage() {
                         name="name"
                         value={formData.name}
                         onChange={handleInputChange}
+                        onFocus={() => analytics.trackFormFieldFocus('name')}
+                        onBlur={() => analytics.trackFormFieldBlur('name')}
                         required
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
                         placeholder="Your full name"
@@ -207,6 +235,8 @@ export default function ContactPage() {
                         name="email"
                         value={formData.email}
                         onChange={handleInputChange}
+                        onFocus={() => analytics.trackFormFieldFocus('email')}
+                        onBlur={() => analytics.trackFormFieldBlur('email')}
                         required
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
                         placeholder="your.email@example.com"
