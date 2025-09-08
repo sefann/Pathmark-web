@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { 
   Target, 
   Eye, 
@@ -15,10 +15,12 @@ import {
   ChevronDown,
   ChevronUp,
   Mail,
-  Linkedin
+  Linkedin,
+  X
 } from 'lucide-react';
 import Banner from '@/components/Banner';
 import StatisticsSection from '@/components/StatisticsSection';
+import Image from 'next/image';
 
 export default function AboutPage() {
   // const [heroRef, heroInView] = useInView({ threshold: 0.1 }); // Unused for now
@@ -26,12 +28,26 @@ export default function AboutPage() {
   const [valuesRef, valuesInView] = useInView({ threshold: 0.1 });
   const [expandedMember, setExpandedMember] = useState<number | null>(null);
   const [expandedLeader, setExpandedLeader] = useState<string | null>(null);
+  const [openLeaderId, setOpenLeaderId] = useState<string | null>(null);
+  const [openMemberId, setOpenMemberId] = useState<number | null>(null);
+
+  useEffect(() => {
+    const modalOpen = !!openLeaderId || !!openMemberId;
+    if (modalOpen) {
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = originalOverflow;
+      };
+    }
+  }, [openLeaderId, openMemberId]);
 
   const leadership = [
     {
       id: 'leadership-1',
       name: 'Aisha A. Adamu',
       title: 'Lead Managing Partner',
+      image: '/images/aisha.png',
       yearsExperience: '10+ years',
       bio: 'Strategic consulting and project management expert specializing in energy sector development and policy advisory across Africa.',
       detailedBio: 'Aisha is a visionary leader who has transformed the consulting landscape in West Africa. Her expertise spans across multiple sectors, with particular focus on energy policy development and implementation. She has successfully advised governments and private sector clients on major infrastructure projects, regulatory frameworks, and strategic partnerships. Her leadership has been instrumental in establishing Pathmark Advisory as a trusted partner for complex, high-impact projects.',
@@ -45,6 +61,7 @@ export default function AboutPage() {
       id: 'leadership-2',
       name: 'Sulaimon A. Ajishafe',
       title: 'Executive Partner',
+      image: '/images/ajishafe.png',
       yearsExperience: '15+ years',
       bio: 'Technology and finance executive driving digital transformation initiatives across West Africa for major banks and fintech companies.',
       detailedBio: 'Sulaimon is a technology innovator and strategic thinker who has revolutionized how African businesses approach digital transformation. His deep understanding of both technology and business processes has enabled him to bridge the gap between technical solutions and business outcomes. He has led numerous successful digital transformation projects, helping organizations modernize their operations, improve efficiency, and gain competitive advantages in the digital economy.',
@@ -338,7 +355,7 @@ export default function AboutPage() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12 place-items-center">
             {leadership.map((leader, index) => {
               const isExpanded = expandedLeader === leader.id;
               return (
@@ -347,14 +364,19 @@ export default function AboutPage() {
                   initial={{ opacity: 0, y: 50 }}
                   animate={timelineInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.8, delay: index * 0.2 }}
-                  className="bg-white rounded-2xl shadow-xl overflow-hidden"
+                  className="bg-white rounded-2xl shadow-xl overflow-hidden max-w-md w-full"
                 >
-                  <div className="aspect-square bg-gradient-to-br from-primary-100 to-accent-100 relative">
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <User size={80} className="text-primary opacity-50" />
-                    </div>
+                  <div className="relative w-full h-64 md:h-72">
+                    <Image
+                      src={leader.image}
+                      alt={leader.name}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      priority={index === 0}
+                    />
                   </div>
-                  <div className="p-8">
+                  <div className="p-6">
                                          <div className="flex justify-between items-start mb-4">
                        <div>
                          <h3 className="text-2xl font-bold text-primary mb-2">{leader.name}</h3>
@@ -362,10 +384,10 @@ export default function AboutPage() {
                          <p className="text-sm text-gray-500 mb-4">{leader.yearsExperience} experience</p>
                        </div>
                        <button
-                         onClick={() => setExpandedLeader(isExpanded ? null : leader.id)}
+                         onClick={() => setOpenLeaderId(leader.id)}
                          className="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-colors"
                        >
-                         {isExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                         <ChevronDown size={16} />
                        </button>
                      </div>
                      
@@ -387,55 +409,89 @@ export default function AboutPage() {
                        ))}
                      </div>
 
-                    {/* Expanded Content */}
-                    <motion.div
-                      initial={false}
-                      animate={{ height: isExpanded ? 'auto' : 0, opacity: isExpanded ? 1 : 0 }}
-                      transition={{ duration: 0.3, ease: 'easeInOut' }}
-                      className="overflow-hidden"
-                    >
-                                             <div className="border-t border-gray-100 pt-6">
-                         <div className="mb-6">
-                           <h4 className="font-semibold text-gray-900 mb-3">Detailed Background</h4>
-                           <p className="text-gray-600 text-sm leading-relaxed">
-                             {leader.detailedBio}
-                           </p>
-                         </div>
-
-                         <div className="mb-6">
-                           <h4 className="font-semibold text-gray-900 mb-3">Full Expertise</h4>
-                           <div className="flex flex-wrap gap-2">
-                             {leader.fullExpertise.map((skill) => (
-                               <span key={skill} className="bg-primary-100 text-primary px-2 py-1 rounded text-xs">
-                                 {skill}
-                               </span>
-                             ))}
-                           </div>
-                         </div>
-
-                         <div className="flex space-x-3">
-                           <a 
-                             href={`mailto:${leader.email}`}
-                             className="flex items-center space-x-1 text-primary hover:text-accent transition-colors text-sm"
-                           >
-                             <Mail size={16} />
-                             <span>Email</span>
-                           </a>
-                           <a 
-                             href={leader.linkedin}
-                             className="flex items-center space-x-1 text-primary hover:text-accent transition-colors text-sm"
-                           >
-                             <Linkedin size={16} />
-                             <span>LinkedIn</span>
-                           </a>
-                         </div>
-                       </div>
-                    </motion.div>
+                   {/* Expanded Content moved to modal */}
                   </div>
                 </motion.div>
               );
             })}
           </div>
+
+          {/* Leadership Modal */}
+          {openLeaderId && (() => {
+            const leader = leadership.find(l => l.id === openLeaderId);
+            if (!leader) return null;
+            return (
+              <div className="fixed inset-0 z-50 overflow-y-auto">
+                <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setOpenLeaderId(null)} />
+                <div className="relative mx-auto my-8 w-full max-w-3xl px-4">
+                  <div className="bg-white rounded-2xl shadow-2xl overflow-hidden max-h-[85vh]">
+                    <div className="relative w-full h-64 md:h-80">
+                      <Image src={leader.image} alt={leader.name} fill className="object-cover" sizes="100vw" />
+                      <button
+                        onClick={() => setOpenLeaderId(null)}
+                        className="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/90 hover:bg-white flex items-center justify-center shadow"
+                        aria-label="Close"
+                      >
+                        <X size={18} />
+                      </button>
+                    </div>
+                    <div className="p-6 md:p-8 overflow-y-auto max-h-[calc(85vh-16rem)]">
+                      <div className="mb-4">
+                        <h3 className="text-2xl font-bold text-primary">{leader.name}</h3>
+                        <p className="text-accent font-semibold">{leader.title}</p>
+                        <p className="text-sm text-gray-500">{leader.yearsExperience} experience</p>
+                      </div>
+                      <div className="mb-6">
+                        <h4 className="font-semibold text-gray-900 mb-3">Connect</h4>
+                        <div className="flex items-center gap-3">
+                          <a href={leader.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-primary-50 text-primary hover:bg-primary hover:text-white transition-colors text-sm">
+                            <Linkedin size={18} />
+                            <span>LinkedIn</span>
+                          </a>
+                          <a href={`mailto:${leader.email}`} className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-primary-50 text-primary hover:bg-primary hover:text-white transition-colors text-sm">
+                            <Mail size={18} />
+                            <span>Email</span>
+                          </a>
+                        </div>
+                      </div>
+                      <p className="text-gray-700 mb-6 leading-relaxed">{leader.bio}</p>
+                      <div className="mb-6">
+                        <div className="flex items-center space-x-2 mb-3">
+                          <Quote className="text-accent" size={20} />
+                          <span className="font-semibold text-gray-900">Leadership Quote</span>
+                        </div>
+                        <p className="text-gray-700 italic">“{leader.quote}”</p>
+                      </div>
+                      <div className="mb-6">
+                        <h4 className="font-semibold text-gray-900 mb-3">Core Expertise</h4>
+                        <div className="flex flex-wrap gap-2">
+                          {leader.briefExpertise.map((skill) => (
+                            <span key={skill} className="bg-primary-100 text-primary px-2 py-1 rounded text-xs">
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="mb-6">
+                        <h4 className="font-semibold text-gray-900 mb-3">Detailed Background</h4>
+                        <p className="text-gray-700 leading-relaxed">{leader.detailedBio}</p>
+                      </div>
+                      <div className="mb-6">
+                        <h4 className="font-semibold text-gray-900 mb-3">Full Expertise</h4>
+                        <div className="flex flex-wrap gap-2">
+                          {leader.fullExpertise.map((skill) => (
+                            <span key={skill} className="bg-primary-100 text-primary px-2 py-1 rounded text-xs">
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })()}
 
           {/* Team Members Section */}
           <motion.div
@@ -476,10 +532,10 @@ export default function AboutPage() {
                          <p className="text-xs text-gray-400">{member.yearsExperience} experience</p>
                        </div>
                        <button
-                         onClick={() => setExpandedMember(isExpanded ? null : member.id)}
+                         onClick={() => setOpenMemberId(member.id)}
                          className="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-colors"
                        >
-                         {isExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                         <ChevronDown size={16} />
                        </button>
                      </div>
                      
@@ -496,55 +552,78 @@ export default function AboutPage() {
                      </div>
                    </div>
 
-                                     {/* Expanded Content */}
-                   <motion.div
-                     initial={false}
-                     animate={{ height: isExpanded ? 'auto' : 0, opacity: isExpanded ? 1 : 0 }}
-                     transition={{ duration: 0.3, ease: 'easeInOut' }}
-                     className="overflow-hidden"
-                   >
-                                           <div className="px-6 pb-6 border-t border-gray-100">
-                        <div className="mb-6">
-                          <h4 className="font-semibold text-gray-900 mb-3">Detailed Background</h4>
-                          <p className="text-gray-600 text-sm leading-relaxed">
-                            {member.detailedBio}
-                          </p>
-                        </div>
-
-                        <div className="mb-6">
-                          <h4 className="font-semibold text-gray-900 mb-3">Full Expertise</h4>
-                          <div className="flex flex-wrap gap-2">
-                            {member.fullExpertise.map((skill) => (
-                              <span key={skill} className="bg-primary-100 text-primary px-2 py-1 rounded text-xs">
-                                {skill}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-
-                        {/* Contact */}
-                        <div className="flex space-x-3">
-                          <a 
-                            href={`mailto:${member.email}`}
-                            className="flex items-center space-x-1 text-primary hover:text-accent transition-colors text-xs"
-                          >
-                            <Mail size={14} />
-                            <span>Email</span>
-                          </a>
-                          <a 
-                            href={member.linkedin}
-                            className="flex items-center space-x-1 text-primary hover:text-accent transition-colors text-xs"
-                          >
-                            <Linkedin size={14} />
-                            <span>LinkedIn</span>
-                          </a>
-                        </div>
-                      </div>
-                   </motion.div>
+                  {/* Expanded Content moved to modal */}
                 </motion.div>
               );
             })}
           </div>
+
+          {/* Team Member Modal */}
+          {openMemberId && (() => {
+            const member = teamMembers.find(m => m.id === openMemberId);
+            if (!member) return null;
+            return (
+              <div className="fixed inset-0 z-50 overflow-y-auto">
+                <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setOpenMemberId(null)} />
+                <div className="relative mx-auto my-8 w-full max-w-3xl px-4">
+                  <div className="bg-white rounded-2xl shadow-2xl overflow-hidden max-h-[85vh]">
+                    <div className="p-6 md:p-8 overflow-y-auto max-h-[85vh]">
+                      <button
+                        onClick={() => setOpenMemberId(null)}
+                        className="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/90 hover:bg-white flex items-center justify-center shadow"
+                        aria-label="Close"
+                      >
+                        <X size={18} />
+                      </button>
+                      <div className="mb-4 pr-12">
+                        <h3 className="text-2xl font-bold text-primary">{member.name}</h3>
+                        <p className="text-accent font-semibold">{member.title}</p>
+                        <p className="text-sm text-gray-500">{member.department} • {member.yearsExperience} experience</p>
+                      </div>
+                      <div className="mb-6 pr-12">
+                        <h4 className="font-semibold text-gray-900 mb-3">Connect</h4>
+                        <div className="flex items-center gap-3">
+                          <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-primary-50 text-primary hover:bg-primary hover:text-white transition-colors text-sm">
+                            <Linkedin size={18} />
+                            <span>LinkedIn</span>
+                          </a>
+                          <a href={`mailto:${member.email}`} className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-primary-50 text-primary hover:bg-primary hover:text-white transition-colors text-sm">
+                            <Mail size={18} />
+                            <span>Email</span>
+                          </a>
+                        </div>
+                      </div>
+                      <p className="text-gray-700 mb-6 leading-relaxed">{member.bio}</p>
+                      <div className="mb-6">
+                        <h4 className="font-semibold text-gray-900 mb-3">Detailed Background</h4>
+                        <p className="text-gray-700 leading-relaxed">{member.detailedBio}</p>
+                      </div>
+                      <div className="mb-6">
+                        <h4 className="font-semibold text-gray-900 mb-3">Core Expertise</h4>
+                        <div className="flex flex-wrap gap-2">
+                          {member.briefExpertise.map((skill) => (
+                            <span key={skill} className="bg-primary-100 text-primary px-2 py-1 rounded text-xs">
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="mb-6">
+                        <h4 className="font-semibold text-gray-900 mb-3">Full Expertise</h4>
+                        <div className="flex flex-wrap gap-2">
+                          {member.fullExpertise.map((skill) => (
+                            <span key={skill} className="bg-primary-100 text-primary px-2 py-1 rounded text-xs">
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })()}
         </div>
       </section>
     </div>
