@@ -37,6 +37,7 @@ export default function CareersPage() {
     {
       id: 1,
       title: 'Senior Energy Consultant',
+      isOpen: false,
       department: 'Energy Solutions',
       location: 'Abuja, Nigeria',
       type: 'Full-time',
@@ -70,6 +71,7 @@ export default function CareersPage() {
     {
       id: 2,
       title: 'Construction Project Manager',
+      isOpen: false,
       department: 'Construction & Infrastructure',
       location: 'Lagos, Nigeria',
       type: 'Full-time',
@@ -103,6 +105,7 @@ export default function CareersPage() {
     {
       id: 3,
       title: 'Digital Transformation Analyst',
+      isOpen: false,
       department: 'Technology Solutions',
       location: 'Abuja, Nigeria',
       type: 'Full-time',
@@ -136,6 +139,7 @@ export default function CareersPage() {
     {
       id: 4,
       title: 'Financial Advisory Associate',
+      isOpen: false,
       department: 'Financial Services',
       location: 'Lagos, Nigeria',
       type: 'Full-time',
@@ -169,6 +173,7 @@ export default function CareersPage() {
     {
       id: 5,
       title: 'Government Relations Specialist',
+      isOpen: false,
       department: 'Government Relations',
       location: 'Abuja, Nigeria',
       type: 'Full-time',
@@ -202,6 +207,7 @@ export default function CareersPage() {
     {
       id: 6,
       title: 'Management Consultant - Entry Level',
+      isOpen: false,
       department: 'General Consulting',
       location: 'Multiple Locations',
       type: 'Full-time',
@@ -432,6 +438,10 @@ export default function CareersPage() {
               Explore exciting career opportunities across our practice areas and 
               find the perfect role to advance your professional journey.
             </p>
+            <div className="mt-6 max-w-2xl mx-auto p-4 rounded-lg border border-yellow-200 bg-yellow-50 text-yellow-900">
+              At the moment, there are no active openings. The roles below are currently
+              <span className="font-semibold"> closed</span>. You can still submit a general application and we will contact you when vacancies open.
+            </div>
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -442,16 +452,23 @@ export default function CareersPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-white rounded-xl shadow-lg p-8 card-hover"
+                className={`bg-white rounded-xl shadow-lg p-8 card-hover relative ${!job.isOpen ? 'opacity-90' : ''}`}
               >
                 <div className="flex items-start justify-between mb-4">
                   <div>
                     <h3 className="text-xl font-bold text-primary mb-2">{job.title}</h3>
                     <p className="text-accent font-semibold">{job.department}</p>
                   </div>
-                  <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
-                    {job.type}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    {!job.isOpen && (
+                      <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">
+                        Closed
+                      </span>
+                    )}
+                    <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+                      {job.type}
+                    </span>
+                  </div>
                 </div>
 
                 <p className="text-gray-600 mb-6 leading-relaxed">{job.description}</p>
@@ -478,9 +495,17 @@ export default function CareersPage() {
                   >
                     View Details
                   </button>
-                  <a href="#application" className="btn-primary flex-1 text-center">
-                    Apply Now
-                  </a>
+                  <button
+                    disabled={!job.isOpen}
+                    onClick={() => {
+                      if (job.isOpen) {
+                        window.location.hash = '#application';
+                      }
+                    }}
+                    className={`flex-1 text-center btn-primary disabled:opacity-50 disabled:cursor-not-allowed`}
+                  >
+                    {job.isOpen ? 'Apply Now' : 'Closed'}
+                  </button>
                 </div>
               </motion.div>
             ))}
