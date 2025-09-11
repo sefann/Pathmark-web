@@ -441,18 +441,130 @@ export default function HomePage() {
       </section>
 
       {/* Trusted Partners Section */}
-      <section ref={partnersRef} className="section-padding bg-gray-50">
-        <div className="container-custom">
+      <section ref={partnersRef} className="section-padding relative overflow-hidden">
+        {/* Animated Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+          {/* Floating Geometric Shapes */}
+          <div className="absolute inset-0 overflow-hidden">
+            <motion.div
+              animate={{
+                rotate: [0, 360],
+                scale: [1, 1.1, 1],
+              }}
+              transition={{
+                duration: 20,
+                repeat: Infinity,
+                ease: "linear"
+              }}
+              className="absolute top-10 left-10 w-32 h-32 bg-gradient-to-r from-blue-200/30 to-indigo-200/30 rounded-full blur-xl"
+            />
+            <motion.div
+              animate={{
+                rotate: [360, 0],
+                scale: [1, 0.8, 1],
+              }}
+              transition={{
+                duration: 15,
+                repeat: Infinity,
+                ease: "linear"
+              }}
+              className="absolute top-32 right-20 w-24 h-24 bg-gradient-to-r from-purple-200/30 to-pink-200/30 rounded-full blur-lg"
+            />
+            <motion.div
+              animate={{
+                rotate: [0, -360],
+                scale: [0.8, 1.2, 0.8],
+              }}
+              transition={{
+                duration: 25,
+                repeat: Infinity,
+                ease: "linear"
+              }}
+              className="absolute bottom-20 left-1/4 w-40 h-40 bg-gradient-to-r from-cyan-200/20 to-blue-200/20 rounded-full blur-2xl"
+            />
+            <motion.div
+              animate={{
+                rotate: [360, 0],
+                scale: [1, 1.1, 1],
+              }}
+              transition={{
+                duration: 18,
+                repeat: Infinity,
+                ease: "linear"
+              }}
+              className="absolute bottom-32 right-1/3 w-28 h-28 bg-gradient-to-r from-indigo-200/25 to-purple-200/25 rounded-full blur-lg"
+            />
+          </div>
+
+          {/* Animated Grid Pattern */}
+          <div className="absolute inset-0 opacity-20">
+            <motion.div
+              animate={{
+                backgroundPosition: ["0% 0%", "100% 100%"],
+              }}
+              transition={{
+                duration: 30,
+                repeat: Infinity,
+                ease: "linear"
+              }}
+              className="w-full h-full"
+              style={{
+                backgroundImage: `
+                  linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+                  linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px)
+                `,
+                backgroundSize: "50px 50px"
+              }}
+            />
+          </div>
+
+          {/* Floating Particles */}
+          {[...Array(8)].map((_, i) => (
+            <motion.div
+              key={i}
+              animate={{
+                y: [0, -30, 0],
+                x: [0, Math.sin(i) * 20, 0],
+                opacity: [0.3, 0.8, 0.3],
+              }}
+              transition={{
+                duration: 3 + i * 0.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: i * 0.3
+              }}
+              className="absolute w-2 h-2 bg-blue-400/40 rounded-full"
+              style={{
+                left: `${10 + i * 12}%`,
+                top: `${20 + (i % 3) * 30}%`,
+              }}
+            />
+          ))}
+        </div>
+
+        <div className="container-custom relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={partnersInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl lg:text-5xl font-bold text-primary mb-6">
-              Trusted by Industry Leaders
+            <h2 className="text-4xl lg:text-5xl font-bold text-primary mb-6 relative">
+              <span className="relative z-10">Trusted by Industry Leaders</span>
+              <motion.div
+                animate={{
+                  scale: [1, 1.05, 1],
+                  opacity: [0.1, 0.2, 0.1],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                className="absolute inset-0 bg-gradient-to-r from-blue-200/20 to-purple-200/20 rounded-lg blur-xl"
+              />
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-700 max-w-3xl mx-auto relative z-10">
               We work with leading companies across various sectors, building lasting partnerships 
               that drive mutual success and growth.
             </p>
@@ -482,7 +594,7 @@ export default function HomePage() {
                   transition={{ duration: 0.8, delay: index * 0.1 }}
                   className="flex-shrink-0"
                 >
-                                     <div className="w-56 h-40 bg-white rounded-lg shadow-md flex items-center justify-center p-5 hover:shadow-lg transition-all duration-300 hover:scale-105">
+                   <div className="w-56 h-40 bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 flex items-center justify-center p-5 hover:shadow-xl hover:bg-white/90 transition-all duration-300 hover:scale-105 hover:-translate-y-1">
                      <img
                        src={partner.logo}
                        alt={partner.name}
