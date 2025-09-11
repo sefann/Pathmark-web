@@ -1,6 +1,8 @@
 // RSS Feed Caching System
+import { Article } from '@/types/insights';
+
 interface CacheEntry {
-  data: unknown;
+  data: Article[];
   timestamp: number;
   etag?: string;
   lastModified?: string;
@@ -11,7 +13,7 @@ class RSSCache {
   private readonly TTL = 3600000; // 1 hour in milliseconds
   private readonly MAX_CACHE_SIZE = 100; // Maximum number of cached entries
 
-  set(key: string, data: unknown, etag?: string, lastModified?: string): void {
+  set(key: string, data: Article[], etag?: string, lastModified?: string): void {
     // Remove oldest entries if cache is full
     if (this.cache.size >= this.MAX_CACHE_SIZE) {
       const oldestKey = this.cache.keys().next().value;
@@ -26,7 +28,7 @@ class RSSCache {
     });
   }
 
-  get(key: string): unknown | null {
+  get(key: string): Article[] | null {
     const entry = this.cache.get(key);
     if (!entry) return null;
 

@@ -375,7 +375,7 @@ export default function CareersPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
             {companyValues.map((value, index) => {
-              const Icon = value.icon;
+              const Icon = value.icon as React.ComponentType<{ size?: number; className?: string }>;
               return (
                 <motion.div
                   key={value.title}
@@ -403,19 +403,21 @@ export default function CareersPage() {
           <div className="bg-gray-50 rounded-2xl p-8">
             <h3 className="text-2xl font-bold text-primary mb-6 text-center">Our Benefits Package</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {benefits.map((benefit, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="flex items-center space-x-3"
-                >
-                  <CheckCircle size={20} className="text-green-500 flex-shrink-0" />
-                  <span className="text-gray-700">{benefit}</span>
-                </motion.div>
-              ))}
+              {benefits.map((benefit, index) => {
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    className="flex items-center space-x-3"
+                  >
+                    <CheckCircle size={20} className="text-green-500 flex-shrink-0" />
+                    <span className="text-gray-700">{benefit}</span>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -445,7 +447,7 @@ export default function CareersPage() {
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {jobOpenings.map((job, index) => (
+            {jobOpenings.map((job, index): React.ReactElement => (
               <motion.div
                 key={job.id}
                 initial={{ opacity: 0, y: 50 }}

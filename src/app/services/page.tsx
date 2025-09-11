@@ -6,7 +6,8 @@ import {
   ArrowRight,
   Target,
   Award,
-  Globe
+  Globe,
+  Users
 } from 'lucide-react';
 import Link from 'next/link';
 import StatisticsSection from '@/components/StatisticsSection';

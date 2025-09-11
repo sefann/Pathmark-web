@@ -7,7 +7,21 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const includeMetrics = searchParams.get('metrics') === 'true';
     
-    const performanceData = {
+    interface PerformanceData {
+      cache: {
+        size: number;
+        hitRate: number;
+      };
+      performance: {
+        averageFetchTime: number;
+        averageArticles: number;
+      };
+      memory: Record<string, number> | null;
+      timestamp: string;
+      metrics?: unknown;
+    }
+
+    const performanceData: PerformanceData = {
       cache: {
         size: rssCache.size(),
         hitRate: performanceMonitor.getCacheHitRate(),
