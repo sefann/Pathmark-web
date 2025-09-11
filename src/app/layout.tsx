@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     siteName: "Pathmark Advisory",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/logo.svg",
         width: 1200,
         height: 630,
         alt: "Pathmark Advisory Co. Ltd",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Pathmark Advisory Co. Ltd",
     description: "The Path to Bringing Your Vision to Life",
-    images: ["/og-image.jpg"],
+    images: ["/logo.svg"],
   },
   robots: {
     index: true,
