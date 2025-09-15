@@ -104,10 +104,10 @@ export default function HomePage() {
   ];
 
   const stats = [
-    { number: '100+', label: 'Projects Completed' },
-    { number: '50+', label: 'Happy Clients' },
-    { number: '10+', label: 'Years Experience' },
-    { number: '5', label: 'Industries Served' }
+    { number: '100+', label: 'Projects Completed', icon: Target },
+    { number: '50+', label: 'Happy Clients', icon: Users },
+    { number: '10+', label: 'Years Experience', icon: Award },
+    { number: '5', label: 'Industries Served', icon: Building }
   ];
 
   const trustedPartners = [
@@ -140,8 +140,14 @@ export default function HomePage() {
             console.error('Video loading error:', e);
             setVideoError(true);
           }}
+          onEnded={(e) => {
+            // Force restart if loop fails
+            const video = e.target as HTMLVideoElement;
+            video.currentTime = 0;
+            video.play().catch(console.error);
+          }}
         >
-          <source src="/videos/home-banner.mp4?v=1" type="video/mp4" />
+          <source src="/videos/home-banner.mp4?v=2" type="video/mp4" />
         </video>
         
         {/* Fallback background image only if video fails to load */}
@@ -197,7 +203,7 @@ export default function HomePage() {
               </span>
             </p>
             <p className="text-lg md:text-xl mb-8 max-w-4xl mx-auto leading-relaxed text-center text-white font-semibold">
-              💼 Investment Opportunities Available for Local & International Clients
+              Investment Opportunities Available for Local & International Clients
             </p>
             <div className="flex justify-center items-center">
               <Link href="/contact" className="btn-secondary text-lg px-8 py-4">
@@ -221,8 +227,63 @@ export default function HomePage() {
       </section>
 
       {/* Services Section */}
-      <section ref={servicesRef} className="section-padding bg-gray-50">
-        <div className="container-custom">
+      <section ref={servicesRef} className="section-padding relative overflow-hidden">
+        {/* Background with gradient and spiral/web design */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-red-50"></div>
+        <div className="absolute inset-0 opacity-30">
+          {/* Spiral/Web pattern */}
+          <div className="absolute top-0 left-0 w-full h-full">
+            <svg className="w-full h-full" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+              {/* Spiral lines */}
+              <path d="M100,100 Q300,50 500,150 Q700,100 900,200 Q1100,150 1200,300" stroke="url(#spiralGradient1)" strokeWidth="2" fill="none" opacity="0.4"/>
+              <path d="M50,200 Q250,150 450,250 Q650,200 850,300 Q1050,250 1200,400" stroke="url(#spiralGradient2)" strokeWidth="2" fill="none" opacity="0.3"/>
+              <path d="M0,300 Q200,250 400,350 Q600,300 800,400 Q1000,350 1200,500" stroke="url(#spiralGradient3)" strokeWidth="2" fill="none" opacity="0.4"/>
+              
+              {/* Web-like connecting lines */}
+              <line x1="200" y1="100" x2="400" y2="300" stroke="url(#webGradient1)" strokeWidth="1" opacity="0.2"/>
+              <line x1="600" y1="150" x2="800" y2="350" stroke="url(#webGradient2)" strokeWidth="1" opacity="0.2"/>
+              <line x1="300" y1="250" x2="700" y2="450" stroke="url(#webGradient3)" strokeWidth="1" opacity="0.2"/>
+              
+              {/* Gradient definitions */}
+              <defs>
+                <linearGradient id="spiralGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.6"/>
+                  <stop offset="50%" stopColor="#8B5CF6" stopOpacity="0.4"/>
+                  <stop offset="100%" stopColor="#EF4444" stopOpacity="0.6"/>
+                </linearGradient>
+                <linearGradient id="spiralGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#EF4444" stopOpacity="0.5"/>
+                  <stop offset="50%" stopColor="#8B5CF6" stopOpacity="0.3"/>
+                  <stop offset="100%" stopColor="#3B82F6" stopOpacity="0.5"/>
+                </linearGradient>
+                <linearGradient id="spiralGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#8B5CF6" stopOpacity="0.6"/>
+                  <stop offset="50%" stopColor="#EF4444" stopOpacity="0.4"/>
+                  <stop offset="100%" stopColor="#3B82F6" stopOpacity="0.6"/>
+                </linearGradient>
+                <linearGradient id="webGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.3"/>
+                  <stop offset="100%" stopColor="#EF4444" stopOpacity="0.3"/>
+                </linearGradient>
+                <linearGradient id="webGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#EF4444" stopOpacity="0.3"/>
+                  <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0.3"/>
+                </linearGradient>
+                <linearGradient id="webGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#8B5CF6" stopOpacity="0.3"/>
+                  <stop offset="100%" stopColor="#3B82F6" stopOpacity="0.3"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          
+          {/* Additional subtle overlay patterns */}
+          <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-gradient-radial from-blue-200/20 to-transparent rounded-full blur-xl"></div>
+          <div className="absolute bottom-1/3 left-1/3 w-48 h-48 bg-gradient-radial from-red-200/20 to-transparent rounded-full blur-xl"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-gradient-radial from-purple-200/20 to-transparent rounded-full blur-lg"></div>
+        </div>
+        
+        <div className="container-custom relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={servicesInView ? { opacity: 1, y: 0 } : {}}
@@ -273,8 +334,20 @@ export default function HomePage() {
       </section>
 
       {/* Investment Opportunities Section */}
-      <section className="section-padding bg-gradient-to-r from-primary to-accent text-white">
-        <div className="container-custom">
+      <section className="section-padding text-white relative overflow-hidden">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url('/images/investment.png')`
+          }}
+        ></div>
+        
+        {/* Darker overlay with reduced transparency for better text visibility */}
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-accent/90"></div>
+        <div className="absolute inset-0 bg-black/40"></div>
+        
+        <div className="container-custom relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
@@ -282,7 +355,7 @@ export default function HomePage() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-              💼 Investment Opportunities
+              Investment Opportunities
             </h2>
             <p className="text-xl max-w-4xl mx-auto leading-relaxed">
               We offer exclusive investment opportunities across all our service areas for both local and international clients. 
@@ -297,7 +370,6 @@ export default function HomePage() {
               transition={{ duration: 0.8, delay: 0.1 }}
               className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 text-center"
             >
-              <div className="text-2xl mb-2">🏭</div>
               <h3 className="text-sm font-bold mb-2">Energy & Mining</h3>
               <p className="text-primary-100 text-xs leading-relaxed">
                 Mining operations, renewable energy, and infrastructure development.
@@ -310,7 +382,6 @@ export default function HomePage() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 text-center"
             >
-              <div className="text-2xl mb-2">🏗️</div>
               <h3 className="text-sm font-bold mb-2">Construction</h3>
               <p className="text-primary-100 text-xs leading-relaxed">
                 Infrastructure projects, real estate, and construction ventures.
@@ -323,7 +394,6 @@ export default function HomePage() {
               transition={{ duration: 0.8, delay: 0.3 }}
               className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 text-center"
             >
-              <div className="text-2xl mb-2">💻</div>
               <h3 className="text-sm font-bold mb-2">Technology</h3>
               <p className="text-primary-100 text-xs leading-relaxed">
                 Digital transformation, fintech, and technology startups.
@@ -336,7 +406,6 @@ export default function HomePage() {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 text-center"
             >
-              <div className="text-2xl mb-2">💰</div>
               <h3 className="text-sm font-bold mb-2">Finance</h3>
               <p className="text-primary-100 text-xs leading-relaxed">
                 Banking, insurance, and financial technology sectors.
@@ -349,7 +418,6 @@ export default function HomePage() {
               transition={{ duration: 0.8, delay: 0.5 }}
               className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 text-center"
             >
-              <div className="text-2xl mb-2">🤝</div>
               <h3 className="text-sm font-bold mb-2">Government</h3>
               <p className="text-primary-100 text-xs leading-relaxed">
                 Public-private partnerships and government projects.
@@ -362,7 +430,6 @@ export default function HomePage() {
               transition={{ duration: 0.8, delay: 0.6 }}
               className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 text-center"
             >
-              <div className="text-2xl mb-2">🌍</div>
               <h3 className="text-2xl font-bold mb-2">Global</h3>
               <p className="text-primary-100 text-xs leading-relaxed">
                 International partnerships and cross-border opportunities.
@@ -441,7 +508,7 @@ export default function HomePage() {
       </section>
 
       {/* Trusted Partners Section */}
-      <section ref={partnersRef} className="section-padding relative overflow-hidden">
+      <section ref={partnersRef} className="py-12 lg:py-16 relative overflow-hidden">
         {/* Animated Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
           {/* Floating Geometric Shapes */}
@@ -547,7 +614,7 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 50 }}
             animate={partnersInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-8"
           >
             <h2 className="text-4xl lg:text-5xl font-bold text-primary mb-6 relative">
               <span className="relative z-10">Trusted by Industry Leaders</span>
@@ -594,13 +661,11 @@ export default function HomePage() {
                   transition={{ duration: 0.8, delay: index * 0.1 }}
                   className="flex-shrink-0"
                 >
-                   <div className="w-56 h-40 bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 flex items-center justify-center p-5 hover:shadow-xl hover:bg-white/90 transition-all duration-300 hover:scale-105 hover:-translate-y-1">
                      <img
                        src={partner.logo}
                        alt={partner.name}
-                       className="w-48 h-32 object-contain grayscale hover:grayscale-0 transition-all duration-300"
+                       className="w-72 h-48 object-contain grayscale hover:grayscale-0 transition-all duration-300 hover:scale-105"
                      />
-                   </div>
                 </motion.div>
               ))}
             </motion.div>

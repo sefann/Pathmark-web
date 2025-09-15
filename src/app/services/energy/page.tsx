@@ -163,12 +163,6 @@ export default function EnergyPage() {
       category: 'Mining'
     },
     {
-      title: 'Oil & Gas Joint Venture - Niger Delta',
-      description: 'Facilitated complex JV structuring and regulatory compliance for upstream oil and gas operations in the Niger Delta region.',
-      results: ['DPR compliance achieved', 'JV successfully structured', 'Environmental approvals secured', 'Operational efficiency improved'],
-      category: 'Oil & Gas'
-    },
-    {
       title: 'Solar Farm Development - Rural Electrification',
       description: 'End-to-end solar farm development providing clean energy to underserved communities while supporting sustainable development goals.',
       results: ['500KW solar farm installed', '1000+ households powered', 'Local jobs created', 'Carbon footprint reduced'],

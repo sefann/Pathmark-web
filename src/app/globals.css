@@ -85,6 +85,10 @@ body {
     overflow: hidden;
   }
   
+  .bg-gradient-radial {
+    background: radial-gradient(circle, var(--tw-gradient-stops));
+  }
+  
   /* Force input text to be visible */
   input, textarea, select {
     color: #111827 !important;

@@ -303,10 +303,10 @@ export default function TechnologyPage() {
                        <img 
                          src={
                            service.title === 'Cybersecurity' 
-                             ? 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'
+                             ? '/technology/cyber.png'
                              : service.title === 'Enterprise IT Infrastructure & Cloud Solutions'
-                             ? 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80'
-                             : 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'
+                             ? '/technology/cloud.png'
+                             : '/technology/smarthomes.png'
                          }
                          alt={service.title}
                          className="w-full h-full object-cover"
@@ -368,10 +368,10 @@ export default function TechnologyPage() {
                        <img 
                          src={
                            service.title === 'Data Centre Development & Management'
-                             ? 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80'
+                             ? '/technology/enterprise.png'
                              : service.title === 'Cloud Solutions'
-                             ? 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80'
-                             : 'https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'
+                             ? '/technology/cloudsolutions.png'
+                             : '/technology/erp.png'
                          }
                          alt={service.title}
                          className="w-full h-full object-cover"
@@ -477,35 +477,20 @@ export default function TechnologyPage() {
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {caseStudies.map((study, index) => (
-              <motion.div
-                key={study.title}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                                 <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-                   <div className="relative h-48 overflow-hidden">
-                     <img 
-                       src={
-                         study.category === 'Cybersecurity'
-                           ? 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'
-                           : study.category === 'Cloud Solutions'
-                           ? 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80'
-                           : 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'
-                       }
-                       alt={study.title}
-                       className="w-full h-full object-cover"
-                     />
-                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-                     <div className="absolute top-4 right-4">
-                       {study.category === 'Cybersecurity' && <Shield size={48} className="text-white drop-shadow-lg" />}
-                       {study.category === 'Cloud Solutions' && <Cloud size={48} className="text-white drop-shadow-lg" />}
-                       {study.category === 'Smart Home' && <Home size={48} className="text-white drop-shadow-lg" />}
-                     </div>
-                   </div>
-                  <div className="p-6">
+            {caseStudies.map((study, index) => {
+              const Icon = study.category === 'Cybersecurity' ? Shield : study.category === 'Cloud Solutions' ? Cloud : Home;
+              return (
+                <motion.div
+                  key={study.title}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="bg-white rounded-2xl shadow-xl p-6 h-full">
+                    <div className="w-16 h-16 bg-gradient-to-r from-primary to-accent rounded-lg flex items-center justify-center mb-6">
+                      <Icon size={32} className="text-white" />
+                    </div>
                     <div className="inline-block bg-primary-50 text-primary px-3 py-1 rounded-full text-xs font-semibold mb-3">
                       {study.category}
                     </div>
@@ -524,9 +509,9 @@ export default function TechnologyPage() {
                       ))}
                     </ul>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>

@@ -293,10 +293,27 @@ export default function ConstructionPage() {
                   animate={servicesInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.8, delay: index * 0.1 }}
                 >
-                  <div className="bg-white rounded-2xl shadow-xl p-8 h-full">
-                    <div className={`w-16 h-16 bg-gradient-to-r ${service.color} rounded-lg flex items-center justify-center mb-6`}>
-                      <Icon size={32} className="text-white" />
+                  <div className="bg-white rounded-2xl shadow-xl overflow-hidden h-full">
+                    <div className="relative h-48 overflow-hidden">
+                      <img 
+                        src={
+                          service.title === 'General Construction' 
+                            ? '/construction/generalconstruction.png'
+                            : service.title === 'Real Estate Development'
+                            ? '/construction/realestate.png'
+                            : service.title === 'Project Management'
+                            ? '/construction/projectmanagement.png'
+                            : '/construction/interiordeco.png'
+                        }
+                        alt={service.title}
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                      <div className={`absolute top-4 right-4 w-16 h-16 bg-gradient-to-r ${service.color} rounded-lg flex items-center justify-center`}>
+                        <Icon size={32} className="text-white" />
+                      </div>
                     </div>
+                    <div className="p-8">
                     <h3 className="text-2xl font-bold text-primary mb-4">
                       {service.title}
                     </h3>
@@ -314,6 +331,7 @@ export default function ConstructionPage() {
                         </li>
                       ))}
                     </ul>
+                    </div>
                   </div>
                 </motion.div>
               );
@@ -342,10 +360,25 @@ export default function ConstructionPage() {
                     transition={{ duration: 0.8, delay: index * 0.1 }}
                     viewport={{ once: true }}
                   >
-                    <div className="bg-white rounded-2xl shadow-xl p-6 h-full">
-                      <div className={`w-12 h-12 bg-gradient-to-r ${type.color} rounded-lg flex items-center justify-center mb-4`}>
-                        <Icon size={24} className="text-white" />
+                    <div className="bg-white rounded-2xl shadow-xl overflow-hidden h-full">
+                      <div className="relative h-32 overflow-hidden">
+                        <img 
+                          src={
+                            type.title === 'Residential Construction' 
+                              ? '/construction/residential.png'
+                              : type.title === 'Commercial Construction'
+                              ? '/construction/commercial.png'
+                              : '/construction/infrastructure.png'
+                          }
+                          alt={type.title}
+                          className="w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div className={`absolute top-3 right-3 w-12 h-12 bg-gradient-to-r ${type.color} rounded-lg flex items-center justify-center`}>
+                          <Icon size={24} className="text-white" />
+                        </div>
                       </div>
+                      <div className="p-6">
                       <h4 className="text-xl font-bold text-primary mb-3">
                         {type.title}
                       </h4>
@@ -360,6 +393,7 @@ export default function ConstructionPage() {
                           </li>
                         ))}
                       </ul>
+                      </div>
                     </div>
                   </motion.div>
                 );
