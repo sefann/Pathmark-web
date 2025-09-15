@@ -55,7 +55,7 @@ export default function AboutPage() {
       fullExpertise: ['Energy Policy', 'Strategic Planning', 'Government Relations', 'Project Finance', 'Infrastructure Development', 'Policy Advisory', 'Regulatory Compliance', 'Stakeholder Management'],
       quote: 'Our success is measured not just by the projects we complete, but by the lasting impact we create for our clients and communities.',
       email: 'aisha.adamu@pathmarkadvisory.com',
-      linkedin: '#'
+      linkedin: 'https://www.linkedin.com/company/pathmark-advisory-co-ltd/'
     },
     {
       id: 'leadership-2',
@@ -69,7 +69,7 @@ export default function AboutPage() {
       fullExpertise: ['Digital Transformation', 'Fintech', 'Business Process Automation', 'Data Analytics', 'Enterprise Architecture', 'Strategic Technology Planning', 'Cloud Computing', 'AI/ML Integration'],
       quote: 'Technology is not just about innovation; it\'s about creating solutions that solve real problems and improve lives.',
       email: 'sulaimon.ajishafe@pathmarkadvisory.com',
-      linkedin: '#'
+      linkedin: 'https://www.linkedin.com/company/pathmark-advisory-co-ltd/'
     }
   ];
 
@@ -85,7 +85,7 @@ export default function AboutPage() {
       briefExpertise: ['Solar Energy', 'Project Development', 'Environmental Assessment'],
       fullExpertise: ['Solar Energy', 'Project Development', 'Environmental Impact Assessment', 'Renewable Energy Policy', 'Grid Integration', 'Energy Storage', 'Rural Electrification', 'Sustainability Planning'],
       email: 'kemi.ogundimu@pathmarkadvisory.com',
-      linkedin: '#'
+      linkedin: 'https://www.linkedin.com/company/pathmark-advisory-co-ltd/'
     },
     {
       id: 2,
@@ -98,7 +98,7 @@ export default function AboutPage() {
       briefExpertise: ['Project Management', 'Quality Control', 'Infrastructure Planning'],
       fullExpertise: ['Project Management', 'Quality Control', 'Risk Assessment', 'Infrastructure Planning', 'Contract Management', 'Safety Management', 'Cost Optimization', 'Stakeholder Coordination'],
       email: 'chinedu.okwu@pathmarkadvisory.com',
-      linkedin: '#'
+      linkedin: 'https://www.linkedin.com/company/pathmark-advisory-co-ltd/'
     },
     {
       id: 3,
@@ -111,7 +111,7 @@ export default function AboutPage() {
       briefExpertise: ['Enterprise Architecture', 'Cloud Computing', 'Digital Transformation'],
       fullExpertise: ['Enterprise Architecture', 'Cloud Computing', 'Cybersecurity', 'Digital Transformation', 'AI/ML Integration', 'Data Analytics', 'Software Development', 'IT Strategy'],
       email: 'fatima.alhassan@pathmarkadvisory.com',
-      linkedin: '#'
+      linkedin: 'https://www.linkedin.com/company/pathmark-advisory-co-ltd/'
     },
     {
       id: 4,
@@ -124,7 +124,7 @@ export default function AboutPage() {
       briefExpertise: ['Investment Banking', 'M&A', 'Corporate Finance'],
       fullExpertise: ['Investment Banking', 'M&A', 'Capital Markets', 'Corporate Finance', 'Financial Modeling', 'Due Diligence', 'Valuation', 'Deal Structuring'],
       email: 'olumide.adebayo@pathmarkadvisory.com',
-      linkedin: '#'
+      linkedin: 'https://www.linkedin.com/company/pathmark-advisory-co-ltd/'
     }
   ];
 

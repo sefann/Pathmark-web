@@ -37,7 +37,7 @@ const Footer = () => {
   ];
 
   const socialLinks = [
-    { name: 'LinkedIn', href: '#', icon: Linkedin },
+    { name: 'LinkedIn', href: 'https://www.linkedin.com/company/pathmark-advisory-co-ltd/', icon: Linkedin },
     { name: 'Twitter', href: '#', icon: Twitter },
     { name: 'Facebook', href: '#', icon: Facebook },
     { name: 'Instagram', href: '#', icon: Instagram },
