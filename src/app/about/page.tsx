@@ -45,16 +45,15 @@ export default function AboutPage() {
   const leadership = [
     {
       id: 'leadership-1',
-      name: 'Aisha A. Adamu',
+      name: 'Aisha Abdullahi Adamu',
       title: 'Lead Managing Partner',
       image: '/images/aisha.png',
       yearsExperience: '10+ years',
-      bio: 'Strategic consulting and project management expert specializing in energy sector development and policy advisory across Africa.',
-      detailedBio: 'Aisha is a visionary leader who has transformed the consulting landscape in West Africa. Her expertise spans across multiple sectors, with particular focus on energy policy development and implementation. She has successfully advised governments and private sector clients on major infrastructure projects, regulatory frameworks, and strategic partnerships. Her leadership has been instrumental in establishing Pathmark Advisory as a trusted partner for complex, high-impact projects.',
-      briefExpertise: ['Energy Policy', 'Strategic Planning', 'Government Relations'],
-      fullExpertise: ['Energy Policy', 'Strategic Planning', 'Government Relations', 'Project Finance', 'Infrastructure Development', 'Policy Advisory', 'Regulatory Compliance', 'Stakeholder Management'],
-      quote: 'Our success is measured not just by the projects we complete, but by the lasting impact we create for our clients and communities.',
-      email: 'aisha.adamu@pathmarkadvisory.com',
+      bio: 'Nigerian entrepreneur and strategist directing Pathmark Advisory\'s strategic vision in government relations, corporate structuring, and business development.',
+      detailedBio: 'Aisha Abdullahi Adamu is a Nigerian entrepreneur and strategist with over 10 years of experience in business and leadership. She serves as the Lead Managing Partner of Pathmark Advisory Co. Ltd., where she directs the firm\'s strategic vision, providing high-level counsel in government relations, corporate structuring, and business development. Under her leadership, Pathmark has positioned itself as a trusted advisory partner for organizations navigating Nigeria\'s complex policy and investment landscape. With a career foundation at Microsoft, Aisha brings a unique blend of corporate discipline and entrepreneurial foresight. She has advised across multiple sectors, supporting clients in mining, energy, infrastructure, and finance, while driving initiatives that align business growth with long-term sustainability. She is also the founder of The Bridge by Aisha, a flagship platform for leadership, storytelling, and transformation, which has become one of Africa\'s most distinctive gatherings for visionary women and changemakers. At Pathmark and beyond, Aisha is recognized for her ability to connect strategy with influence, bridging private sector innovation, public sector opportunity, and global networks.',
+      expertise: ['Government Relations', 'Corporate Structuring', 'Business Development', 'Strategic Planning', 'Policy Advisory', 'Investment Strategy', 'Leadership Development', 'Cross-Sector Advisory'],
+      quote: 'Success is not defined by the projects we complete, but by the bridges we build, connecting strategy to impact and creating value that endures.',
+      email: 'aisha@pathmarkadvisory.com',
       linkedin: 'https://www.linkedin.com/company/pathmark-advisory-co-ltd/'
     },
     {
@@ -65,11 +64,10 @@ export default function AboutPage() {
       yearsExperience: '15+ years',
       bio: 'Technology and finance executive driving digital transformation initiatives across West Africa for major banks and fintech companies.',
       detailedBio: 'Sulaimon is a technology innovator and strategic thinker who has revolutionized how African businesses approach digital transformation. His deep understanding of both technology and business processes has enabled him to bridge the gap between technical solutions and business outcomes. He has led numerous successful digital transformation projects, helping organizations modernize their operations, improve efficiency, and gain competitive advantages in the digital economy.',
-      briefExpertise: ['Digital Transformation', 'Fintech', 'Business Process Automation'],
-      fullExpertise: ['Digital Transformation', 'Fintech', 'Business Process Automation', 'Data Analytics', 'Enterprise Architecture', 'Strategic Technology Planning', 'Cloud Computing', 'AI/ML Integration'],
+      expertise: ['Digital Transformation', 'Fintech', 'Business Process Automation', 'Data Analytics', 'Enterprise Architecture', 'Strategic Technology Planning', 'Cloud Computing', 'AI/ML Integration'],
       quote: 'Technology is not just about innovation; it\'s about creating solutions that solve real problems and improve lives.',
-      email: 'sulaimon.ajishafe@pathmarkadvisory.com',
-      linkedin: 'https://www.linkedin.com/company/pathmark-advisory-co-ltd/'
+      email: 's.ajishafe@pathmarkadvisory.com',
+      linkedin: 'https://www.linkedin.com/in/sulaimon-a-ajishafe-04a81884/'
     }
   ];
 
@@ -82,8 +80,7 @@ export default function AboutPage() {
       yearsExperience: '8+ years',
       bio: 'Renewable energy project development specialist with experience managing over $200M in clean energy investments across Nigeria.',
       detailedBio: 'Kemi is a passionate energy consultant with deep expertise in renewable energy systems and sustainable development. She has successfully led numerous solar energy projects across Nigeria, helping communities transition to clean energy solutions. Her work has not only reduced energy costs but also contributed to environmental sustainability and economic development in rural areas. Kemi is known for her innovative approach to energy project management and her commitment to delivering lasting impact.',
-      briefExpertise: ['Solar Energy', 'Project Development', 'Environmental Assessment'],
-      fullExpertise: ['Solar Energy', 'Project Development', 'Environmental Impact Assessment', 'Renewable Energy Policy', 'Grid Integration', 'Energy Storage', 'Rural Electrification', 'Sustainability Planning'],
+      expertise: ['Solar Energy', 'Project Development', 'Environmental Impact Assessment', 'Renewable Energy Policy', 'Grid Integration', 'Energy Storage', 'Rural Electrification', 'Sustainability Planning'],
       email: 'kemi.ogundimu@pathmarkadvisory.com',
       linkedin: 'https://www.linkedin.com/company/pathmark-advisory-co-ltd/'
     },
@@ -95,8 +92,7 @@ export default function AboutPage() {
       yearsExperience: '10+ years',
       bio: 'Construction project management expert with experience overseeing infrastructure projects worth over ₦50 billion across Nigeria.',
       detailedBio: 'Chinedu is a seasoned construction professional who has revolutionized infrastructure development in Nigeria. His expertise spans from road construction to major building projects, with a focus on quality, safety, and timely delivery. He has successfully managed complex projects involving multiple stakeholders and has developed innovative approaches to project optimization. Chinedu\'s leadership has been instrumental in establishing best practices in construction management across the region.',
-      briefExpertise: ['Project Management', 'Quality Control', 'Infrastructure Planning'],
-      fullExpertise: ['Project Management', 'Quality Control', 'Risk Assessment', 'Infrastructure Planning', 'Contract Management', 'Safety Management', 'Cost Optimization', 'Stakeholder Coordination'],
+      expertise: ['Project Management', 'Quality Control', 'Risk Assessment', 'Infrastructure Planning', 'Contract Management', 'Safety Management', 'Cost Optimization', 'Stakeholder Coordination'],
       email: 'chinedu.okwu@pathmarkadvisory.com',
       linkedin: 'https://www.linkedin.com/company/pathmark-advisory-co-ltd/'
     },
@@ -108,8 +104,7 @@ export default function AboutPage() {
       yearsExperience: '6+ years',
       bio: 'Technology practice leader specializing in enterprise software implementation and digital strategy for African businesses.',
       detailedBio: 'Fatima is a technology visionary who has been at the forefront of digital transformation in Africa. Her expertise in enterprise architecture and cloud computing has enabled numerous businesses to modernize their operations and gain competitive advantages. She has successfully implemented complex technology solutions for financial institutions, manufacturing companies, and government agencies. Fatima is passionate about leveraging technology to solve real business challenges and drive innovation.',
-      briefExpertise: ['Enterprise Architecture', 'Cloud Computing', 'Digital Transformation'],
-      fullExpertise: ['Enterprise Architecture', 'Cloud Computing', 'Cybersecurity', 'Digital Transformation', 'AI/ML Integration', 'Data Analytics', 'Software Development', 'IT Strategy'],
+      expertise: ['Enterprise Architecture', 'Cloud Computing', 'Cybersecurity', 'Digital Transformation', 'AI/ML Integration', 'Data Analytics', 'Software Development', 'IT Strategy'],
       email: 'fatima.alhassan@pathmarkadvisory.com',
       linkedin: 'https://www.linkedin.com/company/pathmark-advisory-co-ltd/'
     },
@@ -121,8 +116,7 @@ export default function AboutPage() {
       yearsExperience: '7+ years',
       bio: 'Investment banking and corporate finance expert with experience closing deals worth over $500M across West Africa.',
       detailedBio: 'Olumide is a financial expert with a proven track record in investment banking and corporate finance. His deep understanding of capital markets and financial modeling has enabled him to structure complex deals and raise significant capital for businesses across West Africa. He has advised on major mergers and acquisitions, helping companies achieve their strategic objectives. Olumide\'s expertise in financial advisory has made him a trusted partner for both local and international investors.',
-      briefExpertise: ['Investment Banking', 'M&A', 'Corporate Finance'],
-      fullExpertise: ['Investment Banking', 'M&A', 'Capital Markets', 'Corporate Finance', 'Financial Modeling', 'Due Diligence', 'Valuation', 'Deal Structuring'],
+      expertise: ['Investment Banking', 'M&A', 'Capital Markets', 'Corporate Finance', 'Financial Modeling', 'Due Diligence', 'Valuation', 'Deal Structuring'],
       email: 'olumide.adebayo@pathmarkadvisory.com',
       linkedin: 'https://www.linkedin.com/company/pathmark-advisory-co-ltd/'
     }
@@ -402,7 +396,7 @@ export default function AboutPage() {
                      </div>
 
                      <div className="flex flex-wrap gap-2 mb-4">
-                       {leader.briefExpertise.map((skill) => (
+                        {leader.expertise.map((skill) => (
                          <span key={skill} className="bg-primary-100 text-primary px-3 py-1 rounded-full text-sm">
                            {skill}
                          </span>
@@ -425,22 +419,30 @@ export default function AboutPage() {
                 <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setOpenLeaderId(null)} />
                 <div className="relative mx-auto my-8 w-full max-w-3xl px-4">
                   <div className="bg-white rounded-2xl shadow-2xl overflow-hidden max-h-[85vh]">
-                    <div className="relative w-full h-64 md:h-80">
-                      <Image src={leader.image} alt={leader.name} fill className="object-cover" sizes="100vw" />
+                    {/* Header with close button */}
+                    <div className="relative p-6 pb-4">
                       <button
                         onClick={() => setOpenLeaderId(null)}
-                        className="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/90 hover:bg-white flex items-center justify-center shadow"
+                        className="absolute top-6 right-6 w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center shadow"
                         aria-label="Close"
                       >
                         <X size={18} />
                       </button>
-                    </div>
-                    <div className="p-6 md:p-8 overflow-y-auto max-h-[calc(85vh-16rem)]">
-                      <div className="mb-4">
-                        <h3 className="text-2xl font-bold text-primary">{leader.name}</h3>
-                        <p className="text-accent font-semibold">{leader.title}</p>
-                        <p className="text-sm text-gray-500">{leader.yearsExperience} experience</p>
+                      
+                      {/* Header content with image */}
+                      <div className="flex items-start gap-6">
+                        <div className="relative w-24 h-24 md:w-32 md:h-32 flex-shrink-0">
+                          <Image src={leader.image} alt={leader.name} fill className="object-cover rounded-lg" sizes="128px" />
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-2xl font-bold text-primary mb-2">{leader.name}</h3>
+                          <p className="text-accent font-semibold mb-1">{leader.title}</p>
+                          <p className="text-sm text-gray-500">{leader.yearsExperience} experience</p>
+                        </div>
                       </div>
+                    </div>
+                    
+                    <div className="px-6 pb-6 md:px-8 md:pb-8 overflow-y-auto max-h-[calc(85vh-12rem)]">
                       <div className="mb-6">
                         <h4 className="font-semibold text-gray-900 mb-3">Connect</h4>
                         <div className="flex items-center gap-3">
@@ -463,28 +465,18 @@ export default function AboutPage() {
                         <p className="text-gray-700 italic">“{leader.quote}”</p>
                       </div>
                       <div className="mb-6">
-                        <h4 className="font-semibold text-gray-900 mb-3">Core Expertise</h4>
+                        <h4 className="font-semibold text-gray-900 mb-3">Expertise</h4>
                         <div className="flex flex-wrap gap-2">
-                          {leader.briefExpertise.map((skill) => (
+                          {leader.expertise.map((skill) => (
                             <span key={skill} className="bg-primary-100 text-primary px-2 py-1 rounded text-xs">
                               {skill}
                             </span>
                           ))}
                         </div>
                       </div>
-                      <div className="mb-6">
+                      <div className="mb-8">
                         <h4 className="font-semibold text-gray-900 mb-3">Detailed Background</h4>
                         <p className="text-gray-700 leading-relaxed">{leader.detailedBio}</p>
-                      </div>
-                      <div className="mb-6">
-                        <h4 className="font-semibold text-gray-900 mb-3">Full Expertise</h4>
-                        <div className="flex flex-wrap gap-2">
-                          {leader.fullExpertise.map((skill) => (
-                            <span key={skill} className="bg-primary-100 text-primary px-2 py-1 rounded text-xs">
-                              {skill}
-                            </span>
-                          ))}
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -544,7 +536,7 @@ export default function AboutPage() {
                      </p>
                      
                      <div className="flex flex-wrap gap-1 mb-4">
-                       {member.briefExpertise.map((skill) => (
+                        {member.expertise.map((skill) => (
                          <span key={skill} className="bg-primary-100 text-primary px-2 py-1 rounded text-xs">
                            {skill}
                          </span>
@@ -599,19 +591,9 @@ export default function AboutPage() {
                         <p className="text-gray-700 leading-relaxed">{member.detailedBio}</p>
                       </div>
                       <div className="mb-6">
-                        <h4 className="font-semibold text-gray-900 mb-3">Core Expertise</h4>
+                        <h4 className="font-semibold text-gray-900 mb-3">Expertise</h4>
                         <div className="flex flex-wrap gap-2">
-                          {member.briefExpertise.map((skill) => (
-                            <span key={skill} className="bg-primary-100 text-primary px-2 py-1 rounded text-xs">
-                              {skill}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                      <div className="mb-6">
-                        <h4 className="font-semibold text-gray-900 mb-3">Full Expertise</h4>
-                        <div className="flex flex-wrap gap-2">
-                          {member.fullExpertise.map((skill) => (
+                          {member.expertise.map((skill) => (
                             <span key={skill} className="bg-primary-100 text-primary px-2 py-1 rounded text-xs">
                               {skill}
                             </span>
