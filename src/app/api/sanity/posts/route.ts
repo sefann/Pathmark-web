@@ -1,20 +1,9 @@
 import { NextResponse } from 'next/server';
-import { client } from '@/lib/sanity';
+import { client, insightsQuery } from '@/lib/sanity';
 
 export async function GET() {
   try {
-    const query = `*[_type == "post" && publishedAt <= now()] | order(publishedAt desc) {
-      _id,
-      title,
-      slug,
-      publishedAt,
-      "image": mainImage,
-      body,
-      "author": author->name,
-      "categories": categories[]->title
-    }`;
-    
-    const posts = await client.fetch(query);
+    const posts = await client.fetch(insightsQuery);
     
     return NextResponse.json({
       success: true,

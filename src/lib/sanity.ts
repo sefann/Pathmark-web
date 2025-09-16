@@ -3,7 +3,7 @@ import imageUrlBuilder from '@sanity/image-url';
 import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
 
 export const client = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'your-project-id',
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'ch79hnv9',
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
   apiVersion: '2024-01-01', // Use today's date or your preferred version
   useCdn: process.env.NODE_ENV === 'production', // `false` if you want to ensure fresh data
@@ -19,35 +19,30 @@ export function urlFor(source: SanityImageSource) {
 
 // GROQ queries
 export const insightsQuery = `
-  *[_type == "insight" && status == "published" && publishedAt <= now() && (scheduledFor == null || scheduledFor <= now())] | order(publishedAt desc) {
+  *[_type == "post" && publishedAt <= now()] | order(publishedAt desc) {
     _id,
     title,
     slug,
-    excerpt,
     publishedAt,
+    // Try both coverImage and mainImage fields
     coverImage,
-    featured,
-    "author": author->{
-      name,
-      image,
-      role
-    },
-    "categories": categories[]->{
-      title,
-      slug,
-      color
-    },
-    tags
+    mainImage,
+    // Optional for lists
+    body,
+    // Flatten author and categories for the current UI
+    "author": author->name,
+    "categories": categories[]->title
   }
 `;
 
 export const insightBySlugQuery = `
-  *[_type == "insight" && slug.current == $slug && status == "published" && publishedAt <= now() && (scheduledFor == null || scheduledFor <= now())][0] {
+  *[_type == "post" && slug.current == $slug && publishedAt <= now()][0] {
     _id,
     title,
     slug,
     excerpt,
     publishedAt,
+    // Keep full image for detail view
     coverImage,
     featured,
     body,
@@ -67,7 +62,7 @@ export const insightBySlugQuery = `
 `;
 
 export const featuredInsightsQuery = `
-  *[_type == "insight" && featured == true && status == "published" && publishedAt <= now() && (scheduledFor == null || scheduledFor <= now())] | order(publishedAt desc)[0...3] {
+  *[_type == "post" && featured == true && publishedAt <= now()] | order(publishedAt desc)[0...3] {
     _id,
     title,
     slug,
@@ -86,7 +81,7 @@ export const featuredInsightsQuery = `
 `;
 
 export const insightsByCategoryQuery = `
-  *[_type == "insight" && status == "published" && publishedAt <= now() && (scheduledFor == null || scheduledFor <= now()) && $category in categories[]->slug.current] | order(publishedAt desc) {
+  *[_type == "post" && publishedAt <= now() && $category in categories[]->slug.current] | order(publishedAt desc) {
     _id,
     title,
     slug,

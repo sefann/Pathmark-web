@@ -12,12 +12,22 @@ interface SanityPost {
   title: string;
   slug: { current: string };
   publishedAt: string;
-  image: {
+  image?: {
     asset: {
       _ref: string;
     };
   } | null;
-  body: unknown[];
+  coverImage?: {
+    asset: {
+      _ref: string;
+    };
+  } | null;
+  mainImage?: {
+    asset: {
+      _ref: string;
+    };
+  } | null;
+  body?: unknown[];
   author?: string;
   categories?: string[];
 }
@@ -67,13 +77,14 @@ function HeroArticle({ post, type }: { post: SanityPost | RSSArticle, type: 'san
 
   if (type === 'sanity') {
     const sanityPost = post as SanityPost;
+    const imageAsset = sanityPost.image || sanityPost.coverImage || sanityPost.mainImage;
   return (
       <article className="relative overflow-hidden rounded-2xl shadow-2xl">
         {/* Hero Image */}
         <div className="aspect-[16/9] bg-gradient-to-br from-gray-100 to-gray-200">
-          {sanityPost.image && sanityPost.image.asset ? (
+          {imageAsset && imageAsset.asset ? (
             <img
-              src={urlFor(sanityPost.image).width(800).height(450).url()}
+              src={urlFor(imageAsset).width(800).height(450).url()}
               alt={sanityPost.title}
             className="w-full h-full object-cover"
           />
@@ -220,13 +231,14 @@ function SidebarArticle({ post, type }: { post: SanityPost | RSSArticle, type: '
 
   if (type === 'sanity') {
     const sanityPost = post as SanityPost;
+    const imageAsset = sanityPost.image || sanityPost.coverImage || sanityPost.mainImage;
     return (
       <article className="flex space-x-4 p-4 hover:bg-gray-50 rounded-lg transition-colors">
         {/* Thumbnail */}
         <div className="flex-shrink-0 w-20 h-20 bg-gray-200 rounded-lg overflow-hidden">
-          {sanityPost.image && sanityPost.image.asset ? (
+          {imageAsset && imageAsset.asset ? (
             <img
-              src={urlFor(sanityPost.image).width(80).height(80).url()}
+              src={urlFor(imageAsset).width(80).height(80).url()}
               alt={sanityPost.title}
               className="w-full h-full object-cover"
             />
@@ -240,7 +252,7 @@ function SidebarArticle({ post, type }: { post: SanityPost | RSSArticle, type: '
         {/* Content */}
         <div className="flex-1 min-w-0">
           <div className="inline-block bg-primary/10 text-primary text-xs font-semibold px-2 py-1 rounded-full mb-2">
-            Pathmark
+            {sanityPost.categories && sanityPost.categories.length > 0 ? sanityPost.categories[0] : 'Pathmark'}
           </div>
           <h3 className="font-semibold text-gray-900 mb-1 line-clamp-2 text-sm">
             {sanityPost.title}
@@ -314,13 +326,14 @@ function ArticleCard({ post, type }: { post: SanityPost | RSSArticle, type: 'san
 
   if (type === 'sanity') {
     const sanityPost = post as SanityPost;
+    const imageAsset = sanityPost.image || sanityPost.coverImage || sanityPost.mainImage;
     return (
       <article className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
         {/* Image */}
         <div className="aspect-[4/3] bg-gray-200 overflow-hidden">
-          {sanityPost.image && sanityPost.image.asset ? (
+          {imageAsset && imageAsset.asset ? (
             <img
-              src={urlFor(sanityPost.image).width(400).height(300).url()}
+              src={urlFor(imageAsset).width(400).height(300).url()}
               alt={sanityPost.title}
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
             />
@@ -334,7 +347,7 @@ function ArticleCard({ post, type }: { post: SanityPost | RSSArticle, type: 'san
       {/* Content */}
       <div className="p-6">
           <div className="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3">
-            {sanityPost.categories && sanityPost.categories.length > 0 ? sanityPost.categories[0] : 'Pathmark Insights'}
+            {sanityPost.categories && sanityPost.categories.length > 0 ? sanityPost.categories[0] : 'Pathmark'}
           </div>
           
         <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
@@ -539,8 +552,8 @@ export default function InsightsPage() {
   const sidebarSanityPosts = filteredSanityPosts.slice(1, 4);
   const sidebarRssArticles = filteredRssArticles.slice(1, 50); // Load more articles for scrolling
   const remainingSanityPosts = filteredSanityPosts.slice(4, 10);
-  const initialRssArticles = filteredRssArticles.slice(20, 26); // Show only 6 cards initially
-  const remainingRssArticles = showMoreRss ? filteredRssArticles.slice(20, 50) : initialRssArticles;
+  const initialRssArticles = filteredRssArticles.slice(6, 12); // Show 6 cards initially (after hero + sidebar)
+  const remainingRssArticles = showMoreRss ? filteredRssArticles.slice(6, 50) : initialRssArticles;
 
   return (
     <div className="pt-16 min-h-screen bg-gray-50">
@@ -765,7 +778,7 @@ export default function InsightsPage() {
                            <ArticleCard key={article.id} post={article} type="rss" />
                          ))}
                        </div>
-                       {filteredRssArticles.length > 26 && (
+                       {filteredRssArticles.length > 12 && (
                          <div className="text-center mt-8">
                            {!showMoreRss ? (
                              <button
