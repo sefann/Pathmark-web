@@ -104,8 +104,8 @@ export default function ContactPage() {
     {
       icon: Phone,
       title: 'Phone Number',
-      details: ['+234000000000'],
-      link: 'tel:+234000000000'
+      details: ['+2347079993916'],
+      link: 'tel:+2347079993916'
     },
     {
       icon: Mail,
@@ -371,8 +371,8 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <p className="font-medium text-gray-900">Call Us</p>
-                      <a href="tel:+234000000000" className="text-primary hover:text-accent transition-colors">
-                        +234000000000
+                      <a href="tel:+2347079993916" className="text-primary hover:text-accent transition-colors">
+                        +2347079993916
                       </a>
                     </div>
                   </div>
@@ -383,7 +383,7 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <p className="font-medium text-gray-900">WhatsApp</p>
-                      <a href="https://wa.me/234000000000" className="text-primary hover:text-accent transition-colors">
+                      <a href="https://wa.me/2347079993916" className="text-primary hover:text-accent transition-colors">
                         Chat with us
                       </a>
                     </div>

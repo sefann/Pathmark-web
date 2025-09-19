@@ -413,23 +413,23 @@ export default function IndustriesPage() {
       </section>
 
       {/* Industry Selector */}
-      <section className="py-8 bg-gray-50 sticky top-16 z-40">
+      <section className="py-4 bg-gray-50 sticky top-16 z-40">
         <div className="container-custom">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2">
             {industries.map((industry) => {
               const Icon = industry.icon;
               return (
                 <button
                   key={industry.id}
                   onClick={() => setSelectedIndustry(industry.id)}
-                  className={`p-4 rounded-xl text-center transition-all duration-300 ${
+                  className={`p-2 rounded-lg text-center transition-all duration-300 ${
                     selectedIndustry === industry.id
                       ? 'bg-primary text-white shadow-lg scale-105'
                       : 'bg-white text-gray-600 hover:bg-primary-50 hover:text-primary hover:shadow-md'
                   }`}
                 >
-                  <Icon size={32} className="mx-auto mb-2" />
-                  <h3 className="font-semibold text-sm">{industry.title}</h3>
+                  <Icon size={20} className="mx-auto mb-1" />
+                  <h3 className="font-semibold text-xs leading-tight">{industry.title}</h3>
                 </button>
               );
             })}

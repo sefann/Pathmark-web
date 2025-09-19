@@ -148,15 +148,6 @@ export default function MiningPage() {
             animate={heroInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
           >
-            <div className="mb-6">
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="w-24 h-24 bg-gradient-to-r from-accent to-primary rounded-full flex items-center justify-center mx-auto mb-6"
-              >
-                <Mountain size={48} className="text-white" />
-              </motion.div>
-            </div>
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6">
               Mining
               <span className="block text-accent">Excellence</span>

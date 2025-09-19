@@ -238,7 +238,7 @@ export default function PrivacyPolicyPage() {
                     </div>
                     <div className="flex items-center space-x-3">
                       <Phone size={18} className="text-accent-200" />
-                      <span>+234000000000</span>
+                      <span>+2347079993916</span>
                     </div>
                   </div>
                 </div>

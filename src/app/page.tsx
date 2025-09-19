@@ -113,6 +113,8 @@ export default function HomePage() {
   const trustedPartners = [
     { name: 'Dangote Group', logo: '/logos/dangote.svg' },
     { name: 'First Bank', logo: '/logos/firstbank.svg' },
+    { name: 'Intavalto', logo: '/logos/intavalto.svg' },
+    { name: 'Intavalto Luxe', logo: '/logos/intavaltoluxe.svg' },
     { name: 'Mama Mia', logo: '/logos/mamamia.svg' },
     { name: 'New Age', logo: '/logos/newage.svg' },
     { name: 'VG Energy', logo: '/logos/vgenergy.svg' }
@@ -659,12 +661,16 @@ export default function HomePage() {
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={partnersInView ? { opacity: 1, scale: 1 } : {}}
                   transition={{ duration: 0.8, delay: index * 0.1 }}
-                  className="flex-shrink-0"
+                  className="flex-shrink-0 w-72 h-48 flex items-center justify-center"
                 >
                      <img
                        src={partner.logo}
                        alt={partner.name}
-                       className="w-72 h-48 object-contain grayscale hover:grayscale-0 transition-all duration-300 hover:scale-105"
+                       className="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all duration-300 hover:scale-105"
+                       onError={(e) => {
+                         console.error(`Failed to load logo: ${partner.logo}`);
+                         e.currentTarget.style.display = 'none';
+                       }}
                      />
                 </motion.div>
               ))}
