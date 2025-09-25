@@ -80,6 +80,15 @@ export default function HomePage() {
     }
   ];
 
+  // Added Warehousing & Logistics service to home grid
+  services.push({
+    icon: Building,
+    title: 'Warehousing & Logistics',
+    description: 'Storage, distribution, trucking, and heavy equipment moving solutions',
+    href: '/services/warehousing-logistics',
+    color: 'from-amber-500 to-rose-500'
+  });
+
   const whyChooseUs = [
     {
       icon: Target,
@@ -465,7 +474,7 @@ export default function HomePage() {
       />
 
       {/* Why Choose Us Section */}
-      <section ref={whyRef} className="section-padding">
+      <section ref={whyRef} className="section-padding bg-white text-black">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -473,10 +482,10 @@ export default function HomePage() {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl lg:text-5xl font-bold text-primary mb-6">
+            <h2 className="text-4xl lg:text-5xl font-bold text-black mb-6">
               Why Choose Pathmark Advisory?
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-black max-w-3xl mx-auto">
               We combine local expertise with international best practices to deliver 
               exceptional results for our clients across Nigeria and beyond.
             </p>
@@ -496,10 +505,10 @@ export default function HomePage() {
                   <div className="w-20 h-20 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center mx-auto mb-6">
                     <Icon size={40} className="text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-primary mb-4">
+                  <h3 className="text-xl font-bold text-black mb-4">
                     {item.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-black leading-relaxed">
                     {item.description}
                   </p>
                 </motion.div>

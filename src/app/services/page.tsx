@@ -56,6 +56,14 @@ export default function ServicesPage() {
     }
   ];
 
+  // Added Warehousing & Logistics service to services listing
+  services.push({
+    id: 'warehousing-logistics',
+    title: 'Warehousing & Logistics',
+    description: 'Storage, distribution, trucking, and heavy equipment moving solutions.',
+    href: '/services/warehousing-logistics'
+  });
+
   const stats = [
     { number: '100+', label: 'Projects Completed', icon: Target },
     { number: '50+', label: 'Happy Clients', icon: Users },

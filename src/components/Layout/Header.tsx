@@ -41,7 +41,8 @@ const Header = () => {
         { name: 'Technology', href: '/services/technology' },
         { name: 'Finance', href: '/services/finance' },
         { name: 'Government Relations', href: '/services/government' },
-        { name: 'Consulting', href: '/services/consulting' }
+        { name: 'Consulting', href: '/services/consulting' },
+        { name: 'Warehousing & Logistics', href: '/services/warehousing-logistics' }
       ]
     },
     { 
