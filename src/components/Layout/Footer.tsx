@@ -112,22 +112,6 @@ const Footer = () => {
                   </Link>
                 </li>
               ))}
-              <li>
-                <Link 
-                  href="/services#consulting"
-                  className="text-gray-300 hover:text-accent transition-colors duration-300"
-                >
-                  General Consulting
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href="/services#lobbying"
-                  className="text-gray-300 hover:text-accent transition-colors duration-300"
-                >
-                  Government Relations
-                </Link>
-              </li>
             </ul>
           </div>
 

@@ -51,6 +51,65 @@ interface InsightsResponse {
   category: string;
 }
 
+// Colorful news icon component for fallbacks
+function NewsIcon({ className, iconSize = "w-12 h-12", textSize = "text-sm" }: { 
+  className: string, 
+  iconSize?: string,
+  textSize?: string 
+}) {
+  return (
+    <div className={`flex items-center justify-center bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 ${className}`}>
+      <div className="text-center">
+        <div className="bg-white/20 backdrop-blur-sm rounded-full p-4 mb-3">
+          <svg className={`${iconSize} text-white mx-auto`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+          </svg>
+        </div>
+        <span className={`text-white ${textSize} font-bold tracking-wide`}>NEWS</span>
+      </div>
+    </div>
+  );
+}
+
+// Image component with fallback to news icon
+function ImageWithFallback({ src, alt, className, iconSize, textSize }: { 
+  src?: string, 
+  alt: string, 
+  className: string,
+  iconSize?: string,
+  textSize?: string
+}) {
+  const [imgSrc, setImgSrc] = useState<string | undefined>(src);
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    setImgSrc(src);
+    setHasError(false);
+  }, [src]);
+
+  const handleError = () => {
+    if (!hasError) {
+      setHasError(true);
+      setImgSrc(undefined);
+    }
+  };
+
+  // If no src or error occurred, show news icon
+  if (!imgSrc || hasError) {
+    return <NewsIcon className={className} iconSize={iconSize} textSize={textSize} />;
+  }
+
+  // Show actual image
+  return (
+    <img
+      src={imgSrc}
+      alt={alt}
+      className={className}
+      onError={handleError}
+    />
+  );
+}
+
 // Components
 function HeroArticle({ post, type }: { post: SanityPost | RSSArticle, type: 'sanity' | 'rss' }) {
   const formatDate = (dateString: string) => {
@@ -140,17 +199,13 @@ function HeroArticle({ post, type }: { post: SanityPost | RSSArticle, type: 'san
       <article className="relative overflow-hidden rounded-2xl shadow-2xl">
         {/* Hero Image */}
         <div className="aspect-[16/9] bg-gradient-to-br from-gray-100 to-gray-200">
-          {rssArticle.image ? (
-            <img
-              src={rssArticle.image}
-              alt={rssArticle.title}
-              className="w-full h-full object-cover"
-            />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center">
-              <div className="text-gray-400 text-6xl">📰</div>
-            </div>
-          )}
+          <ImageWithFallback
+            src={rssArticle.image}
+            alt={rssArticle.title}
+            className="w-full h-full object-cover"
+            iconSize="w-16 h-16"
+            textSize="text-base"
+          />
         </div>
         
         {/* Overlay Content */}
@@ -270,17 +325,13 @@ function SidebarArticle({ post, type }: { post: SanityPost | RSSArticle, type: '
       <article className="flex space-x-4 p-4 hover:bg-gray-50 rounded-lg transition-colors">
         {/* Thumbnail */}
         <div className="flex-shrink-0 w-20 h-20 bg-gray-200 rounded-lg overflow-hidden">
-          {rssArticle.image ? (
-            <img
-              src={rssArticle.image}
-              alt={rssArticle.title}
-              className="w-full h-full object-cover"
-            />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center">
-              <div className="text-gray-400 text-lg">📰</div>
-            </div>
-          )}
+          <ImageWithFallback
+            src={rssArticle.image}
+            alt={rssArticle.title}
+            className="w-full h-full object-cover"
+            iconSize="w-6 h-6"
+            textSize="text-xs"
+          />
         </div>
         
         {/* Content */}
@@ -377,17 +428,13 @@ function ArticleCard({ post, type }: { post: SanityPost | RSSArticle, type: 'san
        <article className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
          {/* Image */}
          <div className="aspect-[3/2] bg-gray-200 overflow-hidden">
-           {rssArticle.image ? (
-             <img
-               src={rssArticle.image}
-               alt={rssArticle.title}
-               className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-             />
-           ) : (
-             <div className="w-full h-full flex items-center justify-center">
-               <div className="text-gray-400 text-2xl">📰</div>
-             </div>
-           )}
+           <ImageWithFallback
+             src={rssArticle.image}
+             alt={rssArticle.title}
+             className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+             iconSize="w-12 h-12"
+             textSize="text-sm"
+           />
          </div>
          
          {/* Content */}
@@ -509,18 +556,61 @@ export default function InsightsPage() {
     return inappropriateKeywords.some(keyword => lowerText.includes(keyword));
   };
 
-  const filteredRssArticles = rssArticles.filter(article => {
-    const matchesCategory = selectedCategory === 'All' || article.category === selectedCategory;
-    const matchesSearch = article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         article.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         article.source.toLowerCase().includes(searchQuery.toLowerCase());
+  // Function to check if image should be blocked (unwanted placeholder images)
+  const shouldBlockImage = (imageUrl: string) => {
+    if (!imageUrl) return false;
     
-    // Filter out articles with inappropriate content
-    const hasInappropriateContent = containsInappropriateContent(article.title) || 
-                                   containsInappropriateContent(article.description);
+    const lowerUrl = imageUrl.toLowerCase();
     
-    return matchesCategory && matchesSearch && !hasInappropriateContent;
-  });
+    // Block common unwanted image patterns
+    const blockedPatterns = [
+      'placeholder',
+      'default',
+      'no-image',
+      'missing',
+      'broken',
+      'error',
+      // Block specific unwanted image URLs that contain the man's photo
+      'headshot',
+      'profile',
+      'author',
+      'reporter',
+      'journalist',
+      'staff',
+      // Block common image hosting services that often have placeholder images
+      'via.placeholder.com',
+      'picsum.photos',
+      'lorempixel.com'
+    ];
+    
+    return blockedPatterns.some(pattern => lowerUrl.includes(pattern));
+  };
+
+  // Function to clean article data and block unwanted images
+  const cleanArticleData = (articles: RSSArticle[]) => {
+    return articles.map(article => ({
+      ...article,
+      // Temporarily block ALL RSS images to force news icons
+      // Change this back to: shouldBlockImage(article.image || '') ? undefined : article.image
+      // when you want to allow real images again
+      image: undefined
+    }));
+  };
+
+  const filteredRssArticles = cleanArticleData(
+    rssArticles.filter(article => {
+      const matchesCategory = selectedCategory === 'All' || article.category === selectedCategory;
+      const matchesSearch = article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                           article.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                           article.source.toLowerCase().includes(searchQuery.toLowerCase());
+      
+      // Filter out articles with inappropriate content
+      const hasInappropriateContent = containsInappropriateContent(article.title) || 
+                                     containsInappropriateContent(article.description);
+      
+      return matchesCategory && matchesSearch && !hasInappropriateContent;
+    })
+  );
 
   const filteredSanityPosts = sanityPosts.filter(post => {
     return post.title.toLowerCase().includes(searchQuery.toLowerCase());
@@ -571,7 +661,7 @@ export default function InsightsPage() {
         </video>
         
         {/* Overlay */}
-        <div className="absolute inset-0 bg-black/40"></div>
+        <div className="absolute inset-0 bg-blue-900/60"></div>
         
         {/* Content */}
         <div className="relative z-10 flex items-center justify-center h-full">

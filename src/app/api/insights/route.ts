@@ -137,11 +137,17 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     let allArticles: Article[] = [];
     let cacheHit = false;
     
-    // For now, use fallback and manual articles to ensure the insights page works
-    // TODO: Re-enable RSS feeds when network issues are resolved
-    console.log('Using fallback and manual articles for insights');
-    allArticles = [...fallbackArticles, ...manualArticles];
-    cacheHit = true;
+    // Try to fetch real RSS feeds first
+    try {
+      console.log('Fetching real RSS feeds...');
+      allArticles = await fetchAllFeeds();
+      console.log(`Successfully fetched ${allArticles.length} articles from RSS feeds`);
+    } catch (error) {
+      console.error('RSS fetch failed, using fallback articles:', error);
+      // Fallback to manual articles if RSS fails
+      allArticles = [...fallbackArticles, ...manualArticles];
+      cacheHit = true;
+    }
     
     // Filter articles by category if specified
     const filteredArticles = category && category !== 'All' 
