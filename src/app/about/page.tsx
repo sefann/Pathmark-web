@@ -54,7 +54,7 @@ export default function AboutPage() {
       expertise: ['Government Relations', 'Corporate Structuring', 'Business Development', 'Strategic Planning', 'Policy Advisory', 'Investment Strategy', 'Leadership Development', 'Cross-Sector Advisory'],
       quote: 'Success is not defined by the projects we complete, but by the bridges we build, connecting strategy to impact and creating value that endures.',
       email: 'aisha@pathmarkadvisory.com',
-      linkedin: 'https://www.linkedin.com/company/pathmark-advisory-co-ltd/'
+      linkedin: 'https://www.linkedin.com/in/aisha-abdullahi-adamu-253906299/'
     },
     {
       id: 'leadership-2',
