@@ -1,8 +1,6 @@
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Sanity Studio | Pathmark Advisory',
-  description: 'Content management for Pathmark Advisory',
+export const metadata = {
+  title: 'Pathmark Advisory CMS',
+  description: 'Content Management System for Pathmark Advisory',
 }
 
 export default function StudioLayout({
@@ -10,5 +8,6 @@ export default function StudioLayout({
 }: {
   children: React.ReactNode
 }) {
-  return <>{children}</>
+  return children
 }
+
