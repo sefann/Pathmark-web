@@ -6,6 +6,7 @@ import CookieConsent from "@/components/CookieConsent";
 import GoogleAnalytics from "@/components/Analytics/GoogleAnalytics";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://pathmarkadvisory.com'),
   title: "Pathmark Advisory Co. Ltd - The Path to Bringing Your Vision to Life",
   description: "Professional consulting and project execution services across Energy, Construction, Technology, Finance, and Government Relations. Based in Abuja, Nigeria.",
   keywords: "consulting, project execution, energy, construction, technology, finance, Nigeria, Abuja",

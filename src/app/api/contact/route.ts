@@ -44,8 +44,8 @@ export async function POST(request: NextRequest) {
 
     // Send email using Resend
     const { data, error } = await resend.emails.send({
-      from: 'Pathmark Advisory <noreply@pathmarkadvisory.com>',
-      to: ['contact@pathmarkadvisory.com'],
+      from: process.env.CONTACT_EMAIL_FROM || 'Pathmark Advisory <noreply@pathmarkadvisory.com>',
+      to: [process.env.CONTACT_EMAIL_TO || 'contact@pathmarkadvisory.com'],
       subject: `New Contact Form Submission: ${subject}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
