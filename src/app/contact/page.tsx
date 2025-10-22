@@ -53,13 +53,32 @@ export default function ContactPage() {
     setIsSubmitting(true);
     
     try {
-      const response = await fetch('/api/contact', {
+      // Get Formspree endpoint from environment variable
+      const formspreeEndpoint = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT;
+      
+      // Check if endpoint is configured
+      if (!formspreeEndpoint || formspreeEndpoint === 'https://formspree.io/f/YOUR_FORM_ID') {
+        console.error('Formspree endpoint not configured!');
+        console.log('Please set NEXT_PUBLIC_FORMSPREE_ENDPOINT in .env.local');
+        setSubmitStatus('error');
+        setIsSubmitting(false);
+        return;
+      }
+      
+      console.log('Submitting to Formspree:', formspreeEndpoint);
+      console.log('Form data:', formData);
+      
+      const response = await fetch(formspreeEndpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
         body: JSON.stringify(formData),
       });
+
+      console.log('Response status:', response.status);
+      console.log('Response ok:', response.ok);
 
       if (response.ok) {
         setSubmitStatus('success');
@@ -76,8 +95,14 @@ export default function ContactPage() {
           message: ''
         });
       } else {
-        const errorData = await response.json();
+        let errorData;
+        try {
+          errorData = await response.json();
+        } catch (e) {
+          errorData = { error: 'Failed to parse error response', status: response.status };
+        }
         console.error('Form submission error:', errorData);
+        console.error('Response status:', response.status);
         setSubmitStatus('error');
         
         // Track form error
@@ -85,6 +110,7 @@ export default function ContactPage() {
       }
     } catch (error) {
       console.error('Form submission error:', error);
+      console.error('Error details:', error instanceof Error ? error.message : 'Unknown error');
       setSubmitStatus('error');
       
       // Track form error

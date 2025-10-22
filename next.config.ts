@@ -1,9 +1,12 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  // Performance optimizations
-  experimental: {
-    optimizePackageImports: ['lucide-react', 'framer-motion'],
+  // Static export configuration for Hostinger
+  output: 'export',
+  
+  // Disable image optimization for static export
+  images: {
+    unoptimized: true,
   },
   
   // Disable TypeScript checking during build to avoid deployment issues
@@ -16,66 +19,13 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   
-  // Image optimization (simplified since we're using regular img tags)
-  images: {
-    domains: ['images.unsplash.com'], // Only for fallback images if needed
+  // Trailing slash for better compatibility with static hosting
+  trailingSlash: true,
+  
+  // Performance optimizations
+  experimental: {
+    optimizePackageImports: ['lucide-react', 'framer-motion'],
   },
-  
-  // Compression
-  compress: true,
-  
-  // Headers for caching
-  async headers() {
-    return [
-      {
-        source: '/api/insights/:path*',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400',
-          },
-        ],
-      },
-      {
-        source: '/insights',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400',
-          },
-        ],
-      },
-      {
-        source: '/(.*)',
-        headers: [
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
-          },
-          {
-            key: 'X-Frame-Options',
-            value: 'DENY',
-          },
-          {
-            key: 'X-XSS-Protection',
-            value: '1; mode=block',
-          },
-        ],
-      },
-    ];
-  },
-  
-  // Bundle analyzer (optional)
-  ...(process.env.ANALYZE === 'true' && {
-    webpack: (config) => {
-      config.plugins.push(
-        new (require('@next/bundle-analyzer')({
-          enabled: true,
-        }))()
-      );
-      return config;
-    },
-  }),
 };
 
 export default nextConfig;

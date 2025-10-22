@@ -172,3 +172,7 @@ DEPLOYMENT_CREDENTIALS.md
 next-env.d.ts
 
 .vercel
+
+# Large build files
+next-build.zip
+*.zip

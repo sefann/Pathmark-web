@@ -4,32 +4,12 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, User, ArrowRight, Filter, Search, Globe, FileText } from 'lucide-react';
 import Link from 'next/link';
-import { urlFor } from '../../sanity/lib/image';
+import { fetchPostsClient, SimplifiedPost } from '@/lib/wordpress';
+import { fallbackBlogPosts } from '@/data/fallback-blog-posts';
 
-// Types
-interface SanityPost {
-  _id: string;
-  title: string;
-  slug: { current: string };
-  publishedAt: string;
-  image?: {
-    asset: {
-      _ref: string;
-    };
-  } | null;
-  coverImage?: {
-    asset: {
-      _ref: string;
-    };
-  } | null;
-  mainImage?: {
-    asset: {
-      _ref: string;
-    };
-  } | null;
-  body?: unknown[];
-  author?: string;
-  categories?: string[];
+// Types - Renamed to match WordPress structure
+interface SanityPost extends SimplifiedPost {
+  // Keep interface for backward compatibility
 }
 
 interface RSSArticle {
@@ -136,15 +116,14 @@ function HeroArticle({ post, type }: { post: SanityPost | RSSArticle, type: 'san
 
   if (type === 'sanity') {
     const sanityPost = post as SanityPost;
-    const imageAsset = sanityPost.image || sanityPost.coverImage || sanityPost.mainImage;
   return (
       <article className="relative overflow-hidden rounded-2xl shadow-2xl">
         {/* Hero Image */}
         <div className="aspect-[16/9] bg-gradient-to-br from-gray-100 to-gray-200">
-          {imageAsset && imageAsset.asset ? (
+          {sanityPost.image ? (
             <img
-              src={urlFor(imageAsset).width(800).height(450).url()}
-              alt={sanityPost.title}
+              src={sanityPost.image.url}
+              alt={sanityPost.image.alt || sanityPost.title}
             className="w-full h-full object-cover"
           />
         ) : (
@@ -286,15 +265,14 @@ function SidebarArticle({ post, type }: { post: SanityPost | RSSArticle, type: '
 
   if (type === 'sanity') {
     const sanityPost = post as SanityPost;
-    const imageAsset = sanityPost.image || sanityPost.coverImage || sanityPost.mainImage;
     return (
       <article className="flex space-x-4 p-4 hover:bg-gray-50 rounded-lg transition-colors">
         {/* Thumbnail */}
         <div className="flex-shrink-0 w-20 h-20 bg-gray-200 rounded-lg overflow-hidden">
-          {imageAsset && imageAsset.asset ? (
+          {sanityPost.image ? (
             <img
-              src={urlFor(imageAsset).width(80).height(80).url()}
-              alt={sanityPost.title}
+              src={sanityPost.image.url}
+              alt={sanityPost.image.alt || sanityPost.title}
               className="w-full h-full object-cover"
             />
           ) : (
@@ -377,15 +355,14 @@ function ArticleCard({ post, type }: { post: SanityPost | RSSArticle, type: 'san
 
   if (type === 'sanity') {
     const sanityPost = post as SanityPost;
-    const imageAsset = sanityPost.image || sanityPost.coverImage || sanityPost.mainImage;
     return (
       <article className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
         {/* Image */}
         <div className="aspect-[4/3] bg-gray-200 overflow-hidden">
-          {imageAsset && imageAsset.asset ? (
+          {sanityPost.image ? (
             <img
-              src={urlFor(imageAsset).width(400).height(300).url()}
-              alt={sanityPost.title}
+              src={sanityPost.image.url}
+              alt={sanityPost.image.alt || sanityPost.title}
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
             />
           ) : (
@@ -501,48 +478,36 @@ export default function InsightsPage() {
     'Public Sector', 'Mining', 'Investment Africa', 'Nigerian News'
   ];
 
-  // Load Sanity posts immediately and independently
+  // Load WordPress posts (previously Sanity)
   useEffect(() => {
-    const fetchSanityPosts = async () => {
+    const fetchWordPressPosts = async () => {
       try {
-        const response = await fetch('/api/sanity/posts');
-        if (response.ok) {
-          const data = await response.json();
-          setSanityPosts(data.posts || []);
+        const posts = await fetchPostsClient(50); // Fetch up to 50 posts
+        
+        // If WordPress returns no posts, use fallback posts
+        if (posts.length === 0) {
+          console.log('No WordPress posts found, using fallback content');
+          setSanityPosts(fallbackBlogPosts);
         } else {
-          console.error('Failed to fetch Sanity posts');
+          setSanityPosts(posts);
         }
       } catch (error) {
-        console.error('Error fetching Sanity posts:', error);
+        console.error('Error fetching WordPress posts:', error);
+        // Use fallback posts on error
+        setSanityPosts(fallbackBlogPosts);
       } finally {
         setSanityLoading(false);
       }
     };
 
-    fetchSanityPosts();
+    fetchWordPressPosts();
   }, []);
 
-  // Load RSS articles separately with a slight delay
+  // RSS articles removed - not compatible with static export
+  // If you need industry news, consider using a third-party widget or embed
   useEffect(() => {
-    const fetchRssArticles = async () => {
-      try {
-        const response = await fetch('/api/insights?limit=100');
-        if (response.ok) {
-          const data: InsightsResponse = await response.json();
-          setRssArticles(data.articles || []);
-        } else {
-          console.error('Failed to fetch RSS articles');
-        }
-      } catch (error) {
-        console.error('Error fetching RSS articles:', error);
-      } finally {
-        setRssLoading(false);
-      }
-    };
-
-    // Small delay to prioritize Sanity content
-    const timer = setTimeout(fetchRssArticles, 100);
-    return () => clearTimeout(timer);
+    setRssArticles([]);
+    setRssLoading(false);
   }, []);
 
   // Function to check if content contains inappropriate material
@@ -661,20 +626,66 @@ export default function InsightsPage() {
         </video>
         
         {/* Overlay */}
-        <div className="absolute inset-0 bg-blue-900/60"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-accent/80"></div>
         
         {/* Content */}
         <div className="relative z-10 flex items-center justify-center h-full">
           <div className="text-center text-white max-w-4xl mx-auto px-4">
-            <h1 className="text-4xl lg:text-6xl font-bold mb-6">
-              Insights & Analysis
-            </h1>
-            <p className="text-xl lg:text-2xl text-gray-200 mb-8">
-              Expert insights from Pathmark Advisory and curated industry news from trusted sources
-            </p>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <h1 className="text-4xl lg:text-6xl font-bold mb-6">
+                Insights & Expertise
+              </h1>
+              <p className="text-xl lg:text-2xl text-white/95 mb-8 leading-relaxed">
+                Stay informed with expert insights on energy, mining, construction, technology, and investment opportunities across Nigeria and beyond.
+              </p>
+              <div className="flex flex-wrap justify-center gap-4 text-sm lg:text-base">
+                <div className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
+                  ⚡ Energy & Mining
+                </div>
+                <div className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
+                  🏗️ Infrastructure
+                </div>
+                <div className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
+                  💡 Technology
+                </div>
+                <div className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
+                  💼 Investment
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </div>
+
+      {/* Welcome Section */}
+      <section className="bg-white py-12">
+        <div className="container-custom">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-4xl mx-auto text-center"
+          >
+            <h2 className="text-3xl lg:text-4xl font-bold text-primary mb-6">
+              Welcome to Pathmark Insights
+            </h2>
+            <p className="text-lg text-gray-700 leading-relaxed mb-6">
+              Our Insights page is your gateway to understanding the dynamic landscape of Nigerian business and investment. 
+              We share expert analysis, industry trends, and practical insights across the sectors we serve—from renewable 
+              energy and mining operations to infrastructure development and digital transformation.
+            </p>
+            <p className="text-lg text-gray-700 leading-relaxed">
+              Whether you're an investor exploring opportunities, a business leader seeking strategic guidance, or simply 
+              interested in Nigeria's economic development, you'll find valuable perspectives to inform your decisions. 
+              Our content reflects our commitment to excellence and deep understanding of both local markets and international best practices.
+            </p>
+          </motion.div>
+        </div>
+      </section>
 
       <div className="container-custom py-12">
         {/* Search and Filters */}
@@ -711,7 +722,7 @@ export default function InsightsPage() {
             <div className="flex items-center justify-between mb-8">
               <div className="flex items-center space-x-3">
                 <FileText size={24} className="text-primary" />
-                <h2 className="text-3xl font-bold text-gray-900">Pathmark Insights</h2>
+                <h2 className="text-3xl font-bold text-gray-900">Pathmark Blog</h2>
               </div>
               <span className="text-gray-600">
                 {filteredSanityPosts.length} posts
@@ -721,7 +732,7 @@ export default function InsightsPage() {
             {sanityLoading ? (
               <div className="text-center py-12">
                 <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
-                <p className="text-gray-600">Loading Pathmark insights...</p>
+                <p className="text-gray-600">Loading blog posts from WordPress...</p>
               </div>
             ) : filteredSanityPosts.length > 0 ? (
               <div className="space-y-8">
@@ -791,154 +802,18 @@ export default function InsightsPage() {
             ) : (
               <div className="text-center py-12">
                 <div className="text-gray-400 text-4xl mb-4">📄</div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                  No Pathmark insights found
-              </h3>
-              <p className="text-gray-600">
-                  {searchQuery ? 'Try adjusting your search terms.' : 'No insights have been published yet. Create your first post in the Studio!'}
-              </p>
-            </div>
-          )}
-          </section>
-
-          {/* Section 2: Industry News */}
-          <section>
-            <div className="flex items-center justify-between mb-8">
-              <div className="flex items-center space-x-3">
-                <Globe size={24} className="text-primary" />
-                <h2 className="text-3xl font-bold text-gray-900">Industry News</h2>
-              </div>
-              <span className="text-gray-600">
-                {filteredRssArticles.length} articles
-              </span>
-            </div>
-
-            {rssLoading ? (
-              <div className="text-center py-12">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
-                <p className="text-gray-600">Loading industry news...</p>
-              </div>
-            ) : filteredRssArticles.length > 0 ? (
-              <div className="space-y-8">
-                {/* Hero Article with Improved Sliding Effect */}
-                <div className="relative overflow-hidden h-[500px] rounded-2xl">
-                  <motion.div
-                    className="h-full flex"
-                    animate={{
-                      x: `${-currentRssSlide * 100}%`,
-                    }}
-                    transition={{
-                      duration: 0.8,
-                      ease: "easeInOut",
-                    }}
-                  >
-                    {filteredRssArticles.slice(0, 5).map((article) => (
-                      <div
-                        key={article.id}
-                        className="w-full h-full flex-shrink-0"
-                      >
-                        <HeroArticle post={article} type="rss" />
-                      </div>
-                    ))}
-                  </motion.div>
-                  
-                  {/* Slide Indicators */}
-                  {filteredRssArticles.slice(0, 5).length > 1 && (
-                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                      {filteredRssArticles.slice(0, 5).map((_, index) => (
-                        <button
-                          key={index}
-                          onClick={() => setCurrentRssSlide(index)}
-                          className={`w-3 h-3 rounded-full transition-colors ${
-                            index === currentRssSlide ? 'bg-white' : 'bg-white/50'
-                          }`}
-                        />
-                      ))}
-                    </div>
-                  )}
-                </div>
-                
-                {/* Sidebar Layout for Recent Articles */}
-                {sidebarRssArticles.length > 0 && (
-                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                                         <div className="lg:col-span-2">
-                       <h3 className="text-xl font-semibold text-gray-900 mb-4">Latest News</h3>
-                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                         {remainingRssArticles.map((article) => (
-                           <ArticleCard key={article.id} post={article} type="rss" />
-                         ))}
-                       </div>
-                       {filteredRssArticles.length > 12 && (
-                         <div className="text-center mt-8">
-                           {!showMoreRss ? (
-                             <button
-                               onClick={() => setShowMoreRss(true)}
-                               className="inline-flex items-center bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary-600 transition-colors"
-                             >
-                               Explore More Articles
-                               <ArrowRight size={20} className="ml-2" />
-                             </button>
-                           ) : (
-                             <button
-                               onClick={() => setShowMoreRss(false)}
-                               className="inline-flex items-center bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors"
-                             >
-                               Show Less
-                               <ArrowRight size={20} className="ml-2 rotate-180" />
-                             </button>
-                           )}
-                         </div>
-                       )}
-                     </div>
-                    
-                                         <div className="lg:col-span-1">
-                       <h3 className="text-xl font-semibold text-gray-900 mb-4">Trending</h3>
-                       <div className="relative overflow-hidden h-[800px]">
-                         <motion.div
-                           className="space-y-4"
-                           animate={{
-                             y: [0, -2800],
-                           }}
-                           transition={{
-                             duration: 40,
-                             repeat: Infinity,
-                             ease: "linear",
-                           }}
-                         >
-                           {sidebarRssArticles.map((article) => (
-                             <a key={article.id} href={article.link} target="_blank" rel="noopener noreferrer">
-                               <SidebarArticle post={article} type="rss" />
-                             </a>
-                           ))}
-                           {/* Duplicate articles for seamless loop */}
-                           {sidebarRssArticles.map((article) => (
-                             <a key={`${article.id}-duplicate`} href={article.link} target="_blank" rel="noopener noreferrer">
-                               <SidebarArticle post={article} type="rss" />
-                             </a>
-                           ))}
-                         </motion.div>
-                       </div>
-                     </div>
-                  </div>
-                )}
-                
-
-              </div>
-            ) : (
-              <div className="text-center py-12">
-                <div className="text-gray-400 text-4xl mb-4">📰</div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                  No industry articles found
+                  No articles match your search
                 </h3>
                 <p className="text-gray-600">
-                  {searchQuery || selectedCategory !== 'All' 
-                    ? 'Try adjusting your search terms or category filter.' 
-                    : 'Unable to fetch industry news at the moment. Please try again later.'
-                  }
+                  Try adjusting your search terms or browse our featured content below.
                 </p>
               </div>
             )}
           </section>
+
+          {/* Note: Industry News RSS section removed for static export compatibility */}
+          {/* You can add external news widgets or embeds here if needed */}
           </div>
       </div>
     </div>
