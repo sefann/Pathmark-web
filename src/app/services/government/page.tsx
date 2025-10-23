@@ -158,26 +158,6 @@ export default function GovernmentPage() {
     }
   ];
 
-  const caseStudies = [
-    {
-      title: 'Energy Policy Advocacy - Oil & Gas Sector',
-      description: 'Successfully influenced key energy policy reforms, resulting in improved regulatory framework for oil and gas operations.',
-      results: ['Policy reforms implemented', 'Regulatory clarity achieved', 'Industry standards improved', 'Stakeholder alignment secured'],
-      category: 'Policy'
-    },
-    {
-      title: 'PPP Facilitation - Infrastructure Development',
-      description: 'Facilitated successful public-private partnership for major infrastructure project worth ₦50 billion.',
-      results: ['₦50 billion PPP secured', 'Multi-stakeholder agreement', 'Project implementation started', 'Economic impact achieved'],
-      category: 'PPP'
-    },
-    {
-      title: 'Regulatory Compliance - Financial Services',
-      description: 'Comprehensive regulatory monitoring and compliance support for major financial institution.',
-      results: ['100% compliance achieved', 'Risk mitigation implemented', 'Regulatory relationships strengthened', 'Operational efficiency improved'],
-      category: 'Compliance'
-    }
-  ];
 
   const stats = [
     { number: '100+', label: 'Policy Engagements', icon: FileText },
@@ -454,63 +434,6 @@ export default function GovernmentPage() {
         stats={stats}
       />
 
-      {/* Case Studies Section */}
-      <section className="section-padding bg-white">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl lg:text-5xl font-bold text-primary mb-6">
-              Success Stories
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Real projects delivering real results for our clients across Nigeria's government relations sector.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {caseStudies.map((study, index) => {
-              const Icon = study.category === 'Policy' ? FileText : study.category === 'PPP' ? Briefcase : Shield;
-              return (
-                <motion.div
-                  key={study.title}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                >
-                  <div className="bg-gray-50 rounded-2xl shadow-xl p-6 h-full">
-                    <div className="w-16 h-16 bg-gradient-to-r from-primary to-accent rounded-lg flex items-center justify-center mb-6">
-                      <Icon size={32} className="text-white" />
-                    </div>
-                    <div className="inline-block bg-primary-50 text-primary px-3 py-1 rounded-full text-xs font-semibold mb-3">
-                      {study.category}
-                    </div>
-                    <h3 className="text-xl font-bold text-primary mb-3">
-                      {study.title}
-                    </h3>
-                    <p className="text-gray-600 mb-4 leading-relaxed">
-                      {study.description}
-                    </p>
-                    <ul className="space-y-2">
-                      {study.results.map((result, idx) => (
-                        <li key={idx} className="flex items-center space-x-2">
-                          <CheckCircle size={16} className="text-green-500 flex-shrink-0" />
-                          <span className="text-gray-700 text-sm">{result}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
 
       {/* CTA Section */}
       <section className="section-padding relative text-white overflow-hidden">

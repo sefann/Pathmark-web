@@ -135,35 +135,35 @@ function HeroArticle({ post, type }: { post: SanityPost | RSSArticle, type: 'san
         
         {/* Overlay Content */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/60 to-transparent">
-          <div className="absolute top-0 left-0 right-0 p-8">
+          <div className="absolute top-0 left-0 right-0 p-4 sm:p-8">
             {/* Badge */}
             <div className="inline-block bg-primary text-white text-sm font-semibold px-4 py-2 rounded-full mb-4">
               {sanityPost.categories && sanityPost.categories.length > 0 ? sanityPost.categories[0] : 'Pathmark Insight'}
             </div>
             
             {/* Title */}
-            <h1 className="text-2xl lg:text-3xl font-bold text-white mb-3 leading-tight line-clamp-2">
+            <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-3 leading-tight line-clamp-2">
               {sanityPost.title}
             </h1>
             
-            {/* Meta */}
-            <div className="flex items-center space-x-4 text-white/90 mb-4">
-              <div className="flex items-center space-x-2">
-                <Calendar size={16} />
-                <span>{formatDate(sanityPost.publishedAt)}</span>
+            {/* Meta - Better positioned and styled */}
+            <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 text-white/90 mb-4">
+              <div className="flex items-center space-x-2 bg-black/30 backdrop-blur-sm px-3 py-1 rounded-full">
+                <Calendar size={14} />
+                <span className="text-sm">{formatDate(sanityPost.publishedAt)}</span>
               </div>
               {sanityPost.author && (
-                <div className="flex items-center space-x-2">
-                  <User size={16} />
-                  <span>{sanityPost.author}</span>
+                <div className="flex items-center space-x-2 bg-black/30 backdrop-blur-sm px-3 py-1 rounded-full">
+                  <User size={14} />
+                  <span className="text-sm">{sanityPost.author}</span>
                 </div>
               )}
             </div>
             
-            {/* CTA */}
+            {/* CTA - More prominent */}
             <Link
               href={`/insights/${sanityPost.slug.current}`}
-              className="inline-flex items-center bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary-600 transition-colors"
+              className="inline-flex items-center bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary-600 transition-colors font-semibold shadow-lg"
             >
               Read Full Article
               <ArrowRight size={20} className="ml-2" />
@@ -189,47 +189,47 @@ function HeroArticle({ post, type }: { post: SanityPost | RSSArticle, type: 'san
         
         {/* Overlay Content */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/60 to-transparent">
-          <div className="absolute top-0 left-0 right-0 p-8">
+          <div className="absolute top-0 left-0 right-0 p-4 sm:p-8">
             {/* Badges */}
-            <div className="flex items-center space-x-3 mb-3">
+            <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-3 mb-3">
               <div className={`inline-block text-sm font-semibold px-3 py-1 rounded-full ${getCategoryColor(rssArticle.category)}`}>
                 {rssArticle.category}
               </div>
-              <div className="text-white/90 text-sm">
+              <div className="text-white/90 text-sm bg-black/30 backdrop-blur-sm px-3 py-1 rounded-full">
                 {rssArticle.source}
               </div>
             </div>
             
             {/* Title */}
-            <h1 className="text-2xl lg:text-3xl font-bold text-white mb-3 leading-tight line-clamp-2">
+            <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-3 leading-tight line-clamp-2">
               {rssArticle.title}
             </h1>
             
             {/* Description */}
-            <p className="text-white/90 text-base mb-4 leading-relaxed line-clamp-2">
+            <p className="text-white/90 text-sm sm:text-base mb-4 leading-relaxed line-clamp-2">
               {rssArticle.description}
             </p>
             
-            {/* Meta */}
-            <div className="flex items-center space-x-4 text-white/90 mb-4">
-              <div className="flex items-center space-x-2">
-                <Calendar size={16} />
-                <span>{formatDate(rssArticle.pubDate)}</span>
+            {/* Meta - Better positioned and styled */}
+            <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 text-white/90 mb-4">
+              <div className="flex items-center space-x-2 bg-black/30 backdrop-blur-sm px-3 py-1 rounded-full">
+                <Calendar size={14} />
+                <span className="text-sm">{formatDate(rssArticle.pubDate)}</span>
               </div>
               {rssArticle.author && (
-                <div className="flex items-center space-x-2">
-                  <User size={16} />
-                  <span>{rssArticle.author}</span>
+                <div className="flex items-center space-x-2 bg-black/30 backdrop-blur-sm px-3 py-1 rounded-full">
+                  <User size={14} />
+                  <span className="text-sm">{rssArticle.author}</span>
                 </div>
               )}
             </div>
             
-            {/* CTA */}
+            {/* CTA - More prominent */}
             <a
               href={rssArticle.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary-600 transition-colors"
+              className="inline-flex items-center bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary-600 transition-colors font-semibold shadow-lg"
             >
               Read Full Article
               <ArrowRight size={20} className="ml-2" />

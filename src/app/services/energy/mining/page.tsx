@@ -335,18 +335,11 @@ export default function MiningPage() {
               Let's discuss how our comprehensive mining capabilities can help you 
               achieve your extraction goals with safety, efficiency, and sustainability.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex justify-center">
               <button className="bg-gradient-to-r from-accent to-primary text-white px-8 py-4 rounded-full text-lg font-semibold hover:shadow-lg transition-all duration-300">
                 Start Your Mining Project
                 <ArrowRight className="ml-2 inline" size={20} />
               </button>
-                             <a 
-                 href="/brochures/mining-brochure.pdf" 
-                 download="Pathmark-Mining-Services-Brochure.pdf"
-                 className="border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-gray-900 transition-all duration-300 inline-block"
-               >
-                 Download Mining Brochure
-               </a>
             </div>
           </motion.div>
         </div>

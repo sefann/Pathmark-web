@@ -59,7 +59,6 @@ const Header = () => {
     { name: 'Portfolio', href: '/portfolio' },
     { name: 'Insights', href: '/insights' },
     { name: 'Careers', href: '/careers' },
-    { name: 'Contact', href: '/contact' },
   ];
 
   const isActive = (href: string) => pathname === href;

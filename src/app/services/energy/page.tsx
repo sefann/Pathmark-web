@@ -155,20 +155,6 @@ export default function EnergyPage() {
     }
   ];
 
-  const caseStudies = [
-    {
-      title: 'Mineral Exploration Project - Northern Nigeria',
-      description: 'Comprehensive mining advisory for a major mineral exploration project, including geological assessments, regulatory compliance, and stakeholder engagement.',
-      results: ['Successful license acquisition', 'Community relations established', 'ESG standards compliance achieved', 'Project feasibility confirmed'],
-      category: 'Mining'
-    },
-    {
-      title: 'Solar Farm Development - Rural Electrification',
-      description: 'End-to-end solar farm development providing clean energy to underserved communities while supporting sustainable development goals.',
-      results: ['500KW solar farm installed', '1000+ households powered', 'Local jobs created', 'Carbon footprint reduced'],
-      category: 'Renewable Energy'
-    }
-  ];
 
   const stats = [
     { number: '50+', label: 'Energy Projects', icon: Zap },
@@ -417,68 +403,6 @@ export default function EnergyPage() {
         stats={stats}
       />
 
-      {/* Case Studies Section */}
-      <section className="section-padding bg-gray-50">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl lg:text-5xl font-bold text-primary mb-6">
-              Success Stories
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Real projects delivering real results for our clients across Nigeria's energy sector.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {caseStudies.map((study, index) => (
-              <motion.div
-                key={study.title}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-                  <div className={`h-48 flex items-center justify-center ${
-                    study.category === 'Mining' ? 'bg-gradient-to-br from-amber-100 to-orange-100' :
-                    study.category === 'Oil & Gas' ? 'bg-gradient-to-br from-blue-100 to-cyan-100' :
-                    'bg-gradient-to-br from-yellow-100 to-orange-100'
-                  }`}>
-                    {study.category === 'Mining' && <Drill size={64} className="text-amber-500" />}
-                    {study.category === 'Oil & Gas' && <Fuel size={64} className="text-blue-500" />}
-                    {study.category === 'Renewable Energy' && <Sun size={64} className="text-yellow-500" />}
-                  </div>
-                  <div className="p-6">
-                    <div className="inline-block bg-primary-50 text-primary px-3 py-1 rounded-full text-xs font-semibold mb-3">
-                      {study.category}
-                    </div>
-                    <h3 className="text-xl font-bold text-primary mb-3">
-                      {study.title}
-                    </h3>
-                    <p className="text-gray-600 mb-4 leading-relaxed">
-                      {study.description}
-                    </p>
-                    <ul className="space-y-2">
-                      {study.results.map((result, idx) => (
-                        <li key={idx} className="flex items-center space-x-2">
-                          <CheckCircle size={16} className="text-green-500 flex-shrink-0" />
-                          <span className="text-gray-700 text-sm">{result}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* CTA Section */}
       <section className="section-padding bg-gradient-to-r from-primary to-primary-800 text-white">

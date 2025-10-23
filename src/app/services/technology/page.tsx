@@ -162,26 +162,6 @@ export default function TechnologyPage() {
     }
   ];
 
-  const caseStudies = [
-    {
-      title: 'Banking Cybersecurity Implementation - Lagos',
-      description: 'Comprehensive cybersecurity overhaul for a major Nigerian bank, including NDPR compliance and ISO 27001 certification.',
-      results: ['100% NDPR compliance', 'ISO 27001 certification achieved', 'Zero security breaches', 'Enhanced customer trust'],
-      category: 'Cybersecurity'
-    },
-    {
-      title: 'Cloud Migration - Manufacturing Company',
-      description: 'Successful migration of enterprise systems to cloud platform, improving efficiency and reducing costs.',
-      results: ['40% cost reduction', '99.9% uptime achieved', 'Improved scalability', 'Enhanced disaster recovery'],
-      category: 'Cloud Solutions'
-    },
-    {
-      title: 'Smart Home Complex - Abuja',
-      description: 'Complete smart home automation for a luxury residential complex with integrated security and energy management.',
-      results: ['50 smart homes automated', '30% energy savings', 'Enhanced security', 'Premium market positioning'],
-      category: 'Smart Home'
-    }
-  ];
 
   const stats = [
     { number: '200+', label: 'Technology Projects', icon: Cpu },
@@ -458,63 +438,6 @@ export default function TechnologyPage() {
         stats={stats}
       />
 
-      {/* Case Studies Section */}
-      <section className="section-padding bg-gray-50">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl lg:text-5xl font-bold text-primary mb-6">
-              Success Stories
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Real projects delivering real results for our clients across Nigeria's technology sector.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {caseStudies.map((study, index) => {
-              const Icon = study.category === 'Cybersecurity' ? Shield : study.category === 'Cloud Solutions' ? Cloud : Home;
-              return (
-                <motion.div
-                  key={study.title}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                >
-                  <div className="bg-white rounded-2xl shadow-xl p-6 h-full">
-                    <div className="w-16 h-16 bg-gradient-to-r from-primary to-accent rounded-lg flex items-center justify-center mb-6">
-                      <Icon size={32} className="text-white" />
-                    </div>
-                    <div className="inline-block bg-primary-50 text-primary px-3 py-1 rounded-full text-xs font-semibold mb-3">
-                      {study.category}
-                    </div>
-                    <h3 className="text-xl font-bold text-primary mb-3">
-                      {study.title}
-                    </h3>
-                    <p className="text-gray-600 mb-4 leading-relaxed">
-                      {study.description}
-                    </p>
-                    <ul className="space-y-2">
-                      {study.results.map((result, idx) => (
-                        <li key={idx} className="flex items-center space-x-2">
-                          <CheckCircle size={16} className="text-green-500 flex-shrink-0" />
-                          <span className="text-gray-700 text-sm">{result}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
 
              {/* CTA Section */}
        <section className="section-padding relative text-white overflow-hidden">

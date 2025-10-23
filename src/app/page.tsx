@@ -459,9 +459,10 @@ export default function HomePage() {
               whileTap={{ scale: 0.95 }}
               className="inline-block"
             >
-              <Link href="/contact" className="bg-white text-primary hover:bg-primary-100 transition-all duration-300 text-xl font-bold px-12 py-6 rounded-full shadow-2xl hover:shadow-3xl border-2 border-white/20 backdrop-blur-sm">
-                Start Your Investment Journey
-                <ArrowRight className="ml-3 inline" size={24} />
+              <Link href="/contact" className="bg-white text-primary hover:bg-primary-100 transition-all duration-300 text-lg sm:text-xl font-bold px-6 sm:px-12 py-4 sm:py-6 rounded-full shadow-2xl hover:shadow-3xl border-2 border-white/20 backdrop-blur-sm">
+                <span className="block sm:inline">Start Your Investment</span>
+                <span className="block sm:inline sm:ml-1">Journey</span>
+                <ArrowRight className="ml-2 sm:ml-3 inline" size={20} />
               </Link>
             </motion.div>
           </motion.div>

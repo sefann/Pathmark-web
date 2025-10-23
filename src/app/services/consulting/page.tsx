@@ -130,26 +130,6 @@ export default function ConsultingPage() {
     }
   ];
 
-  const caseStudies = [
-    {
-      title: 'Business Transformation - Manufacturing Company',
-      description: 'Comprehensive restructuring of a struggling manufacturing company, resulting in 40% cost reduction and improved profitability.',
-      results: ['40% cost reduction', 'Improved profitability', 'Enhanced efficiency', 'Successful turnaround'],
-      category: 'Transformation'
-    },
-    {
-      title: 'Supply Chain Optimization - Retail Chain',
-      description: 'End-to-end supply chain optimization for a national retail chain, reducing procurement costs by 25%.',
-      results: ['25% cost reduction', 'Improved supplier relationships', 'Enhanced efficiency', 'Better inventory management'],
-      category: 'Procurement'
-    },
-    {
-      title: 'Market Entry Strategy - Tech Startup',
-      description: 'Comprehensive market research and feasibility study that guided successful market entry for a fintech startup.',
-      results: ['Successful market entry', 'Clear competitive positioning', 'Optimized pricing strategy', 'Enhanced market share'],
-      category: 'Research'
-    }
-  ];
 
   const stats = [
     { number: '200+', label: 'Consulting Projects', icon: Briefcase },
@@ -364,78 +344,6 @@ export default function ConsultingPage() {
         stats={stats}
       />
 
-      {/* Case Studies Section */}
-      <section className="section-padding bg-gray-50">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl lg:text-5xl font-bold text-primary mb-6">
-              Success Stories
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Real projects delivering real results for our clients across Nigeria's consulting sector.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {caseStudies.map((study, index) => (
-              <motion.div
-                key={study.title}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-                  <div className="relative h-48 overflow-hidden">
-                    <img 
-                      src={
-                        study.category === 'Transformation'
-                          ? 'https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'
-                          : study.category === 'Procurement'
-                          ? 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'
-                          : 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'
-                      }
-                      alt={study.title}
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-                    <div className="absolute top-4 right-4">
-                      {study.category === 'Transformation' && <RefreshCw size={48} className="text-white drop-shadow-lg" />}
-                      {study.category === 'Procurement' && <Truck size={48} className="text-white drop-shadow-lg" />}
-                      {study.category === 'Research' && <Search size={48} className="text-white drop-shadow-lg" />}
-                    </div>
-                  </div>
-                  <div className="p-6">
-                    <div className="inline-block bg-primary-50 text-primary px-3 py-1 rounded-full text-xs font-semibold mb-3">
-                      {study.category}
-                    </div>
-                    <h3 className="text-xl font-bold text-primary mb-3">
-                      {study.title}
-                    </h3>
-                    <p className="text-gray-600 mb-4 leading-relaxed">
-                      {study.description}
-                    </p>
-                    <ul className="space-y-2">
-                      {study.results.map((result, idx) => (
-                        <li key={idx} className="flex items-center space-x-2">
-                          <CheckCircle size={16} className="text-green-500 flex-shrink-0" />
-                          <span className="text-gray-700 text-sm">{result}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* CTA Section */}
       <section className="section-padding relative text-white overflow-hidden">

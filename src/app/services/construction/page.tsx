@@ -164,26 +164,6 @@ export default function ConstructionPage() {
     }
   ];
 
-  const caseStudies = [
-    {
-      title: 'Luxury Residential Complex - Abuja',
-      description: 'End-to-end development of a 50-unit luxury residential complex with modern amenities and sustainable design.',
-      results: ['50 luxury units completed', 'On-time delivery', '15% under budget', 'Premium market positioning'],
-      category: 'Residential'
-    },
-    {
-      title: 'Commercial Office Tower - Lagos',
-      description: '20-story commercial office tower with state-of-the-art facilities and LEED certification.',
-      results: ['20 floors completed', 'LEED Gold certification', '100% occupancy rate', 'Award-winning design'],
-      category: 'Commercial'
-    },
-    {
-      title: 'Infrastructure Development - Port Harcourt',
-      description: 'Major road network and drainage system development improving urban connectivity.',
-      results: ['10km road network', 'Improved drainage', 'Reduced flooding', 'Enhanced accessibility'],
-      category: 'Infrastructure'
-    }
-  ];
 
   const stats = [
     { number: '100+', label: 'Projects Completed', icon: Building },
@@ -455,68 +435,6 @@ export default function ConstructionPage() {
         stats={stats}
       />
 
-      {/* Case Studies Section */}
-      <section className="section-padding bg-gray-50">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl lg:text-5xl font-bold text-primary mb-6">
-              Success Stories
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Real projects delivering real results for our clients across Nigeria's construction sector.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {caseStudies.map((study, index) => (
-              <motion.div
-                key={study.title}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-                  <div className={`h-48 flex items-center justify-center ${
-                    study.category === 'Residential' ? 'bg-gradient-to-br from-blue-100 to-blue-200' :
-                    study.category === 'Commercial' ? 'bg-gradient-to-br from-green-100 to-green-200' :
-                    'bg-gradient-to-br from-orange-100 to-orange-200'
-                  }`}>
-                    {study.category === 'Residential' && <Home size={64} className="text-blue-500" />}
-                    {study.category === 'Commercial' && <Building size={64} className="text-green-500" />}
-                    {study.category === 'Infrastructure' && <Truck size={64} className="text-orange-500" />}
-                  </div>
-                  <div className="p-6">
-                    <div className="inline-block bg-primary-50 text-primary px-3 py-1 rounded-full text-xs font-semibold mb-3">
-                      {study.category}
-                    </div>
-                    <h3 className="text-xl font-bold text-primary mb-3">
-                      {study.title}
-                    </h3>
-                    <p className="text-gray-600 mb-4 leading-relaxed">
-                      {study.description}
-                    </p>
-                    <ul className="space-y-2">
-                      {study.results.map((result, idx) => (
-                        <li key={idx} className="flex items-center space-x-2">
-                          <CheckCircle size={16} className="text-green-500 flex-shrink-0" />
-                          <span className="text-gray-700 text-sm">{result}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* CTA Section */}
       <section className="section-padding bg-gradient-to-r from-primary to-primary-800 text-white">
