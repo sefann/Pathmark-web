@@ -112,14 +112,16 @@ export default function PostPageClient() {
         <div className="max-w-4xl mx-auto">
           {/* Article Header */}
           <article className="bg-white rounded-xl shadow-lg overflow-hidden mb-12">
-            {/* Cover Image */}
+            {/* Cover Image - much smaller with dark overlay */}
             {post.image && (
-              <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden">
+              <div className="aspect-[4/1] bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden relative">
                 <img
                   src={post.image.url}
                   alt={post.image.alt || post.title}
                   className="w-full h-full object-cover"
                 />
+                {/* Dark overlay */}
+                <div className="absolute inset-0 bg-black/30"></div>
               </div>
             )}
 
