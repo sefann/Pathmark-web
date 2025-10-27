@@ -2,7 +2,7 @@
 
 This repository contains the source code for the official website of **Pathmark Advisory Co. Ltd**, a multidisciplinary consulting and project execution company based in Abuja, Nigeria.
 
-**Live Site (Coming Soon)**: [www.pathmarkadvisory.com](http://www.pathmarkadvisory.com)
+**Live Site (Coming Soon)**: [www.pathmarkadvisory.com](https://www.pathmarkadvisory.com)
 
 ---
 

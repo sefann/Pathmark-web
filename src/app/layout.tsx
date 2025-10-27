@@ -3,7 +3,6 @@ import "./globals.css";
 import Header from "@/components/Layout/Header";
 import Footer from "@/components/Layout/Footer";
 import CookieConsent from "@/components/CookieConsent";
-import GoogleAnalytics from "@/components/Analytics/GoogleAnalytics";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://pathmarkadvisory.com'),
@@ -65,9 +64,6 @@ export default function RootLayout({
         </main>
         <Footer />
         <CookieConsent />
-        {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
-          <GoogleAnalytics measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
-        )}
       </body>
     </html>
   );
