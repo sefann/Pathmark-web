@@ -40,11 +40,11 @@ body {
 
 @layer components {
   .btn-primary {
-    @apply bg-primary hover:bg-primary-800 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary-300;
+    @apply bg-primary hover:bg-primary-800 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary-300 flex items-center justify-center gap-2;
   }
   
   .btn-secondary {
-    @apply bg-accent hover:bg-accent-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent-300;
+    @apply bg-accent hover:bg-accent-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent-300 flex items-center justify-center gap-2;
   }
   
   .btn-outline {

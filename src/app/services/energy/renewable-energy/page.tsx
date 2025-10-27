@@ -303,9 +303,9 @@ export default function RenewableEnergyPage() {
               improve your sustainability, and contribute to a cleaner future.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-gradient-to-r from-green-400 to-green-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:shadow-lg transition-all duration-300">
-                Start Your Energy Project
-                <ArrowRight className="ml-2 inline" size={20} />
+              <button className="bg-gradient-to-r from-green-400 to-green-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2">
+                <span>Start Your Energy Project</span>
+                <ArrowRight size={20} />
               </button>
               <button className="border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-gray-900 transition-all duration-300">
                 Get Energy Audit

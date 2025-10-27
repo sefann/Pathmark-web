@@ -193,8 +193,9 @@ export default function WarehousingLogisticsPage() {
             <p className="text-gray-700 mb-6 max-w-2xl mx-auto">
               Talk to our team to scope your warehousing and logistics needs and craft a tailored solution.
             </p>
-            <Link href="/contact" className="btn-secondary inline-flex items-center">
-              Contact Us <MoveRight size={18} className="ml-2" />
+            <Link href="/contact" className="btn-secondary">
+              <span>Contact Us</span>
+              <MoveRight size={18} />
             </Link>
           </motion.div>
         </div>

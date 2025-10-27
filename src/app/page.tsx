@@ -219,7 +219,7 @@ export default function HomePage() {
             <div className="flex justify-center items-center">
               <Link href="/contact" className="btn-secondary text-lg px-8 py-4">
                 Explore Investment Opportunities
-                <ArrowRight className="ml-2" size={20} />
+                <ArrowRight size={20} />
               </Link>
             </div>
           </motion.div>
@@ -374,7 +374,7 @@ export default function HomePage() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -459,10 +459,9 @@ export default function HomePage() {
               whileTap={{ scale: 0.95 }}
               className="inline-block"
             >
-              <Link href="/contact" className="bg-white text-primary hover:bg-primary-100 transition-all duration-300 text-lg sm:text-xl font-bold px-6 sm:px-12 py-4 sm:py-6 rounded-full shadow-2xl hover:shadow-3xl border-2 border-white/20 backdrop-blur-sm">
-                <span className="block sm:inline">Start Your Investment</span>
-                <span className="block sm:inline sm:ml-1">Journey</span>
-                <ArrowRight className="ml-2 sm:ml-3 inline" size={20} />
+              <Link href="/contact" className="bg-white text-primary hover:bg-primary-100 transition-all duration-300 text-lg sm:text-xl font-bold px-6 sm:px-12 py-4 sm:py-6 rounded-full shadow-2xl hover:shadow-3xl border-2 border-white/20 backdrop-blur-sm flex items-center justify-center gap-2 sm:gap-3">
+                <span>Start Your Investment Journey</span>
+                <ArrowRight size={20} />
               </Link>
             </motion.div>
           </motion.div>
@@ -708,7 +707,7 @@ export default function HomePage() {
             <div className="flex justify-center">
               <Link href="/contact" className="btn-secondary text-lg px-8 py-4">
                 Start Your Project
-                <ArrowRight className="ml-2" size={20} />
+                <ArrowRight size={20} />
               </Link>
             </div>
           </motion.div>

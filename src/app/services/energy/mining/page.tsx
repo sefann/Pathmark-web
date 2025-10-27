@@ -336,9 +336,9 @@ export default function MiningPage() {
               achieve your extraction goals with safety, efficiency, and sustainability.
             </p>
             <div className="flex justify-center">
-              <button className="bg-gradient-to-r from-accent to-primary text-white px-8 py-4 rounded-full text-lg font-semibold hover:shadow-lg transition-all duration-300">
-                Start Your Mining Project
-                <ArrowRight className="ml-2 inline" size={20} />
+              <button className="bg-gradient-to-r from-accent to-primary text-white px-8 py-4 rounded-full text-lg font-semibold hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2">
+                <span>Start Your Mining Project</span>
+                <ArrowRight size={20} />
               </button>
             </div>
           </motion.div>

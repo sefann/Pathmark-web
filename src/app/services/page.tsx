@@ -163,7 +163,7 @@ export default function ServicesPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact" className="btn-secondary text-lg px-8 py-4">
                 Request Consultation
-                <ArrowRight className="ml-2" size={20} />
+                <ArrowRight size={20} />
               </Link>
               <Link href="/portfolio" className="btn-outline border-white text-white hover:bg-white hover:text-primary text-lg px-8 py-4">
                 View Our Work
